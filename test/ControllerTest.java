@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import model.ImageProcessingModel;
+import model.ImageProcessingSession;
 import org.junit.Test;
 import view.IImageProcessingView;
 import view.ImageProcessingView;
@@ -20,8 +21,8 @@ public class ControllerTest {
     StringBuffer outBuffer = new StringBuffer();
 
     IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null),outBuffer);
-
-    ImageController controller = new ImageControllerImpl(view,input);
+    ImageProcessingSession session = new ImageProcessingSession();
+    ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
 
     String actualOutput = outBuffer.toString();
@@ -46,8 +47,9 @@ public class ControllerTest {
     StringBuffer outBuffer = new StringBuffer();
 
     IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null),outBuffer);
+    ImageProcessingSession session = new ImageProcessingSession();
 
-    ImageController controller = new ImageControllerImpl(view,input);
+    ImageController controller = new ImageControllerImpl(session, view,input);
     controller.run();
 
     String actualOutput = outBuffer.toString();
