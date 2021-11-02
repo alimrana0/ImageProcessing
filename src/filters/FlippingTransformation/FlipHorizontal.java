@@ -7,16 +7,23 @@ import model.Imaging.Image;
 import model.Imaging.ImageOfPixel;
 import model.Imaging.pixel.IPixel;
 
+/**
+ * Class to represent an image flipped horizontally down the middle.
+ */
 public class FlipHorizontal implements IFlipTransform{
+
   /**
-   * Applies some transformation on the intensity of the given image.
+   * Applies a horizontal flip on the image by rearranging its pixels.
    *
-   * @param image Image to apply the transformation to.
+   * @param image Image being flipped.
    * @return The transformed image.
-   * @throws IllegalArgumentException If the supplied image is null.
+   * @throws IllegalArgumentException If the image is null.
    */
   @Override
   public ImageOfPixel flipTransform(ImageOfPixel image) throws IllegalArgumentException {
+    if(image == null) {
+      throw new IllegalArgumentException("Image can't be null");
+    }
     List<List<IPixel>> imagePixels = new ArrayList<>(image.getPixels());
     List<ArrayList<IPixel>> newImagePixels = new ArrayList<>();
 

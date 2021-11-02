@@ -5,10 +5,10 @@ import model.Imaging.ImageOfPixel;
 public interface IColorTransform {
 
   /**
-   * Applies some transformation on the color of the given image.
-   * @param image Image to apply the transformation to.
+   * Applies a transformation on the color of a given image.
+   * @param image image being transformed.
    * @return The transformed image.
-   * @throws IllegalArgumentException If the supplied image is null.
+   * @throws IllegalArgumentException If the image is null.
    */
   ImageOfPixel applyColorTransformation(ImageOfPixel image);
 

@@ -18,6 +18,9 @@ import model.Imaging.Posn;
 import model.Imaging.pixel.IPixel;
 import model.Imaging.pixel.Pixel;
 
+/**
+ * Test class for intensity trasnformation.
+ */
 public class IntensityTransformationTest {
 
   IColor red = new Color(255, 0, 0);

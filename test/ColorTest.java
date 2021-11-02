@@ -9,6 +9,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Test class for Color.
+ */
 public class ColorTest {
 
   IColor red = new Color(255, 0, 0);

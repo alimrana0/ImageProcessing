@@ -41,7 +41,11 @@ public class ImageControllerImpl implements ImageController {
     this.model = model;
   }
 
-
+  /**
+   * Runs the controller that handles the Processing session, view, and input to conduct the Image
+   * Processing.
+   * @throws IOException if given inputs fail to transmit inside the Image Processor.
+   */
   @Override
   public void run() throws IOException {
     boolean quit = false;

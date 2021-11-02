@@ -7,22 +7,30 @@ import model.Imaging.Image;
 import model.Imaging.ImageOfPixel;
 import model.Imaging.pixel.IPixel;
 
+/**
+ * Abstract class for any Color transformations.
+ */
 public abstract class AbstractColorTransformation implements IColorTransform {
 
-
+  /**
+   * Applies a color transformation to a given image
+   * @param image Image being transformed
+   * @return the image transformed
+   * @throws IllegalArgumentException if the image is null
+   */
   public ImageOfPixel applyColorTransformation(ImageOfPixel image) throws IllegalArgumentException {
     if (image == null) {
-      throw new IllegalArgumentException("Image cannot be null.");
+      throw new IllegalArgumentException("Image can't be null.");
     }
     List<List<IPixel>> imagePixels = image.getPixels();
     return new Image(transform(imagePixels));
   }
 
   /**
-   * Applies the given transformation matrix to each pixel in the supplied image.
+   * Applies the given transformation to each pixel in the given image.
    *
-   * @param imagePixels Pixels of the image.
-   * @return The updated pixels with the transformation applied.
+   * @param imagePixels the image's pixels.
+   * @return a list of list of transformed pixels
    */
   protected List<ArrayList<IPixel>> transform(List<List<IPixel>> imagePixels) {
     List<ArrayList<IPixel>> updatedPixels = new ArrayList<>();

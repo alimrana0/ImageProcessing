@@ -38,8 +38,12 @@ public class ImageProcessingView implements IImageProcessingView {
     this.out = out;
   }
 
-
-
+  /**
+   * Render a specific message to the provided data destination.
+   *
+   * @param message the message being transmitted
+   * @throws IOException if transmission of the message to the data destination fails
+   */
   public void renderMessage(String message) throws IOException {
     try {
       out.append(message);
@@ -48,6 +52,10 @@ public class ImageProcessingView implements IImageProcessingView {
     }
   }
 
+  /**
+   * Shows the options that a client has for use.
+   * @throws IOException if the option menu message fails to transmit to the data destination.
+   */
   @Override
   public void showOptions() throws IOException {
     String options = "Commands:"

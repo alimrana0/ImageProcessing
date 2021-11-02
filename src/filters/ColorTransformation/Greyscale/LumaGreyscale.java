@@ -19,15 +19,24 @@ import model.Imaging.pixel.Pixel;
 public class LumaGreyscale implements IColorTransform {
   public double[][] lumaVals;
 
+  /**
+   * Constructor for a luma greyscale filter.
+   */
   public LumaGreyscale() {
     this.lumaVals = new double[][]{{0.2126, 0.7152, 0.0722},
             {0.2126, 0.7152, 0.0722},
             {0.2126, 0.7152, 0.0722}};
   }
 
+  /**
+   * Applies a color transformation to a given image
+   * @param image Image being transformed
+   * @return the image transformed
+   * @throws IllegalArgumentException if the image is null
+   */
   public ImageOfPixel applyColorTransformation(ImageOfPixel image) throws IllegalArgumentException {
     if (image == null) {
-      throw new IllegalArgumentException("Image cannot be null.");
+      throw new IllegalArgumentException("Image can't be null.");
     }
     List<List<IPixel>> imagePixels = image.getPixels();
     return new Image(transform(image, imagePixels));
@@ -47,10 +56,10 @@ public class LumaGreyscale implements IColorTransform {
   }
 
   /**
-   * Applies the given transformation to the given pixel by updating its rgb values. Any out of
+   * Applies the color transformation to the given pixel. Any out of
    * range rgb value is clamped to the minimum value of 0 or the maximum value of 255.
    *
-   * @param pixel Pixel to transform.
+   * @param pixel pixel being transformed.
    * @return The transformed pixel.
    */
   protected IPixel colorTransform(IPixel pixel) {

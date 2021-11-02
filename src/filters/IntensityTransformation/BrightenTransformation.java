@@ -7,17 +7,23 @@ import model.Imaging.pixel.Pixel;
 import model.Imaging.Posn;
 import model.Imaging.pixel.IPixel;
 
+/**
+ * Class to represent a brightening filter on a pixel.
+ */
 public class BrightenTransformation extends AbstractIntensityTransformation {
 
+  /**
+   * Empty constructor for a BrightenTransformation filter.
+   */
   public BrightenTransformation (){}
 
   /**
-   * Applies the correct transformation to the given pixel by changing its red, green, and blue
-   * values. If the RGB value is out of range 0-255, it will be clamped to the value.
-   * @param pixel
-   * @return
+   * Applies a brightening on a pixel.
+   * If the RGB value is out of range 0-255, it will be clamped to the value.
+   * @param pixel pixel being transformed
+   * @param val the value that the pixel will be brightened by
+   * @return the transformed pixel.
    */
-
   @Override
   protected IPixel intensityTransform(IPixel pixel, int val) {
 

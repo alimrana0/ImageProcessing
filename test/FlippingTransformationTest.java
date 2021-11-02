@@ -15,6 +15,9 @@ import model.Imaging.pixel.Pixel;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for flipping transformation.
+ */
 public class FlippingTransformationTest {
 
   IColor red = new Color(255, 0, 0);

@@ -9,33 +9,46 @@ import model.Imaging.ImageOfPixel;
 import model.Imaging.pixel.IPixel;
 import model.Imaging.pixel.Pixel;
 
+/**
+ * Abstract class for an intensity transformation on an image.
+ */
 public abstract class AbstractIntensityTransformation implements IIntensityTransform {
 
     /**
-     * Creates an AbstractIntensityTransform with the given value that the image should be brightened/
-     * darkened by.
+     * Empty constructor for an abstract intensity transformation.
      */
     protected AbstractIntensityTransformation() {
     }
 
     /**
-     * Applies the correct transformation to the given pixel by changing its red, green, and blue
-     * values. If the RGB value is out of range 0-255, it will be clamped to the value.
+     * Applies the intensity transformation to the given pixel. If the RGB value is out of range
+     * 0-255, it will be clamped to the value.
      *
-     * @param pixel
-     * @return
+     * @param pixel the pixel being transformed
+     * @return the transformed pixel
      */
     protected abstract IPixel intensityTransform(IPixel pixel, int val);
 
-
+  /**
+   * Applies some transformation on the intensity of a given image.
+   * @param image image being transformed.
+   * @return The transformed image.
+   * @throws IllegalArgumentException If the image is null.
+   */
     public ImageOfPixel applyTransformation(ImageOfPixel image, int val) throws IllegalArgumentException {
       if (image == null) {
-        throw new IllegalArgumentException("Image cannot be null.");
+        throw new IllegalArgumentException("Image can't' be null.");
       }
       List<List<IPixel>> imagePixels = image.getPixels();
       return new Image(transform(imagePixels, val));
     }
 
+  /**
+   * Applies the intensity transformation on a given image.
+   * @param imageOfPixels the image's pixels.
+   * @param val the value that the image is being intensified by.
+   * @return the list of transformed pixels.
+   */
     protected List transform(List<List<IPixel>> imageOfPixels,
                                                int val) {
       List<ArrayList<IPixel>> updated = new ArrayList<>();

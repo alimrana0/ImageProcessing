@@ -11,13 +11,16 @@ import model.Imaging.pixel.IPixel;
 import model.Imaging.pixel.Pixel;
 
 public class BlueGreyscale extends AbstractColorTransformation {
+  /**
+   * Empty constructor for BlueGreyscale.
+   */
   public BlueGreyscale(){}
 
   /**
-   * Applies the given transformation to the given pixel by updating its rgb values. Any out of
+   * Applies the color transformation to the given pixel by updating its rgb values. Any out of
    * range rgb value is clamped to the minimum value of 0 or the maximum value of 255.
    *
-   * @param pixel Pixel to transform.
+   * @param pixel Pixel being transformed.
    * @return The transformed pixel.
    */
   protected IPixel colorTransform(IPixel pixel) {

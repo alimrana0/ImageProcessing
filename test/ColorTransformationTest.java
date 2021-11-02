@@ -20,6 +20,9 @@ import model.Imaging.pixel.Pixel;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for color transformation.
+ */
 public class ColorTransformationTest {
 
   Color red = new Color(255, 0, 0);

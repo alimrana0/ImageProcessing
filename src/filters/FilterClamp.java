@@ -7,18 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class representing the filter for clamping which sets the color values of each pixel to the min
- * and max as specified by the class.
+ * Class representing the filter for clamping which sets the color value to 0 or 255 if out of
+ * generic range.
  */
 public class FilterClamp {
 
 
   /**
-   * Takes in a given pixel and makes sure all the color values are within the given bounds
-   * otherwise they are set to the respective values.
+   * Clamps a value to 0 or 255 based on its current range.
    *
-   * @param val which has the RGB value
-   * @return a new Pixel with corrected values if they were out of bounds before
+   * @param val value of the given RBG.
+   * @return an integer representing the clamped RGB value.
    */
   public static int clamp(int val) {
     if (val > 255) {

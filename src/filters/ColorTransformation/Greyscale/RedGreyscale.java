@@ -8,11 +8,16 @@ import model.Imaging.pixel.IPixel;
 import model.Imaging.pixel.Pixel;
 
 public class RedGreyscale extends AbstractColorTransformation {
+
   /**
-   * Applies the given transformation to the given pixel by updating its rgb values. Any out of
+   * Empty constructor for a RedGreyscale filter.
+   */
+  public RedGreyscale() {}
+  /**
+   * Applies the color transformation to the given pixel by updating its rgb values. Any out of
    * range rgb value is clamped to the minimum value of 0 or the maximum value of 255.
    *
-   * @param pixel Pixel to transform.
+   * @param pixel Pixel being transformed.
    * @return The transformed pixel.
    */
   protected IPixel colorTransform(IPixel pixel) {

@@ -6,16 +6,22 @@ import model.Imaging.Posn;
 import model.Imaging.pixel.IPixel;
 import model.Imaging.pixel.Pixel;
 
+/**
+ * Class to represent a darkening filter on a pixel.
+ */
 public class DarkenTransformation extends AbstractIntensityTransformation {
 
+  /**
+   * Empty contrsuctor for a DarkenTransformation filter.
+   */
   public DarkenTransformation(){}
 
   /**
-   * Applies the correct transformation to the given pixel by changing its red, green, and blue
-   * values. If the RGB value is out of range 0-255, it will be clamped to the value.
-   *
-   * @param pixel
-   * @return
+   * Applies a darkening on the given pixel.
+   * If the RGB value is out of range 0-255, it will be clamped to the value.
+   * @param pixel pixel being transformed
+   * @param val the value that the pixel will be darkened by
+   * @return the transformed pixel.
    */
   @Override
   protected IPixel intensityTransform(IPixel pixel, int val) {

@@ -11,8 +11,16 @@ import model.ImageProcessingSession;
 import view.IImageProcessingView;
 import view.ImageProcessingView;
 
+/**
+ * Class representing the main processing unit that handles the MVC Image Processor.
+ */
 public final class ImageProcessor {
 
+  /**
+   * The main function that runs the controller for an ImageProcessor.
+   * @param args the client's given inputs
+   * @throws IOException if the client gives inputs invalid to the ImageProcessor.
+   */
   public static void main(String[] args) throws IOException {
     Readable rd = new InputStreamReader(System.in);
 
