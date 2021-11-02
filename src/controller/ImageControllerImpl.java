@@ -132,7 +132,7 @@ public class ImageControllerImpl implements ImageController {
           this.readModelNameAndNewName();
           try {
             this.model.darken(darkenValue, this.modelName, this.newName);
-            this.view.renderMessage("\nBrightened Image made");
+            this.view.renderMessage("\nDarkened Image made");
           } catch (IllegalArgumentException e) {
             this.view.renderMessage(e.toString());
           }
