@@ -41,7 +41,7 @@ public class Image implements ImageOfPixel {
     FileOutputStream outputStream = new FileOutputStream(filename);
     StringBuilder output = new StringBuilder();
     output.append("P3");
-    output.append("\n" + this.pixels.size() + " " + this.pixels.get(0).size());
+    output.append("\n" + this.pixels.get(1).size() + " " + this.pixels.size());
     for (List<IPixel> pixelList: this.pixels) {
       for (IPixel pixel: pixelList) {
         output.append("\n");

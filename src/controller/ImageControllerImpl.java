@@ -9,6 +9,7 @@ import model.ImageProcessingModel;
 import model.ImageUtil;
 import model.Imaging.Image;
 import view.IImageProcessingView;
+import view.ImageProcessingView;
 
 
 /**
@@ -20,33 +21,42 @@ public class ImageControllerImpl implements ImageController {
   private IImageProcessingView view;
   private Scanner in;
   private HashMap<String, IImageProcessingModel> images;
-  String filepath;
-  String modelName;
-  String newName;
+  private String filepath;
+  private String modelName;
+  private String newName;
+  private IImageProcessingModel currentModel;
 
   /**
    * Creates a new ImageControllerImpl given a view and readable object. Given a variety of commands
    * such as load, save, get-component (component), horizontal-flip, vertical-flip, brighten,
    * darken, and q to quite the controller creates and manipulates images.
    *
-   * @param view  The view of the application that is in control of displaying messages.
    * @param input The input of the application that is used to read in commands.
-   * @throws IllegalArgumentException when view or input are null.
+   * @throws IllegalArgumentException input is null.
    */
   public ImageControllerImpl(IImageProcessingView view, Readable input)
       throws IllegalArgumentException {
-    if (view == null || input == null) {
+    if (input == null) {
       throw new IllegalArgumentException("Parameters for controller cannot be null");
     }
+
+    this.in = new Scanner(input);
+    //initial view has no model, needed to display intro message
+    //Not being used yet from rendering messages
+    this.view = view;
+    this.images = new HashMap<String, IImageProcessingModel>();
   }
 
 
   @Override
   public void run() throws IOException {
     boolean quit = false;
+
+    //tell view to show options
+    view.showOptions();
+
     while (!quit) {
-      //tell view to show options
-      view.showOptions();
+
       //accept user input
       String option = in.next();
 
@@ -56,6 +66,7 @@ public class ImageControllerImpl implements ImageController {
           this.readFilepathAndModelName();
           images.put(modelName,
               new ImageProcessingModel(new Image(ImageUtil.getPixels(this.filepath))));
+          this.view.renderMessage("\nImage Loaded");
           break;
 
         //saves an image with the same name as the one given from the hashmap as a PPM file.
@@ -64,11 +75,14 @@ public class ImageControllerImpl implements ImageController {
           if (this.images.containsKey(modelName)) {
             try {
               this.images.get(modelName).saveImageAsPPM(filepath);
+              this.view.renderMessage("\nImage Saved");
+
             } catch (IOException e) {
               this.view.renderMessage(e.toString());
             }
           } else {
-            throw new IllegalArgumentException("Invalid name");
+            this.view.renderMessage("Invalid name");
+
           }
           break;
 
@@ -82,6 +96,8 @@ public class ImageControllerImpl implements ImageController {
             break;
           }
           this.getComponent(component, modelName, newName);
+          this.view.renderMessage("\nComponent Image made");
+
           break;
 
         //Creates a new image after horizontally flipping the image of the given name and
@@ -94,6 +110,8 @@ public class ImageControllerImpl implements ImageController {
           }
           images.put(newName,
               new ImageProcessingModel(this.images.get(modelName).horizontalFlip()));
+          this.view.renderMessage("\nImage horizontally flipped");
+
           break;
 
         //Creates a new image after vertically flipping the image of the given name and
@@ -106,6 +124,8 @@ public class ImageControllerImpl implements ImageController {
           }
           images.put(newName,
               new ImageProcessingModel(this.images.get(modelName).verticalFlip()));
+          this.view.renderMessage("\nImage vertically flipped");
+
           break;
 
         //Creates a new image after brightening the image of the given name and
@@ -119,6 +139,8 @@ public class ImageControllerImpl implements ImageController {
           int brightenValue = Integer.parseInt(in.next());
           images.put(newName,
               new ImageProcessingModel(this.images.get(modelName).brighten(brightenValue)));
+          this.view.renderMessage("\nImage brightened");
+
           break;
 
         //Creates a new image after darkening the image of the given name and
@@ -133,6 +155,8 @@ public class ImageControllerImpl implements ImageController {
           int darkenValue = Integer.parseInt(in.next());
           images.put(newName,
               new ImageProcessingModel(this.images.get(modelName).darken(darkenValue)));
+          this.view.renderMessage("\nImage darkened");
+
           break;
 
         case "Q":
@@ -150,7 +174,7 @@ public class ImageControllerImpl implements ImageController {
    *
    * @param component The name of the component to be applied.
    * @param modelName The name of the model in the hashmap to apply it to.
-   * @param newName The name of the created model to be stored in the hashmap.
+   * @param newName   The name of the created model to be stored in the hashmap.
    */
   private void getComponent(String component, String modelName, String newName) {
     switch (component) {
@@ -188,8 +212,7 @@ public class ImageControllerImpl implements ImageController {
   }
 
   /**
-   * Reads in the filepath and the model name.
-   * Used in load and save switch cases.
+   * Reads in the filepath and the model name. Used in load and save switch cases.
    */
   private void readFilepathAndModelName() {
     this.filepath = in.next();
@@ -198,8 +221,7 @@ public class ImageControllerImpl implements ImageController {
   }
 
   /**
-   * Reads in the model name and the new model name.
-   * Used in image manipulation switch cases.
+   * Reads in the model name and the new model name. Used in image manipulation switch cases.
    */
   private void readModelNameAndNewName() {
     this.modelName = in.next();

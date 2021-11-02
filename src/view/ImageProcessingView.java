@@ -20,11 +20,7 @@ public class ImageProcessingView implements IImageProcessingView {
    * @param model represents an IPhotoShopLayerModel that is used by the Controller
    */
   public ImageProcessingView(ImageProcessingModel model) {
-    if (model == null) {
-      throw new IllegalArgumentException("Layers Model cannot be null");
-    }
-
-    this.model = model;
+    this(model, System.out);
   }
 
   /**
