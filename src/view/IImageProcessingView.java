@@ -14,4 +14,6 @@ public interface IImageProcessingView {
    * @throws IOException if transmission of the board to the provided data destination fails
    */
   void renderMessage(String message) throws IOException;
+
+  void showOptions() throws IOException;
 }

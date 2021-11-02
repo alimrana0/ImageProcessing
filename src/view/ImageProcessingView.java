@@ -51,4 +51,18 @@ public class ImageProcessingView implements IImageProcessingView {
       throw new IOException("Could not render Message");
     }
   }
+
+  @Override
+  public void showOptions() throws IOException {
+    String options = "Commands:"
+        + "\nload filepath name"
+        + "\nsave saveLocation name"
+        + "\nget-component component "
+        + "\nhorizontal-flip"
+        + "\nvertical-flip"
+        + "\nbrighten"
+        + "\ndarken"
+        + "\nQ or q to quit";
+    this.renderMessage(options);
+  }
 }

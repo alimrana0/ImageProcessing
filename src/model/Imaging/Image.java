@@ -1,5 +1,8 @@
 package model.Imaging;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,24 @@ public class Image implements ImageOfPixel {
   @Override
   public List<List<IPixel>> getPixels() {
     return new ArrayList<>(pixels);
+  }
+
+  public void saveImageAsPPM(String filename) throws IOException {
+    FileOutputStream outputStream = new FileOutputStream(filename);
+    StringBuilder output = new StringBuilder();
+    output.append("P3");
+    output.append("\n" + this.pixels.size() + " " + this.pixels.get(0).size());
+    for (List<IPixel> pixelList: this.pixels) {
+      for (IPixel pixel: pixelList) {
+        output.append("\n");
+        output.append(pixel.getColor().getRed());
+        output.append("\n");
+        output.append(pixel.getColor().getGreen());
+        output.append("\n");
+        output.append(pixel.getColor().getBlue());
+      }
+    }
+    outputStream.write(output.toString().getBytes());
   }
 }
 

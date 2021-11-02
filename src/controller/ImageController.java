@@ -1,4 +1,10 @@
 package controller;
 
-public class ImageController {
+
+import java.io.IOException;
+
+public interface ImageController {
+
+  void run() throws IOException;
+
 }

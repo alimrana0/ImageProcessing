@@ -1,5 +1,7 @@
 package model;
 
+import filters.FlippingTransformation.FlipHorizontal;
+import java.io.IOException;
 import model.Imaging.ImageOfPixel;
 import model.Imaging.ImageOfPixel;
 
@@ -21,5 +23,10 @@ public interface IImageProcessingModel {
 
   ImageOfPixel luma() throws IllegalArgumentException;
 
+  public ImageOfPixel horizontalFlip() throws IllegalArgumentException;
+
+  public ImageOfPixel verticalFlip() throws IllegalArgumentException;
+
+    void saveImageAsPPM(String filename) throws IOException;
 
 }

@@ -6,6 +6,8 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 
+import model.Imaging.Color;
+import model.Imaging.Posn;
 import model.Imaging.pixel.Pixel;
 
 
@@ -63,6 +65,56 @@ public class ImageUtil {
             System.out.println("Color of pixel ("+j+","+i+"): "+ r+","+g+","+b);
         }
     }
+  }
+
+  public static List getPixels(String filename) {
+    Scanner sc;
+
+    try {
+      sc = new Scanner(new FileInputStream(filename));
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File not Found");
+    }
+
+    StringBuilder builder = new StringBuilder();
+    while (sc.hasNextLine()) {
+      String s = sc.nextLine();
+      try {
+        if (s.charAt(0) != '#') {
+          builder.append(s + System.lineSeparator());
+        }
+      } catch (StringIndexOutOfBoundsException e) {
+        throw new IllegalArgumentException("Invalid String");
+      }
+    }
+
+    sc = new Scanner(builder.toString());
+
+    String token;
+
+    token = sc.next();
+    if (!token.equals("P3")) {
+      throw new IllegalArgumentException("Invalid PPM file: plain RAW file should begin with P3");
+    }
+    int width = sc.nextInt();
+    int height = sc.nextInt();
+
+    List pixels = new ArrayList();
+
+
+    for (int i = 0; i < height; i++) {
+      List temp = new ArrayList();
+      for (int j = 0; j < width; j++) {
+        int r = sc.nextInt();
+        int g = sc.nextInt();
+        int b = sc.nextInt();
+
+        //TODO POSN is X Y, IMAGE READ IN ROW/COL AND STARTS IN TOP LEFT CORNER
+        temp.add(new Pixel(new Posn(i,j), new Color(r,g,b)));
+      }
+      pixels.add(temp);
+    }
+    return pixels;
   }
 
   //demo main
