@@ -23,7 +23,7 @@ public class FlipHorizontal implements IFlipTransform{
     for (int i = 0; i < imagePixels.size(); i++) {
       List<IPixel> oldPixels = imagePixels.get(i);
       ArrayList<IPixel> newPixels = new ArrayList<>();
-      for (int j = oldPixels.size(); j > 0; j--) {
+      for (int j = oldPixels.size() - 1; j >= 0; j--) {
         newPixels.add(oldPixels.get(j));
       }
       newImagePixels.add(newPixels);

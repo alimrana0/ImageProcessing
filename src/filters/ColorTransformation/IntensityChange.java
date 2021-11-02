@@ -13,11 +13,11 @@ public class IntensityChange extends AbstractColorTransformation{
   @Override
   protected IPixel colorTransform(IPixel pixel) {
 
-    int avg = (pixel.getColor().getRed()
+    int avg = FilterClamp.clamp((pixel.getColor().getRed()
             + pixel.getColor().getGreen()
-            + pixel.getColor().getGreen()) / 3;
+            + pixel.getColor().getGreen()) / 3);
 
-    return FilterClamp.clamp(new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(avg,
-            avg, avg)));
+    return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(avg,
+            avg, avg));
   }
 }

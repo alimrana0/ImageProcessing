@@ -23,8 +23,8 @@ public class RedGreyscale extends AbstractColorTransformation {
     int changedGreen = red;
     int changedBlue = red;
 
-    return FilterClamp.clamp(new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(red,
-            changedGreen, changedBlue)));
+    return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(red,
+            changedGreen, changedBlue));
 
   }
 }

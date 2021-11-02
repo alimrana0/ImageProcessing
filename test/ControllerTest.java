@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import model.ImageProcessingModel;
+import model.ImageProcessingSession;
 import org.junit.Test;
 import view.IImageProcessingView;
 import view.ImageProcessingView;
@@ -20,21 +21,21 @@ public class ControllerTest {
     StringBuffer outBuffer = new StringBuffer();
 
     IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null),outBuffer);
-
-    ImageController controller = new ImageControllerImpl(view,input);
+    ImageProcessingSession session = new ImageProcessingSession();
+    ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
 
     String actualOutput = outBuffer.toString();
 
     String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit";
+            + "load filepath name\n"
+            + "save saveLocation name\n"
+            + "get-component component \n"
+            + "horizontal-flip\n"
+            + "vertical-flip\n"
+            + "brighten\n"
+            + "darken\n"
+            + "Q or q to quit";
 
     assertEquals(expectedOutput, actualOutput);
   }
@@ -46,22 +47,23 @@ public class ControllerTest {
     StringBuffer outBuffer = new StringBuffer();
 
     IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null),outBuffer);
+    ImageProcessingSession session = new ImageProcessingSession();
 
-    ImageController controller = new ImageControllerImpl(view,input);
+    ImageController controller = new ImageControllerImpl(session, view,input);
     controller.run();
 
     String actualOutput = outBuffer.toString();
 
     String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
-        + "Image Loaded";
+            + "load filepath name\n"
+            + "save saveLocation name\n"
+            + "get-component component \n"
+            + "horizontal-flip\n"
+            + "vertical-flip\n"
+            + "brighten\n"
+            + "darken\n"
+            + "Q or q to quit\n"
+            + "Image Loaded";
     assertEquals(expectedOutput, actualOutput);
   }
 

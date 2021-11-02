@@ -3,6 +3,7 @@ package model.Imaging.pixel;
 import java.util.Objects;
 
 import model.Imaging.Color;
+import model.Imaging.IColor;
 import model.Imaging.Posn;
 
 /**
@@ -12,9 +13,9 @@ import model.Imaging.Posn;
 public class Pixel implements IPixel {
 
   private final Posn posn;
-  private final Color color;
+  private final IColor color;
 
-  public Pixel(Posn position, Color color) {
+  public Pixel(Posn position, IColor color) {
 
     if (position == null || color == null) {
       throw new IllegalArgumentException("Argument cannot be null.");
@@ -26,7 +27,7 @@ public class Pixel implements IPixel {
   }
 
   @Override
-  public Color getColor() {
+  public IColor getColor() {
     return color;
   }
 
