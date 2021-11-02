@@ -25,7 +25,7 @@ public class FlipVertical implements IFlipTransform{
     List<List<IPixel>> imagePixels = image.getPixels();
     List<ArrayList<IPixel>> newImagePixels = new ArrayList<>();
 
-    for (int i = imagePixels.size(); i == 0; i--) {
+    for (int i = imagePixels.size() - 1; i >= 0; i--) {
       List<IPixel> oldPixels = newImagePixels.get(i);
       ArrayList<IPixel> newPixels = new ArrayList<>();
       for (int j = 0; j < oldPixels.size(); j++) {
