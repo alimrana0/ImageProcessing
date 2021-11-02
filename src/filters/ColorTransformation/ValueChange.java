@@ -22,8 +22,8 @@ public class ValueChange extends AbstractColorTransformation{
             pixel.getColor().getGreen(),
             pixel.getColor().getBlue());
 
-    return FilterClamp.clamp(new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(largest,
-            largest, largest)));
+    return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(largest,
+            largest, largest));
 
   }
 

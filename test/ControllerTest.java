@@ -42,8 +42,8 @@ public class ControllerTest {
 
   @Test
   public void controllerLoadSaveTest() throws IOException {
-    String inputString = "load\nkoala.ppm\nkoala\n"
-        + "save\nkoala-saved.ppm\nkoala\nq";
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "save\nstars-saved.ppm\nstars\nq";
     BufferedReader input = new BufferedReader(new StringReader(inputString));
     StringBuffer outBuffer = new StringBuffer();
 
@@ -57,8 +57,8 @@ public class ControllerTest {
 
     String actualOutput = outBuffer.toString();
     String expectedLog = "\n"
-        + "load koala.ppm with name koala\n"
-        + "save image as koala-saved.ppm from koala";
+        + "load stars.ppm with name stars\n"
+        + "save image as stars-saved.ppm from stars";
 
     String expectedOutput = "Commands:\n"
         + "load filepath name\n"
@@ -77,9 +77,9 @@ public class ControllerTest {
 
   @Test
   public void controllerFlipTest() throws IOException {
-    String inputString = "load\nkoala.ppm\nkoala\n"
-        + "vertical-flip\nkoala\nkoala-vertical\n"
-        + "horizontal-flip\nkoala-vertical\nkoala-horizontal\nq";
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "vertical-flip\nstars\nstars-vertical\n"
+        + "horizontal-flip\nstars-vertical\nstars-horizontal\nq";
     BufferedReader input = new BufferedReader(new StringReader(inputString));
     StringBuffer outBuffer = new StringBuffer();
 
@@ -94,9 +94,9 @@ public class ControllerTest {
     String actualOutput = outBuffer.toString();
     String expectedLog =
         "\n"
-            + "load koala.ppm with name koala\n"
-            + "vertically flipping koala, store as koala-vertical\n"
-            + "horizontally flipping koala-vertical, store as koala-horizontal";
+            + "load stars.ppm with name stars\n"
+            + "vertically flipping stars, store as stars-vertical\n"
+            + "horizontally flipping stars-vertical, store as stars-horizontal";
 
     String expectedOutput = "Commands:\n"
         + "load filepath name\n"
@@ -116,14 +116,14 @@ public class ControllerTest {
 
   @Test
   public void controllerComponentTest() throws IOException {
-    String inputString = "load\nkoala.ppm\nkoala\n"
-        + "get-component\nred\nkoala\nkoala-red\n"
-        + "get-component\ngreen\nkoala-red\nkoala-green\n"
-        + "get-component\nblue\nkoala-green\nkoala-blue\n"
-        + "get-component\nvalue\nkoala-blue\nkoala-value\n"
-        + "get-component\nluma\nkoala-value\nkoala-luma\n"
-        + "get-component\nintensity\nkoala-luma\nkoala-intensity\n"
-        + "horizontal-flip\nkoala-intensity\nkoala-flipped\nq";
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "get-component\nred\nstars\nstars-red\n"
+        + "get-component\ngreen\nstars-red\nstars-green\n"
+        + "get-component\nblue\nstars-green\nstars-blue\n"
+        + "get-component\nvalue\nstars-blue\nstars-value\n"
+        + "get-component\nluma\nstars-value\nstars-luma\n"
+        + "get-component\nintensity\nstars-luma\nstars-intensity\n"
+        + "horizontal-flip\nstars-intensity\nstars-flipped\nq";
     BufferedReader input = new BufferedReader(new StringReader(inputString));
     StringBuffer outBuffer = new StringBuffer();
 
@@ -138,14 +138,14 @@ public class ControllerTest {
     String actualOutput = outBuffer.toString();
     String expectedLog =
         "\n"
-            + "load koala.ppm with name koala\n"
-            + "get component red from koala, store as koala-red\n"
-            + "get component green from koala-red, store as koala-green\n"
-            + "get component blue from koala-green, store as koala-blue\n"
-            + "get component value from koala-blue, store as koala-value\n"
-            + "get component luma from koala-value, store as koala-luma\n"
-            + "get component intensity from koala-luma, store as koala-intensity\n"
-            + "horizontally flipping koala-intensity, store as koala-flipped";
+            + "load stars.ppm with name stars\n"
+            + "get component red from stars, store as stars-red\n"
+            + "get component green from stars-red, store as stars-green\n"
+            + "get component blue from stars-green, store as stars-blue\n"
+            + "get component value from stars-blue, store as stars-value\n"
+            + "get component luma from stars-value, store as stars-luma\n"
+            + "get component intensity from stars-luma, store as stars-intensity\n"
+            + "horizontally flipping stars-intensity, store as stars-flipped";
 
     String expectedOutput = "Commands:\n"
         + "load filepath name\n"
@@ -171,10 +171,10 @@ public class ControllerTest {
 
   @Test
   public void controllerBrightenDarkenTest() throws IOException {
-    String inputString = "load\nkoala.ppm\nkoala\n"
-        + "darken\n4\nkoala\nkoala-dark\n"
-        + "brighten\n4\nkoala-dark\nkoala-bright\n"
-        + "flip-horizontal\nkoala-bright\nkoala\nq";
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "darken\n4\nstars\nstars-dark\n"
+        + "brighten\n4\nstars-dark\nstars-bright\n"
+        + "horizontal-flip\nstars-bright\nstars\nq";
     BufferedReader input = new BufferedReader(new StringReader(inputString));
     StringBuffer outBuffer = new StringBuffer();
 
@@ -189,14 +189,10 @@ public class ControllerTest {
     String actualOutput = outBuffer.toString();
     String expectedLog =
         "\n"
-            + "load koala.ppm with name koala\n"
-            + "get component red from koala, store as koala-red\n"
-            + "get component green from koala-red, store as koala-green\n"
-            + "get component blue from koala-green, store as koala-blue\n"
-            + "get component value from koala-blue, store as koala-value\n"
-            + "get component luma from koala-value, store as koala-luma\n"
-            + "get component intensity from koala-luma, store as koala-intensity\n"
-            + "horizontally flipping koala-intensity, store as koala-flipped";
+            + "load stars.ppm with name stars\n"
+            + "darkening stars by 4, store as stars-dark\n"
+            + "brightening stars-dark by 4, store as stars-bright\n"
+            + "horizontally flipping stars-bright, store as stars";
 
     String expectedOutput = "Commands:\n"
         + "load filepath name\n"
@@ -208,12 +204,8 @@ public class ControllerTest {
         + "darken\n"
         + "Q or q to quit\n"
         + "Image Loaded\n"
-        + "Component Image made\n"
-        + "Component Image made\n"
-        + "Component Image made\n"
-        + "Component Image made\n"
-        + "Component Image made\n"
-        + "Component Image made\n"
+        + "Darkened Image made\n"
+        + "Brightened Image made\n"
         + "Horizontal Image made";
     assertEquals(expectedOutput, actualOutput);
     assertEquals(expectedLog, mockLog.toString());

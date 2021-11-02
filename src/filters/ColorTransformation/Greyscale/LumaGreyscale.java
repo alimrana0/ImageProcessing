@@ -55,18 +55,18 @@ public class LumaGreyscale implements IColorTransform {
    */
   protected IPixel colorTransform(IPixel pixel) {
     
-    int changedRed = (int) (pixel.getColor().getRed() * this.lumaVals[0][0]
+    int changedRed = FilterClamp.clamp((int) (pixel.getColor().getRed() * this.lumaVals[0][0]
             + pixel.getColor().getGreen() * this.lumaVals[0][1]
-            + pixel.getColor().getBlue() * this.lumaVals[0][2]);
-    int changedGreen = (int) (pixel.getColor().getRed() * this.lumaVals[1][0]
+            + pixel.getColor().getBlue() * this.lumaVals[0][2]));
+    int changedGreen = FilterClamp.clamp((int) (pixel.getColor().getRed() * this.lumaVals[1][0]
             + pixel.getColor().getGreen() * this.lumaVals[1][1]
-            + pixel.getColor().getBlue() * this.lumaVals[1][2]);
-    int changedBlue = (int) (pixel.getColor().getRed() * this.lumaVals[2][0]
+            + pixel.getColor().getBlue() * this.lumaVals[1][2]));
+    int changedBlue = FilterClamp.clamp((int) (pixel.getColor().getRed() * this.lumaVals[2][0]
             + pixel.getColor().getGreen() * this.lumaVals[2][1]
-            + pixel.getColor().getBlue() * this.lumaVals[2][2]);
+            + pixel.getColor().getBlue() * this.lumaVals[2][2]));
 
-    return FilterClamp.clamp(new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
-            changedGreen, changedBlue)));
+    return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
+            changedGreen, changedBlue));
 
   }
 }

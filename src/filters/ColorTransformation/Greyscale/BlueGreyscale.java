@@ -1,5 +1,7 @@
 package filters.ColorTransformation.Greyscale;
 
+import java.util.logging.Filter;
+
 import filters.ColorTransformation.AbstractColorTransformation;
 import filters.FilterClamp;
 import filters.IntensityTransformation.AbstractIntensityTransformation;
@@ -25,8 +27,10 @@ public class BlueGreyscale extends AbstractColorTransformation {
     int changedRed = blue;
     int changedGreen = blue;
 
-    return FilterClamp.clamp(new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
-            changedGreen, blue)));
+
+
+    return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
+            changedGreen, blue));
 
   }
 

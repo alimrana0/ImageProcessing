@@ -21,12 +21,12 @@ public class BrightenTransformation extends AbstractIntensityTransformation {
   @Override
   protected IPixel intensityTransform(IPixel pixel, int val) {
 
-    int changedRed = (int) (pixel.getColor().getRed() + val);
-    int changedGreen = (int) (pixel.getColor().getGreen() + val);
-    int changedBlue = (int) (pixel.getColor().getBlue() + val);
+    int changedRed = FilterClamp.clamp((int) (pixel.getColor().getRed() + val));
+    int changedGreen = FilterClamp.clamp((int) (pixel.getColor().getGreen() + val));
+    int changedBlue = FilterClamp.clamp((int) (pixel.getColor().getBlue() + val));
 
-    return FilterClamp.clamp(new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
-            changedGreen, changedBlue)));
+    return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
+            changedGreen, changedBlue));
   }
 
 

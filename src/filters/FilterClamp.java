@@ -17,34 +17,15 @@ public class FilterClamp {
    * Takes in a given pixel and makes sure all the color values are within the given bounds
    * otherwise they are set to the respective values.
    *
-   * @param pixel which has the RGB values
+   * @param val which has the RGB value
    * @return a new Pixel with corrected values if they were out of bounds before
    */
-  public static IPixel clamp(IPixel pixel) {
-    int red = pixel.getColor().getRed();
-    int green = pixel.getColor().getGreen();
-    int blue = pixel.getColor().getBlue();
-
-    final int min = 0;
-    final int max = 255;
-
-    if (red < 0) {
-      red = 0;
-    } else if (red > max) {
-      red = max;
+  public static int clamp(int val) {
+    if (val > 255) {
+      return 255;
+    } else if (val < 0) {
+      return 0;
     }
-    if (green < min) {
-      green = min;
-    } else if (green > max) {
-      green = max;
-    }
-    if (blue < min) {
-      blue = min;
-    } else if (blue > max) {
-      blue = max;
-    }
-    Color c = new Color(red, green, blue);
-
-    return new Pixel(pixel.getPosn(), c);
+    return val;
   }
 }

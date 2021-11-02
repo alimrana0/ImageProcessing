@@ -28,8 +28,8 @@ public class ImageControllerImpl implements ImageController {
    * @throws IllegalArgumentException input is null.
    */
   public ImageControllerImpl(ImageProcessingSession model, IImageProcessingView view,
-      Readable input)
-      throws IllegalArgumentException {
+                             Readable input)
+          throws IllegalArgumentException {
     if (model == null || view == null || input == null) {
       throw new IllegalArgumentException("Parameters for controller cannot be null");
     }
@@ -132,7 +132,7 @@ public class ImageControllerImpl implements ImageController {
           this.readModelNameAndNewName();
           try {
             this.model.darken(darkenValue, this.modelName, this.newName);
-            this.view.renderMessage("\nBrightened Image made");
+            this.view.renderMessage("\nDarkened Image made");
           } catch (IllegalArgumentException e) {
             this.view.renderMessage(e.toString());
           }
@@ -167,4 +167,3 @@ public class ImageControllerImpl implements ImageController {
   }
 
 }
-
