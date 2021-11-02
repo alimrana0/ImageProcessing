@@ -10,6 +10,7 @@ import filters.FlippingTransformation.FlipHorizontal;
 import filters.FlippingTransformation.FlipVertical;
 import filters.IntensityTransformation.BrightenTransformation;
 import filters.IntensityTransformation.DarkenTransformation;
+import java.io.IOException;
 import model.Imaging.ImageOfPixel;
 
 public class ImageProcessingModel implements IImageProcessingModel {
@@ -84,7 +85,12 @@ public class ImageProcessingModel implements IImageProcessingModel {
     return new LumaGreyscale().applyColorTransformation(this.image);
   }
 
+  @Override
+  public void saveImageAsPPM(String filename) throws IOException {
+    this.image.saveImageAsPPM(filename);
+  }
 
+  @Override
   public ImageOfPixel horizontalFlip() throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
@@ -93,6 +99,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     return new FlipHorizontal().flipTransform(this.image);
   }
 
+  @Override
   public ImageOfPixel verticalFlip() throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
@@ -100,8 +107,5 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
     return new FlipVertical().flipTransform(this.image);
   }
-
-
-
 
 }
