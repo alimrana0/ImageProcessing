@@ -150,6 +150,12 @@ public class ColorTransformationTest {
 
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testGreyScaleTransformationThrows() {
+
+    ImageOfPixel greyScale = new LumaGreyscale().applyColorTransformation(null);
+  }
+
   @Test
   public void testIntensityTransformation() {
 
@@ -199,5 +205,7 @@ public class ColorTransformationTest {
     assertEquals(valueImage.getPixels().get(1).get(1).getColor().getBlue(), 255);
 
   }
+
+
 
 }

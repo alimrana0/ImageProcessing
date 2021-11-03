@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -34,8 +35,8 @@ public class IntensityTransformationTest {
   ArrayList<IPixel> temp2 = new ArrayList<IPixel>();
 
 
-  @Test
-  public void testImageCreatedCorrectlyFirstPixel() {
+  @Before
+  public void setUp() {
     temp1.add(pixel1);
     temp1.add(pixel2);
     list2D.add(temp1);
@@ -43,6 +44,10 @@ public class IntensityTransformationTest {
     temp2.add(pixel3);
     temp2.add(pixel4);
     list2D.add(temp2);
+  }
+  @Test
+  public void testImageCreatedCorrectlyFirstPixel() {
+
     ImageOfPixel image = new Image(list2D);
     assertEquals(image.getPixels().get(0).get(0).getColor().getRed(), 255);
     assertEquals(image.getPixels().get(0).get(0).getColor().getGreen(), 0);
@@ -53,13 +58,7 @@ public class IntensityTransformationTest {
 
   @Test
   public void testImageCreatedCorrectlySecondPixel() {
-    temp1.add(pixel1);
-    temp1.add(pixel2);
-    list2D.add(temp1);
 
-    temp2.add(pixel3);
-    temp2.add(pixel4);
-    list2D.add(temp2);
     ImageOfPixel image = new Image(list2D);
     assertEquals(image.getPixels().get(0).get(1).getColor().getRed(), 0);
     assertEquals(image.getPixels().get(0).get(1).getColor().getGreen(), 255);
@@ -69,13 +68,7 @@ public class IntensityTransformationTest {
 
   @Test
   public void testImageCreatedCorrectlyThirdPixel() {
-    temp1.add(pixel1);
-    temp1.add(pixel2);
-    list2D.add(temp1);
 
-    temp2.add(pixel3);
-    temp2.add(pixel4);
-    list2D.add(temp2);
     ImageOfPixel image = new Image(list2D);
     assertEquals(image.getPixels().get(1).get(0).getColor().getRed(), 0);
     assertEquals(image.getPixels().get(1).get(0).getColor().getGreen(), 0);
@@ -85,13 +78,7 @@ public class IntensityTransformationTest {
 
   @Test
   public void testImageCreatedCorrectlyFourthPixel() {
-    temp1.add(pixel1);
-    temp1.add(pixel2);
-    list2D.add(temp1);
 
-    temp2.add(pixel3);
-    temp2.add(pixel4);
-    list2D.add(temp2);
     ImageOfPixel image = new Image(list2D);
     assertEquals(image.getPixels().get(1).get(1).getColor().getRed(), 255);
     assertEquals(image.getPixels().get(1).get(1).getColor().getGreen(), 255);
@@ -99,16 +86,15 @@ public class IntensityTransformationTest {
 
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testBrightenTransformationThrows() {
+    ImageOfPixel brightenedImage =
+            new BrightenTransformation().applyTransformation(null, 2);
+  }
 
   @Test
   public void testBrightenTransformation() {
-    temp1.add(pixel1);
-    temp1.add(pixel2);
-    list2D.add(temp1);
 
-    temp2.add(pixel3);
-    temp2.add(pixel4);
-    list2D.add(temp2);
     ImageOfPixel image = new Image(list2D);
 
     ImageOfPixel brightenedImage = new BrightenTransformation().applyTransformation(image, 2);
@@ -131,16 +117,15 @@ public class IntensityTransformationTest {
 
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testDarkenTransformationThrows() {
+    ImageOfPixel darkenedImage =
+            new DarkenTransformation().applyTransformation(null, 2);
+  }
 
   @Test
   public void testDarkenTransformation() {
-    temp1.add(pixel1);
-    temp1.add(pixel2);
-    list2D.add(temp1);
 
-    temp2.add(pixel3);
-    temp2.add(pixel4);
-    list2D.add(temp2);
     ImageOfPixel image = new Image(list2D);
 
     ImageOfPixel darkenedImage = new DarkenTransformation().applyTransformation(image, 2);

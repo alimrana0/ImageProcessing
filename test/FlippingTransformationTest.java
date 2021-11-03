@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -25,25 +26,31 @@ public class FlippingTransformationTest {
   IColor blue = new Color(0, 0, 255);
   IColor white = new Color(255, 255, 255);
 
-  IPixel p1 = new Pixel(new Posn(0, 0), red);
-  IPixel p2 = new Pixel(new Posn(0, 1), green);
-  IPixel p3 = new Pixel(new Posn(1, 0), blue);
-  IPixel p4 = new Pixel(new Posn(1, 1), white);
+  IPixel pixel1 = new Pixel(new Posn(0, 0), red);
+  IPixel pixel2 = new Pixel(new Posn(0, 1), green);
+  IPixel pixel3 = new Pixel(new Posn(1, 0), blue);
+  IPixel pixel4 = new Pixel(new Posn(1, 1), white);
 
-  ArrayList<ArrayList<IPixel>> pixel2DList = new ArrayList<ArrayList<IPixel>>();
-  ArrayList<IPixel> pixelList1 = new ArrayList<IPixel>();
-  ArrayList<IPixel> pixelList2 = new ArrayList<IPixel>();
+  ArrayList<ArrayList<IPixel>> list2D = new ArrayList<ArrayList<IPixel>>();
+  ArrayList<IPixel> test1 = new ArrayList<IPixel>();
+  ArrayList<IPixel> test2 = new ArrayList<IPixel>();
 
+
+  @Before
+  public void setUp() {
+    test1.add(pixel1);
+    test1.add(pixel2);
+    list2D.add(test1);
+
+    test2.add(pixel3);
+    test2.add(pixel4);
+    list2D.add(test2);
+    
+  }
   @Test
-  public void testHorizontalFlipTransformation() {
-    pixelList1.add(p1);
-    pixelList1.add(p2);
-    pixel2DList.add(pixelList1);
-
-    pixelList2.add(p3);
-    pixelList2.add(p4);
-    pixel2DList.add(pixelList2);
-    ImageOfPixel image = new Image(pixel2DList);
+  public void testFlipHorizontalTransformation() {
+ 
+    ImageOfPixel image = new Image(list2D);
 
     ImageOfPixel horizontalFlip = new FlipHorizontal().flipTransform(image);
 
@@ -65,16 +72,15 @@ public class FlippingTransformationTest {
 
   }
 
-  @Test
-  public void testVerticalFlipTransformation() {
-    pixelList1.add(p1);
-    pixelList1.add(p2);
-    pixel2DList.add(pixelList1);
+  @Test(expected = IllegalArgumentException.class)
+  public void testFlipHorizontalTransformationThrows() {
+    ImageOfPixel horizontalFlip = new FlipHorizontal().flipTransform(null);
+  }
 
-    pixelList2.add(p3);
-    pixelList2.add(p4);
-    pixel2DList.add(pixelList2);
-    ImageOfPixel image = new Image(pixel2DList);
+  @Test
+  public void testFlipVerticalTransformation() {
+
+    ImageOfPixel image = new Image(list2D);
 
     ImageOfPixel verticalFlip = new FlipVertical().flipTransform(image);
 
@@ -94,5 +100,10 @@ public class FlippingTransformationTest {
     assertEquals(verticalFlip.getPixels().get(1).get(1).getColor().getGreen(), 255);
     assertEquals(verticalFlip.getPixels().get(1).get(1).getColor().getBlue(), 0);
 
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testFlipVerticalTransformationThrows() {
+    ImageOfPixel verticalFlip = new FlipVertical().flipTransform(null);
   }
 }
