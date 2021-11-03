@@ -66,6 +66,7 @@ public class Image implements ImageOfPixel {
     StringBuilder output = new StringBuilder();
     output.append("P3");
     output.append("\n" + this.pixels.get(1).size() + " " + this.pixels.size());
+    output.append("\n255");
     for (List<IPixel> pixelList : this.pixels) {
       for (IPixel pixel : pixelList) {
         output.append("\n");
@@ -77,6 +78,7 @@ public class Image implements ImageOfPixel {
       }
     }
     outputStream.write(output.toString().getBytes());
+    outputStream.close();
   }
 }
 
