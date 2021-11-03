@@ -14,6 +14,34 @@ import view.ImageProcessingView;
 
 public class ControllerTest {
 
+  @Test(expected = IllegalArgumentException.class)
+  public void nullModelConstructor() throws IllegalArgumentException {
+    String inputString = "load\nstars.ppm\nstars\n";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    ImageProcessingSession session = new ImageProcessingSession();
+    IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(null));
+    ImageController controller = new ImageControllerImpl(null, view, input);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void nullViewConstructor() throws IllegalArgumentException {
+    String inputString = "load\nstars.ppm\nstars\n";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    ImageProcessingSession session = new ImageProcessingSession();
+    IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(null));
+    ImageController controller = new ImageControllerImpl(session, null, input);
+  }
+
+
+  @Test(expected = IllegalArgumentException.class)
+  public void nullInputConstructor() throws IllegalArgumentException {
+    String inputString = "load\nstars.ppm\nstars\n";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    ImageProcessingSession session = new ImageProcessingSession();
+    IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(null));
+    ImageController controller = new ImageControllerImpl(session, view, null);
+  }
+
   @Test
   public void controllerTest() throws IOException {
     String inputString = "Q";
@@ -341,5 +369,18 @@ public class ControllerTest {
         + "invalid inputs\n"
         + "invalid inputs";
     assertEquals(expectedOutput, actualOutput);
+  }
+
+  @Test(expected = IOException.class)
+  public void badView() throws IOException {
+    String inputString = "load\nstars.ppm\nstars\n";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(null));
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
   }
 }
