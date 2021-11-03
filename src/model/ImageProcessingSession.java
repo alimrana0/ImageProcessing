@@ -41,6 +41,9 @@ public class ImageProcessingSession {
     if (this.images.containsKey(modelName)) {
       this.images.get(modelName).saveImageAsPPM(saveLocation);
     }
+    else {
+      throw new IllegalArgumentException("Invalid model name");
+    }
   }
 
   /**
@@ -82,6 +85,9 @@ public class ImageProcessingSession {
           images.put(newName,
               new ImageProcessingModel(this.images.get(modelName).intensity()));
           break;
+        default:
+          throw new IllegalArgumentException("invalid component");
+
       }
 
     } else {
