@@ -45,6 +45,7 @@ public class IntensityTransformationTest {
     temp2.add(pixel4);
     list2D.add(temp2);
   }
+
   @Test
   public void testImageCreatedCorrectlyFirstPixel() {
 
