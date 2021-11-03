@@ -11,7 +11,9 @@ import org.junit.Test;
 import view.IImageProcessingView;
 import view.ImageProcessingView;
 
-
+/**
+ * Test for the ImageController class.
+ */
 public class ControllerTest {
 
   @Test(expected = IllegalArgumentException.class)
