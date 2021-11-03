@@ -5,8 +5,6 @@ import java.io.IOException;
 public interface IImageProcessingView {
 
 
-  String toString();
-
   /**
    * Render a specific message to the provided data destination.
    *
