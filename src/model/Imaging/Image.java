@@ -37,6 +37,12 @@ public class Image implements ImageOfPixel {
     return new ArrayList<>(pixels);
   }
 
+  /**
+   * Saves an image as a PPM file given the name of the file to save it as.
+   *
+   * @param filename The name of the ppm file to create.
+   * @throws IOException Thrown if the file output stream does not function correctly.
+   */
   public void saveImageAsPPM(String filename) throws IOException {
     FileOutputStream outputStream = new FileOutputStream(filename);
     StringBuilder output = new StringBuilder();
