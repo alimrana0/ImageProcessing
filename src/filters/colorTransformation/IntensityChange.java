@@ -1,17 +1,22 @@
-package filters.ColorTransformation;
+package filters.colorTransformation;
 
 import filters.FilterClamp;
-import model.Imaging.Color;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import model.imaging.Color;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
-public class IntensityChange extends AbstractColorTransformation{
+/**
+ * Class to represent an intensity change on a pixel.
+ */
+public class IntensityChange extends AbstractColorTransformation {
 
   /**
    * Empty constructor for IntensityChange.
    */
-  public IntensityChange() {}
+  public IntensityChange() {
+    //Doesn't need any intializations.
+  }
 
   /**
    * Applies the color transformation to the given pixel by updating its rgb values. Any out of

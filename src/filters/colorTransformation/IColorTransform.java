@@ -1,7 +1,10 @@
-package filters.ColorTransformation;
+package filters.colorTransformation;
 
-import model.Imaging.ImageOfPixel;
+import model.imaging.ImageOfPixel;
 
+/**
+ * Interface to represent a color transformation action.
+ */
 public interface IColorTransform {
 
   /**

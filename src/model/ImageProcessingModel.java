@@ -1,17 +1,19 @@
 package model;
 
-import filters.ColorTransformation.Greyscale.BlueGreyscale;
-import filters.ColorTransformation.Greyscale.GreenGreyscale;
-import filters.ColorTransformation.Greyscale.LumaGreyscale;
-import filters.ColorTransformation.Greyscale.RedGreyscale;
-import filters.ColorTransformation.IntensityChange;
-import filters.ColorTransformation.ValueChange;
-import filters.FlippingTransformation.FlipHorizontal;
-import filters.FlippingTransformation.FlipVertical;
-import filters.IntensityTransformation.BrightenTransformation;
-import filters.IntensityTransformation.DarkenTransformation;
+import filters.colorTransformation.greyscale.BlueGreyscale;
+import filters.colorTransformation.greyscale.GreenGreyscale;
+import filters.colorTransformation.greyscale.LumaGreyscale;
+import filters.colorTransformation.greyscale.RedGreyscale;
+import filters.colorTransformation.IntensityChange;
+import filters.colorTransformation.ValueChange;
+import filters.flippingTransformation.FlipHorizontal;
+import filters.flippingTransformation.FlipVertical;
+import filters.intensityTransformation.BrightenTransformation;
+import filters.intensityTransformation.DarkenTransformation;
+
 import java.io.IOException;
-import model.Imaging.ImageOfPixel;
+
+import model.imaging.ImageOfPixel;
 
 /**
  * Class representing a model for an ImageProcessor.
@@ -22,6 +24,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Constructor for an image processing model that uses a given image to set its image field.
+   *
    * @param image
    */
   public ImageProcessingModel(ImageOfPixel image) {
@@ -30,6 +33,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Brightens a given image.
+   *
    * @param val value that the image will be brightened by.
    * @return the brightened image.
    * @throws IllegalArgumentException if the image is null
@@ -44,6 +48,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Darkens a given image.
+   *
    * @param val value that the image will be darkened by.
    * @return the darkened image.
    * @throws IllegalArgumentException if the image is null
@@ -58,6 +63,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Greyscale an image based on the red component.
+   *
    * @return the greyscale image.
    * @throws IllegalArgumentException if the image is null
    */
@@ -72,6 +78,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Greyscale an image based on the green component.
+   *
    * @return the greyscale image.
    * @throws IllegalArgumentException if the image is null
    */
@@ -85,6 +92,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Greyscale an image based on the blue component.
+   *
    * @return the greyscale image.
    * @throws IllegalArgumentException if the image is null
    */
@@ -98,6 +106,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Alters an image's intensity.
+   *
    * @return The intensified image.
    * @throws IllegalArgumentException if image is null
    */
@@ -111,6 +120,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Alters an image's pixels' value.
+   *
    * @return The image with changed values.
    * @throws IllegalArgumentException if image is null
    */
@@ -124,6 +134,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Greyscale an image based on the luma of the components.
+   *
    * @return the greyscale image.
    * @throws IllegalArgumentException if the image is null
    */
@@ -137,6 +148,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Saves a file of the given filename as a PPM file.
+   *
    * @param filename the file name of the image
    * @throws IOException if the filename is invalid
    */
@@ -147,6 +159,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Flips the image horizontally.
+   *
    * @return The horizontally flipped image.
    * @throws IllegalArgumentException if the image is null.
    */
@@ -161,6 +174,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Flips the image vertically.
+   *
    * @return The vertically flipped image.
    * @throws IllegalArgumentException if the image is null.
    */

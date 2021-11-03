@@ -3,15 +3,15 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 
-import filters.FlippingTransformation.FlipHorizontal;
-import filters.FlippingTransformation.FlipVertical;
-import model.Imaging.Color;
-import model.Imaging.IColor;
-import model.Imaging.Image;
-import model.Imaging.ImageOfPixel;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import filters.flippingTransformation.FlipHorizontal;
+import filters.flippingTransformation.FlipVertical;
+import model.imaging.Color;
+import model.imaging.IColor;
+import model.imaging.Image;
+import model.imaging.ImageOfPixel;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
 import static org.junit.Assert.assertEquals;
 

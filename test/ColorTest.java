@@ -1,9 +1,7 @@
 import org.junit.Test;
 
-import model.Imaging.Color;
-import model.Imaging.IColor;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import model.imaging.Color;
+import model.imaging.IColor;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -23,28 +21,29 @@ public class ColorTest {
   public void testRedOver() {
     new Color(1000, 0, 0);
   }
+
   @Test(expected = IllegalArgumentException.class)
-  public void testContructorGreenOver() {
+  public void testGreenOver() {
     new Color(0, 1000, 0);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testContructorBlueOver() {
+  public void testBlueOver() {
     new Color(0, 0, 1000);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testContructorRedUnder() {
+  public void testRedUnder() {
     new Color(-1000, 0, 0);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testContructorGreenUnder() {
+  public void testGreenUnder() {
     new Color(0, -1000, 0);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testContructorBlueUnder() {
+  public void testBlueUnder() {
     new Color(0, 0, -1000);
   }
 

@@ -1,18 +1,23 @@
-package filters.ColorTransformation.Greyscale;
+package filters.colorTransformation.greyscale;
 
-import filters.ColorTransformation.AbstractColorTransformation;
-import filters.FilterClamp;
-import model.Imaging.Color;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import filters.colorTransformation.AbstractColorTransformation;
+import model.imaging.Color;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
+/**
+ * Class to represent a pixel being greyscale in terms of its red component.
+ */
 public class RedGreyscale extends AbstractColorTransformation {
 
   /**
    * Empty constructor for a RedGreyscale filter.
    */
-  public RedGreyscale() {}
+  public RedGreyscale() {
+    //Doesn't need any initializations.
+  }
+
   /**
    * Applies the color transformation to the given pixel by updating its rgb values. Any out of
    * range rgb value is clamped to the minimum value of 0 or the maximum value of 255.

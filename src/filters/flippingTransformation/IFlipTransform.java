@@ -1,6 +1,6 @@
-package filters.FlippingTransformation;
+package filters.flippingTransformation;
 
-import model.Imaging.ImageOfPixel;
+import model.imaging.ImageOfPixel;
 
 /**
  * Interface representing an image transformation of flipping.

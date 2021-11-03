@@ -1,10 +1,12 @@
 package model;
 
-import filters.FlippingTransformation.FlipHorizontal;
 import java.io.IOException;
-import model.Imaging.ImageOfPixel;
-import model.Imaging.ImageOfPixel;
+import model.imaging.ImageOfPixel;
 
+/**
+ * Interface to represent an image processing model. Contains transformation methods and a
+ * saving images as ppm method.
+ */
 public interface IImageProcessingModel {
 
   /**

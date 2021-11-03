@@ -5,8 +5,8 @@ import java.io.IOException;
 import model.ImageProcessingModel;
 
 /**
- * Class implementing IPhotoShopeView which allows the user to see messages and information about
- * the IPhotoShopLayerModel at the given Appendable.
+ * Class implementing IImageProcessingView which allows the user to see messages and
+ * information about Image Processor's view at the given Appendable.
  */
 
 public class ImageProcessingView implements IImageProcessingView {
@@ -17,7 +17,7 @@ public class ImageProcessingView implements IImageProcessingView {
   /**
    * Constructor that only takes in a model.
    *
-   * @param model represents an IPhotoShopLayerModel that is used by the Controller
+   * @param model represents an IImageProcessingView that is used by the Controller
    */
   public ImageProcessingView(ImageProcessingModel model) {
     this(model, System.out);
@@ -26,7 +26,7 @@ public class ImageProcessingView implements IImageProcessingView {
   /**
    * Constructor that takes in both a model and an output source.
    *
-   * @param model an IPhotoShopLayerModel model
+   * @param model an IImageProcessingView model
    * @param out   Output source
    */
   public ImageProcessingView(ImageProcessingModel model, Appendable out) {

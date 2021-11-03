@@ -1,21 +1,23 @@
-package filters.FlippingTransformation;
+package filters.flippingTransformation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Imaging.Image;
-import model.Imaging.ImageOfPixel;
-import model.Imaging.pixel.IPixel;
+import model.imaging.Image;
+import model.imaging.ImageOfPixel;
+import model.imaging.pixel.IPixel;
 
 /**
  * Class to represent an image being flipped vertically down the lateral middle.
  */
-public class FlipVertical implements IFlipTransform{
+public class FlipVertical implements IFlipTransform {
 
   /**
    * Empty constructor for a FlipVertical filter.
    */
-  public FlipVertical() {}
+  public FlipVertical() {
+    //Doesn't need any initializations.
+  }
 
 
   /**
@@ -27,7 +29,7 @@ public class FlipVertical implements IFlipTransform{
    */
   @Override
   public ImageOfPixel flipTransform(ImageOfPixel image) throws IllegalArgumentException {
-    if(image == null) {
+    if (image == null) {
       throw new IllegalArgumentException("Image can't be null");
     }
     List<List<IPixel>> imagePixels = image.getPixels();

@@ -1,25 +1,21 @@
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+
 import static org.junit.Assert.assertEquals;
 
-import filters.IntensityTransformation.BrightenTransformation;
-import filters.IntensityTransformation.DarkenTransformation;
-import model.Imaging.Color;
-import model.Imaging.IColor;
-import model.Imaging.Image;
-import model.Imaging.ImageOfPixel;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import filters.intensityTransformation.BrightenTransformation;
+import filters.intensityTransformation.DarkenTransformation;
+import model.imaging.Color;
+import model.imaging.IColor;
+import model.imaging.Image;
+import model.imaging.ImageOfPixel;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
 /**
- * Test class for intensity trasnformation.
+ * Test class for intensity transformation.
  */
 public class IntensityTransformationTest {
 

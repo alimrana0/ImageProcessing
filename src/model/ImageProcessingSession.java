@@ -2,7 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.util.HashMap;
-import model.Imaging.Image;
+import model.imaging.Image;
 
 /**
  * Represents an image processing session where multiple images are loaded and manipulated.

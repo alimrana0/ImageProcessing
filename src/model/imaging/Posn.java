@@ -1,7 +1,10 @@
-package model.Imaging;
+package model.imaging;
 
 import java.util.Objects;
 
+/**
+ * Class representing a cartesian coordinate.
+ */
 public class Posn {
 
   private final int x;
@@ -36,6 +39,11 @@ public class Posn {
     return this.y;
   }
 
+  /**
+   * Overrides the equivalency of a Posn object.
+   * @param o given object
+   * @return whether this posn is equivalent to a given object Posn
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -49,6 +57,10 @@ public class Posn {
     return this.x == other.x && this.y == other.y;
   }
 
+  /**
+   * Finds the hash of a Posn object.
+   * @return the integer hash of the Posn's variables.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(this.x, this.y);

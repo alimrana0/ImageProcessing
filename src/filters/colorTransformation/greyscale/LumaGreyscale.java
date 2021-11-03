@@ -1,20 +1,19 @@
-package filters.ColorTransformation.Greyscale;
+package filters.colorTransformation.greyscale;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import filters.ColorTransformation.IColorTransform;
+import filters.colorTransformation.IColorTransform;
 import filters.FilterClamp;
-import model.Imaging.Color;
-import model.Imaging.Image;
-import model.Imaging.ImageOfPixel;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import model.imaging.Color;
+import model.imaging.Image;
+import model.imaging.ImageOfPixel;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
 /**
- * Class representing the grey scale filter which is a color transformation that makes an image
- * greyer.
+ * Class representing a grey scale filter on a pixel.
  */
 public class LumaGreyscale implements IColorTransform {
   public double[][] lumaVals;
@@ -24,12 +23,12 @@ public class LumaGreyscale implements IColorTransform {
    */
   public LumaGreyscale() {
     this.lumaVals = new double[][]{{0.2126, 0.7152, 0.0722},
-            {0.2126, 0.7152, 0.0722},
-            {0.2126, 0.7152, 0.0722}};
+                                   {0.2126, 0.7152, 0.0722},
+                                   {0.2126, 0.7152, 0.0722}};
   }
 
   /**
-   * Applies a color transformation to a given image
+   * Applies a color transformation to a given image.
    * @param image Image being transformed
    * @return the image transformed
    * @throws IllegalArgumentException if the image is null

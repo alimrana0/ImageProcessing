@@ -2,6 +2,9 @@ package view;
 
 import java.io.IOException;
 
+/**
+ * Interface to represent an Image Processing View.
+ */
 public interface IImageProcessingView {
 
 

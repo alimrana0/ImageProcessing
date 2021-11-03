@@ -4,19 +4,19 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import filters.ColorTransformation.Greyscale.BlueGreyscale;
-import filters.ColorTransformation.Greyscale.GreenGreyscale;
-import filters.ColorTransformation.Greyscale.LumaGreyscale;
-import filters.ColorTransformation.Greyscale.RedGreyscale;
-import filters.ColorTransformation.IntensityChange;
-import filters.ColorTransformation.ValueChange;
+import filters.colorTransformation.greyscale.BlueGreyscale;
+import filters.colorTransformation.greyscale.GreenGreyscale;
+import filters.colorTransformation.greyscale.LumaGreyscale;
+import filters.colorTransformation.greyscale.RedGreyscale;
+import filters.colorTransformation.IntensityChange;
+import filters.colorTransformation.ValueChange;
 
-import model.Imaging.Color;
-import model.Imaging.Image;
-import model.Imaging.ImageOfPixel;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import model.imaging.Color;
+import model.imaging.Image;
+import model.imaging.ImageOfPixel;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
 import static org.junit.Assert.assertEquals;
 

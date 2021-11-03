@@ -1,16 +1,16 @@
-package filters.FlippingTransformation;
+package filters.flippingTransformation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Imaging.Image;
-import model.Imaging.ImageOfPixel;
-import model.Imaging.pixel.IPixel;
+import model.imaging.Image;
+import model.imaging.ImageOfPixel;
+import model.imaging.pixel.IPixel;
 
 /**
  * Class to represent an image flipped horizontally down the middle.
  */
-public class FlipHorizontal implements IFlipTransform{
+public class FlipHorizontal implements IFlipTransform {
 
   /**
    * Applies a horizontal flip on the image by rearranging its pixels.
@@ -21,7 +21,7 @@ public class FlipHorizontal implements IFlipTransform{
    */
   @Override
   public ImageOfPixel flipTransform(ImageOfPixel image) throws IllegalArgumentException {
-    if(image == null) {
+    if (image == null) {
       throw new IllegalArgumentException("Image can't be null");
     }
     List<List<IPixel>> imagePixels = new ArrayList<>(image.getPixels());

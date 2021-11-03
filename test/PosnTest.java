@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import model.Imaging.Posn;
+import model.imaging.Posn;
 
 import static org.junit.Assert.assertEquals;
 

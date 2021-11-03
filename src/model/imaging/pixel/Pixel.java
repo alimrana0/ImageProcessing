@@ -1,10 +1,9 @@
-package model.Imaging.pixel;
+package model.imaging.pixel;
 
 import java.util.Objects;
 
-import model.Imaging.Color;
-import model.Imaging.IColor;
-import model.Imaging.Posn;
+import model.imaging.IColor;
+import model.imaging.Posn;
 
 /**
  * Class representing a standard pixel that uses a combination or red, blue, and green
@@ -15,6 +14,11 @@ public class Pixel implements IPixel {
   private final Posn posn;
   private final IColor color;
 
+  /**
+   * Constructs a pixel object given a position and a color.
+   * @param position Posn of the pixel.
+   * @param color color of the given pixel.
+   */
   public Pixel(Posn position, IColor color) {
 
     if (position == null || color == null) {

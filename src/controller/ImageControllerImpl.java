@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.Scanner;
+
 import model.ImageProcessingSession;
 import view.IImageProcessingView;
 
@@ -28,8 +29,8 @@ public class ImageControllerImpl implements ImageController {
    * @throws IllegalArgumentException input is null.
    */
   public ImageControllerImpl(ImageProcessingSession model, IImageProcessingView view,
-      Readable input)
-      throws IllegalArgumentException {
+                             Readable input)
+          throws IllegalArgumentException {
     if (model == null || view == null || input == null) {
       throw new IllegalArgumentException("Parameters for controller cannot be null");
     }
@@ -44,6 +45,7 @@ public class ImageControllerImpl implements ImageController {
   /**
    * Runs the controller that handles the Processing session, view, and input to conduct the Image
    * Processing.
+   *
    * @throws IOException if given inputs fail to transmit inside the Image Processor.
    */
   @Override
@@ -65,7 +67,7 @@ public class ImageControllerImpl implements ImageController {
           try {
             this.model.load(this.filepath, this.modelName);
             this.view.renderMessage("\nImage Loaded");
-            ;
+
           } catch (IllegalArgumentException e) {
             this.view.renderMessage("\n" + e.getMessage());
           }
@@ -127,8 +129,7 @@ public class ImageControllerImpl implements ImageController {
           int brightenValue;
           try {
             brightenValue = Integer.parseInt(in.next());
-          }
-          catch (NumberFormatException e) {
+          } catch (NumberFormatException e) {
             this.view.renderMessage("\nMust enter an integer");
             break;
           }
@@ -147,8 +148,7 @@ public class ImageControllerImpl implements ImageController {
           int darkenValue;
           try {
             darkenValue = Integer.parseInt(in.next());
-          }
-          catch (NumberFormatException e) {
+          } catch (NumberFormatException e) {
             this.view.renderMessage("\nMust enter an integer");
             break;
           }

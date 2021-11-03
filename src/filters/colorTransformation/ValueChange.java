@@ -1,17 +1,21 @@
-package filters.ColorTransformation;
+package filters.colorTransformation;
 
-import filters.FilterClamp;
-import model.Imaging.Color;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import model.imaging.Color;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
-public class ValueChange extends AbstractColorTransformation{
+/**
+ * Class to represent a value change on a pixel.
+ */
+public class ValueChange extends AbstractColorTransformation {
 
   /**
    * Empty constructor for a ValueChange filter.
    */
-  public ValueChange() {}
+  public ValueChange() {
+    //Doesn't need any initialization.
+  }
 
   /**
    * Applies the color transformation to the given pixel by updating its rgb values. Any out of

@@ -1,11 +1,5 @@
 package filters;
 
-import model.Imaging.Color;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Class representing the filter for clamping which sets the color value to 0 or 255 if out of
  * generic range.

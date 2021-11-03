@@ -1,20 +1,21 @@
-package filters.ColorTransformation.Greyscale;
+package filters.colorTransformation.greyscale;
 
-import java.util.logging.Filter;
+import filters.colorTransformation.AbstractColorTransformation;
+import model.imaging.Color;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
-import filters.ColorTransformation.AbstractColorTransformation;
-import filters.FilterClamp;
-import filters.IntensityTransformation.AbstractIntensityTransformation;
-import model.Imaging.Color;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
-
+/**
+ * Class to represent a pixel being greyscale in terms of its blue component.
+ */
 public class BlueGreyscale extends AbstractColorTransformation {
   /**
    * Empty constructor for BlueGreyscale.
    */
-  public BlueGreyscale(){}
+  public BlueGreyscale(){
+    //Doesn't need any initializations.
+  }
 
   /**
    * Applies the color transformation to the given pixel by updating its rgb values. Any out of

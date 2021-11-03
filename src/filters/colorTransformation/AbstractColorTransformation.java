@@ -1,11 +1,11 @@
-package filters.ColorTransformation;
+package filters.colorTransformation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Imaging.Image;
-import model.Imaging.ImageOfPixel;
-import model.Imaging.pixel.IPixel;
+import model.imaging.Image;
+import model.imaging.ImageOfPixel;
+import model.imaging.pixel.IPixel;
 
 /**
  * Abstract class for any Color transformations.
@@ -13,7 +13,7 @@ import model.Imaging.pixel.IPixel;
 public abstract class AbstractColorTransformation implements IColorTransform {
 
   /**
-   * Applies a color transformation to a given image
+   * Applies a color transformation to a given image.
    * @param image Image being transformed
    * @return the image transformed
    * @throws IllegalArgumentException if the image is null

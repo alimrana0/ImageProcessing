@@ -1,18 +1,22 @@
-package filters.ColorTransformation.Greyscale;
+package filters.colorTransformation.greyscale;
 
-import filters.ColorTransformation.AbstractColorTransformation;
-import filters.FilterClamp;
-import model.Imaging.Color;
-import model.Imaging.Posn;
-import model.Imaging.pixel.IPixel;
-import model.Imaging.pixel.Pixel;
+import filters.colorTransformation.AbstractColorTransformation;
+import model.imaging.Color;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 
+/**
+ * Class to represent a pixel greyscale in terms of its green component.
+ */
 public class GreenGreyscale extends AbstractColorTransformation {
 
   /**
    * Empty constructor for GreenGreyscale.
    */
-  public GreenGreyscale() {}
+  public GreenGreyscale() {
+    //Doesn't need any initializations.
+  }
 
   /**
    * Applies the color transformation to the given pixel by updating its rgb values. Any out of

@@ -1,9 +1,6 @@
-package filters.IntensityTransformation;
+package filters.intensityTransformation;
 
-import java.awt.*;
-
-import model.IImageProcessingModel;
-import model.Imaging.ImageOfPixel;
+import model.imaging.ImageOfPixel;
 
 /**
  * An interface to represent an intensity transformation on an image.
