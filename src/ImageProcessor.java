@@ -1,11 +1,7 @@
 import controller.ImageController;
 import controller.ImageControllerImpl;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import model.ImageProcessingModel;
 import model.ImageProcessingSession;
 import view.IImageProcessingView;
