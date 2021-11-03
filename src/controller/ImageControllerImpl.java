@@ -28,8 +28,8 @@ public class ImageControllerImpl implements ImageController {
    * @throws IllegalArgumentException input is null.
    */
   public ImageControllerImpl(ImageProcessingSession model, IImageProcessingView view,
-                             Readable input)
-          throws IllegalArgumentException {
+      Readable input)
+      throws IllegalArgumentException {
     if (model == null || view == null || input == null) {
       throw new IllegalArgumentException("Parameters for controller cannot be null");
     }
@@ -58,8 +58,13 @@ public class ImageControllerImpl implements ImageController {
         //loads an image from the given filepath and places it into the hashmap with the given key.
         case "load":
           this.readFilepathAndModelName();
-          this.model.load(this.filepath, this.modelName);
-          this.view.renderMessage("\nImage Loaded");
+          try {
+            this.model.load(this.filepath, this.modelName);
+            this.view.renderMessage("\nImage Loaded");
+            ;
+          } catch (IllegalArgumentException e) {
+            this.view.renderMessage("\n" + e.getMessage());
+          }
 
           break;
 
@@ -69,8 +74,8 @@ public class ImageControllerImpl implements ImageController {
           try {
             this.model.save(this.filepath, this.modelName);
             this.view.renderMessage("\nImage saved");
-          } catch (IOException e) {
-            this.view.renderMessage(e.toString());
+          } catch (IllegalArgumentException e) {
+            this.view.renderMessage("\n" + e.getMessage());
           }
 
           break;
@@ -84,7 +89,7 @@ public class ImageControllerImpl implements ImageController {
             this.model.getComponent(component, this.modelName, this.newName);
             this.view.renderMessage("\nComponent Image made");
           } catch (IllegalArgumentException e) {
-            this.view.renderMessage(e.toString());
+            this.view.renderMessage("\n" + e.getMessage());
           }
           break;
 
@@ -96,7 +101,7 @@ public class ImageControllerImpl implements ImageController {
             this.model.horizontalFlip(this.modelName, this.newName);
             this.view.renderMessage("\nHorizontal Image made");
           } catch (IllegalArgumentException e) {
-            this.view.renderMessage(e.toString());
+            this.view.renderMessage("\n" + e.getMessage());
           }
           break;
 
@@ -108,33 +113,47 @@ public class ImageControllerImpl implements ImageController {
             this.model.verticalFlip(this.modelName, this.newName);
             this.view.renderMessage("\nVertical Image made");
           } catch (IllegalArgumentException e) {
-            this.view.renderMessage(e.toString());
+            this.view.renderMessage("\n" + e.getMessage());
           }
           break;
 
         //Creates a new image after brightening the image of the given name and
         //then stores it in the hashmap
         case "brighten":
-          int brightenValue = Integer.parseInt(in.next());
+          int brightenValue;
+          try {
+            brightenValue = Integer.parseInt(in.next());
+          }
+          catch (NumberFormatException e) {
+            this.view.renderMessage("\nMust enter an integer");
+            break;
+          }
           this.readModelNameAndNewName();
           try {
             this.model.brighten(brightenValue, this.modelName, this.newName);
             this.view.renderMessage("\nBrightened Image made");
           } catch (IllegalArgumentException e) {
-            this.view.renderMessage(e.toString());
+            this.view.renderMessage("\n" + e.getMessage());
           }
           break;
 
         //Creates a new image after darkening the image of the given name and
         //then stores it in the hashmap
         case "darken":
-          int darkenValue = Integer.parseInt(in.next());
+          int darkenValue;
+          try {
+            darkenValue = Integer.parseInt(in.next());
+          }
+          catch (NumberFormatException e) {
+            this.view.renderMessage("\nMust enter an integer");
+            break;
+          }
           this.readModelNameAndNewName();
           try {
             this.model.darken(darkenValue, this.modelName, this.newName);
             this.view.renderMessage("\nDarkened Image made");
           } catch (IllegalArgumentException e) {
-            this.view.renderMessage(e.toString());
+            this.view.renderMessage("\n" + e.getMessage());
           }
           break;
 
@@ -143,7 +162,7 @@ public class ImageControllerImpl implements ImageController {
           quit = true;
           break;
         default:
-          view.renderMessage("Unknown Command Entered");
+          view.renderMessage("\nUnknown Command Entered");
       }
     }
 

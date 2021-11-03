@@ -211,4 +211,135 @@ public class ControllerTest {
     assertEquals(expectedLog, mockLog.toString());
   }
 
+
+  @Test
+  public void controllerInvalidEntries() throws IOException {
+    String inputString = "not a commmand q";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    StringBuilder mockLog = new StringBuilder();
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
+
+    String actualOutput = outBuffer.toString();
+
+    String expectedOutput = "Commands:\n"
+        + "load filepath name\n"
+        + "save saveLocation name\n"
+        + "get-component component \n"
+        + "horizontal-flip\n"
+        + "vertical-flip\n"
+        + "brighten\n"
+        + "darken\n"
+        + "Q or q to quit\n"
+        + "Unknown Command Entered\n"
+        + "Unknown Command Entered\n"
+        + "Unknown Command Entered";
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+  @Test
+  public void controllerInvalidImageName() throws IOException {
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "save\nstars-saved.ppm\nstarssssssssss\nq";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
+
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "Commands:\n"
+        + "load filepath name\n"
+        + "save saveLocation name\n"
+        + "get-component component \n"
+        + "horizontal-flip\n"
+        + "vertical-flip\n"
+        + "brighten\n"
+        + "darken\n"
+        + "Q or q to quit\n"
+        + "Image Loaded\n"
+        + "Invalid model name";
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+  @Test
+  public void controllerInvalidLoad() throws IOException {
+    String inputString = "load\nstarsx.ppm\nstars\nq";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
+
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "Commands:\n"
+        + "load filepath name\n"
+        + "save saveLocation name\n"
+        + "get-component component \n"
+        + "horizontal-flip\n"
+        + "vertical-flip\n"
+        + "brighten\n"
+        + "darken\n"
+        + "Q or q to quit\n"
+        + "File not Found";
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+  //TODO ADD ERROR CONTROL FOR INVALID STRING
+  @Test
+  public void controllerInvalidCommandInputs() throws IOException {
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "get-component\nINVALID\nstars\nstars\n"
+        + "get-component\nred\nNOIMAGE\nstars\n"
+        + "brighten\nnotint\n"
+        + "brighten\n0\nNOIMAGE\nstars\n"
+        + "darken\nnotint\n"
+        + "darken\n0\nNOIMAGE\nnewName\n"
+        + "vertical-flip\nNOIMAGE\nnewName\n"
+        + "horizontal-flip\nNOIMAGE\nnewName\nq";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
+
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "Commands:\n"
+        + "load filepath name\n"
+        + "save saveLocation name\n"
+        + "get-component component \n"
+        + "horizontal-flip\n"
+        + "vertical-flip\n"
+        + "brighten\n"
+        + "darken\n"
+        + "Q or q to quit\n"
+        + "Image Loaded\n"
+        + "invalid component\n"
+        + "invalid inputs\n"
+        + "Must enter an integer\n"
+        + "invalid inputs\n"
+        + "Must enter an integer\n"
+        + "invalid inputs\n"
+        + "invalid inputs\n"
+        + "invalid inputs";
+    assertEquals(expectedOutput, actualOutput);
+  }
 }
