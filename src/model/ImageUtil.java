@@ -104,6 +104,8 @@ public class ImageUtil {
     }
     int width = sc.nextInt();
     int height = sc.nextInt();
+    //TODO NOT BEING USED
+    int maxValue = sc.nextInt();
 
     List pixels = new ArrayList();
 
