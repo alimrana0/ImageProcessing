@@ -1,4 +1,4 @@
-package filters.colorTransformation;
+package filters.colortransformation;
 
 import java.util.ArrayList;
 import java.util.List;

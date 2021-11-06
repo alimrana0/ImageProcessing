@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import filters.colorTransformation.greyscale.BlueGreyscale;
-import filters.colorTransformation.greyscale.GreenGreyscale;
-import filters.colorTransformation.greyscale.LumaGreyscale;
-import filters.colorTransformation.greyscale.RedGreyscale;
-import filters.colorTransformation.IntensityChange;
-import filters.colorTransformation.ValueChange;
+import filters.colortransformation.greyscale.BlueGreyscale;
+import filters.colortransformation.greyscale.GreenGreyscale;
+import filters.colortransformation.greyscale.LumaGreyscale;
+import filters.colortransformation.greyscale.RedGreyscale;
+import filters.colortransformation.IntensityChange;
+import filters.colortransformation.ValueChange;
 
 import model.imaging.Color;
 import model.imaging.Image;

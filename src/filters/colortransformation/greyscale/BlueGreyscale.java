@@ -1,20 +1,19 @@
-package filters.colorTransformation.greyscale;
+package filters.colortransformation.greyscale;
 
-import filters.colorTransformation.AbstractColorTransformation;
+import filters.colortransformation.AbstractColorTransformation;
 import model.imaging.Color;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
 
 /**
- * Class to represent a pixel greyscale in terms of its green component.
+ * Class to represent a pixel being greyscale in terms of its blue component.
  */
-public class GreenGreyscale extends AbstractColorTransformation {
-
+public class BlueGreyscale extends AbstractColorTransformation {
   /**
-   * Empty constructor for GreenGreyscale.
+   * Empty constructor for BlueGreyscale.
    */
-  public GreenGreyscale() {
+  public BlueGreyscale(){
     //Doesn't need any initializations.
   }
 
@@ -27,14 +26,16 @@ public class GreenGreyscale extends AbstractColorTransformation {
    */
   protected IPixel colorTransform(IPixel pixel) {
 
+    int blue = pixel.getColor().getBlue();
 
-    int green = pixel.getColor().getGreen();
+    int changedRed = blue;
+    int changedGreen = blue;
 
-    int changedRed = green;
-    int changedBlue = green;
+
 
     return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
-            green, changedBlue));
+            changedGreen, blue));
 
   }
+
 }

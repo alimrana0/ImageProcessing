@@ -11,12 +11,13 @@ import model.imaging.Image;
  * Class to represent a mock Image Processor session.
  */
 public class MockImageProcessingSession extends ImageProcessingSession {
+
   private StringBuilder log;
   public HashMap<String, IImageProcessingModel> images;
 
   /**
-   * A constructor for a fake model that stores inputted strings and has a public hashmap
-   * in order to verify that images are stored and created correctly.
+   * A constructor for a fake model that stores inputted strings and has a public hashmap in order
+   * to verify that images are stored and created correctly.
    *
    * @param log A Stringbuilder that stores the inputted values in order to make sure they were
    *            transmitted correctly.
@@ -35,7 +36,7 @@ public class MockImageProcessingSession extends ImageProcessingSession {
    */
   public void load(String filepath, String modelName) {
     images.put(modelName,
-            new ImageProcessingModel(new Image(ImageUtil.getPixels(filepath))));
+        new ImageProcessingModel(new Image(ImageUtil.getPixels(filepath))));
     log.append("\nload " + filepath + " with name " + modelName);
 
   }
@@ -63,45 +64,48 @@ public class MockImageProcessingSession extends ImageProcessingSession {
       switch (component) {
         case "red":
           images.put(newName,
-                  new ImageProcessingModel(this.images.get(modelName).redComponent()));
+              new ImageProcessingModel(this.images.get(modelName).redComponent()));
           log.append("\nget component red from " + modelName + ", store as " + newName);
 
           break;
 
         case "green":
           images.put(newName,
-                  new ImageProcessingModel(this.images.get(modelName).greenComponent()));
+              new ImageProcessingModel(this.images.get(modelName).greenComponent()));
           log.append("\nget component green from " + modelName + ", store as " + newName);
 
           break;
 
         case "blue":
           images.put(newName,
-                  new ImageProcessingModel(this.images.get(modelName).blueComponent()));
+              new ImageProcessingModel(this.images.get(modelName).blueComponent()));
           log.append("\nget component blue from " + modelName + ", store as " + newName);
 
           break;
 
         case "value":
           images.put(newName,
-                  new ImageProcessingModel(this.images.get(modelName).valueImage()));
+              new ImageProcessingModel(this.images.get(modelName).valueImage()));
           log.append("\nget component value from " + modelName + ", store as " + newName);
 
           break;
 
         case "luma":
           images.put(newName,
-                  new ImageProcessingModel(this.images.get(modelName).luma()));
+              new ImageProcessingModel(this.images.get(modelName).luma()));
           log.append("\nget component luma from " + modelName + ", store as " + newName);
 
           break;
 
         case "intensity":
           images.put(newName,
-                  new ImageProcessingModel(this.images.get(modelName).intensity()));
+              new ImageProcessingModel(this.images.get(modelName).intensity()));
           log.append("\nget component intensity from " + modelName + ", store as " + newName);
 
           break;
+        default:
+          throw new IllegalArgumentException("invalid component");
+
       }
 
     } else {
@@ -121,7 +125,7 @@ public class MockImageProcessingSession extends ImageProcessingSession {
   public void horizontalFlip(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).horizontalFlip()));
+          new ImageProcessingModel(this.images.get(modelName).horizontalFlip()));
       log.append("\nhorizontally flipping " + modelName + ", store as " + newName);
 
     } else {
@@ -140,7 +144,7 @@ public class MockImageProcessingSession extends ImageProcessingSession {
   public void verticalFlip(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).verticalFlip()));
+          new ImageProcessingModel(this.images.get(modelName).verticalFlip()));
       log.append("\nvertically flipping " + modelName + ", store as " + newName);
 
     } else {
@@ -159,7 +163,7 @@ public class MockImageProcessingSession extends ImageProcessingSession {
   public void brighten(int value, String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).brighten(value)));
+          new ImageProcessingModel(this.images.get(modelName).brighten(value)));
       log.append("\nbrightening " + modelName + " by " + value + ", store as " + newName);
 
     } else {
@@ -179,7 +183,7 @@ public class MockImageProcessingSession extends ImageProcessingSession {
   public void darken(int value, String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).darken(value)));
+          new ImageProcessingModel(this.images.get(modelName).darken(value)));
       log.append("\ndarkening " + modelName + " by " + value + ", store as " + newName);
 
     } else {

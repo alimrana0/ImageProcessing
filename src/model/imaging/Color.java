@@ -18,7 +18,7 @@ public class Color implements IColor {
    * @param r red component of the color
    * @param g green component of the color
    * @param b blue component of the color
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException thrown if a value is outside (0,255).
    */
   public Color(int r, int g, int b) throws IllegalArgumentException {
     if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) {

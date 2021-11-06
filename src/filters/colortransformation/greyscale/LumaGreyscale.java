@@ -1,9 +1,9 @@
-package filters.colorTransformation.greyscale;
+package filters.colortransformation.greyscale;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import filters.colorTransformation.IColorTransform;
+import filters.colortransformation.IColorTransform;
 import filters.FilterClamp;
 import model.imaging.Color;
 import model.imaging.Image;

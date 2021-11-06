@@ -1,15 +1,15 @@
 package model;
 
-import filters.colorTransformation.greyscale.BlueGreyscale;
-import filters.colorTransformation.greyscale.GreenGreyscale;
-import filters.colorTransformation.greyscale.LumaGreyscale;
-import filters.colorTransformation.greyscale.RedGreyscale;
-import filters.colorTransformation.IntensityChange;
-import filters.colorTransformation.ValueChange;
-import filters.flippingTransformation.FlipHorizontal;
-import filters.flippingTransformation.FlipVertical;
-import filters.intensityTransformation.BrightenTransformation;
-import filters.intensityTransformation.DarkenTransformation;
+import filters.colortransformation.greyscale.BlueGreyscale;
+import filters.colortransformation.greyscale.GreenGreyscale;
+import filters.colortransformation.greyscale.LumaGreyscale;
+import filters.colortransformation.greyscale.RedGreyscale;
+import filters.colortransformation.IntensityChange;
+import filters.colortransformation.ValueChange;
+import filters.flippingtransformation.FlipHorizontal;
+import filters.flippingtransformation.FlipVertical;
+import filters.intensitytransformation.BrightenTransformation;
+import filters.intensitytransformation.DarkenTransformation;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
   /**
    * Constructor for an image processing model that uses a given image to set its image field.
    *
-   * @param image
+   * @param image An image which contains a 2d array of pixels.
    */
   public ImageProcessingModel(ImageOfPixel image) {
     this.image = image;
@@ -187,4 +187,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     return new FlipVertical().flipTransform(this.image);
   }
 
-}
+  public void saveImageAs(String outputName) throws IOException {
+    this.saveImageAs(outputName);
+  }
+  }

@@ -1,20 +1,24 @@
 
 package model;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 
+import javax.imageio.ImageIO;
 import model.imaging.Color;
 import model.imaging.Posn;
 import model.imaging.pixel.Pixel;
 
 
 /**
- * This class contains utility methods to read a PPM image from file and simply print its contents. Feel free to change this method
- * as required.
+ * This class contains utility methods to read a PPM image from file and simply print its contents.
+ * Feel free to change this method as required.
  */
 public class ImageUtil {
 
@@ -109,7 +113,6 @@ public class ImageUtil {
 
     List pixels = new ArrayList();
 
-
     for (int i = 0; i < height; i++) {
       List temp = new ArrayList();
       for (int j = 0; j < width; j++) {
@@ -141,5 +144,40 @@ public class ImageUtil {
 
     ImageUtil.readPPM(filename);
   }
+
+
+  //can't be used for ppm
+  public static List readImage(String pathname) {
+
+    BufferedImage img = null;
+    try {
+      img = ImageIO.read(new File(pathname));
+    } catch (IOException e) {
+      //TODO THROW SOMN
+    }
+    int height = img.getHeight();
+    int width = img.getWidth();
+
+    List pixels = new ArrayList();
+
+
+    for (int i = 0; i < 3; i++) {
+      List temp = new ArrayList();
+      for (int j = 0; j < 3; j++) {
+
+        int rgb = img.getRGB(i, j);
+        int r = (rgb >> 16) & 0xFF;
+        int g = (rgb >> 8) & 0xFF;
+        int b = rgb & 0xFF;
+
+        Color color = new Color(r, g, b);
+        temp.add(new Pixel(new Posn(i, j), color));
+      }
+      pixels.add(temp);
+    }
+
+    return pixels;
+  }
+
 }
 
