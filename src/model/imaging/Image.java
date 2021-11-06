@@ -1,10 +1,13 @@
 package model.imaging;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
 
@@ -17,7 +20,7 @@ public class Image implements ImageOfPixel {
   /**
    * Constructs an image object from the given 2D list of pixels.
    *
-   * @param pixels
+   * @param pixels A 2d array containing pixels of the class IPixel.
    */
   public Image(List<ArrayList<IPixel>> pixels) {
     if (pixels == null) {
@@ -79,6 +82,34 @@ public class Image implements ImageOfPixel {
     }
     outputStream.write(output.toString().getBytes());
     outputStream.close();
+  }
+
+
+  public void saveImageAs(String outputName) throws IOException {
+    int width = this.pixels.get(1).size();
+    int height = this.pixels.size();
+    BufferedImage output = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+
+    for (List<IPixel> pixelList : this.pixels) {
+      for (IPixel pixel : pixelList) {
+        int red = pixel.getColor().getRed();
+        int green = pixel.getColor().getGreen();
+        int blue = pixel.getColor().getBlue();
+        System.out.println(blue + "\n");
+        int value = (red << 16) + (green << 8) + blue;
+        output.setRGB(pixel.getPosn().getX(),pixel.getPosn().getY(),value);
+      }
+    }
+    /*
+    description: Standard BMP Image Writer     format names: [bmp, BMP]
+    description: Standard JPEG Image Writer    format names: [JPEG, jpeg, JPG, jpg]
+    description: Standard WBMP Image Writer    format names: [wbmp, WBMP]
+    description: Standard PNG image writer     format names: [png, PNG]
+    description: Standard GIF image writer     format names: [gif, GIF]
+    description: Standard TIFF image writer    format names: [tif, TIF, tiff, TIFF]
+     */
+
+    ImageIO.write(output,"jpg" , new File(outputName));
   }
 }
 

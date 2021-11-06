@@ -1,4 +1,4 @@
-package filters.intensityTransformation;
+package filters.intensitytransformation;
 
 import filters.FilterClamp;
 import model.imaging.Color;

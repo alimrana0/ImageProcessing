@@ -1,4 +1,4 @@
-package filters.intensityTransformation;
+package filters.intensitytransformation;
 
 import java.util.ArrayList;
 import java.util.List;

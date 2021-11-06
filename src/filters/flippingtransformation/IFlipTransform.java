@@ -1,4 +1,4 @@
-package filters.flippingTransformation;
+package filters.flippingtransformation;
 
 import model.imaging.ImageOfPixel;
 

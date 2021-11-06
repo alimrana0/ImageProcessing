@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-import filters.intensityTransformation.BrightenTransformation;
-import filters.intensityTransformation.DarkenTransformation;
+import filters.intensitytransformation.BrightenTransformation;
+import filters.intensitytransformation.DarkenTransformation;
 import model.imaging.Color;
 import model.imaging.IColor;
 import model.imaging.Image;
@@ -45,6 +45,7 @@ public class IntensityTransformationTest {
     temp2.add(pixel4);
     list2D.add(temp2);
   }
+
   @Test
   public void testImageCreatedCorrectlyFirstPixel() {
 
@@ -89,7 +90,7 @@ public class IntensityTransformationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testBrightenTransformationThrows() {
     ImageOfPixel brightenedImage =
-            new BrightenTransformation().applyTransformation(null, 2);
+        new BrightenTransformation().applyTransformation(null, 2);
   }
 
   @Test
@@ -120,7 +121,7 @@ public class IntensityTransformationTest {
   @Test(expected = IllegalArgumentException.class)
   public void testDarkenTransformationThrows() {
     ImageOfPixel darkenedImage =
-            new DarkenTransformation().applyTransformation(null, 2);
+        new DarkenTransformation().applyTransformation(null, 2);
   }
 
   @Test
@@ -148,10 +149,6 @@ public class IntensityTransformationTest {
 
 
   }
-
-
-
-
 
 
 }

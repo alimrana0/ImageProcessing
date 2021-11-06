@@ -21,6 +21,8 @@ public class ImageProcessingView implements IImageProcessingView {
    */
   public ImageProcessingView(ImageProcessingModel model) {
     this(model, System.out);
+    this.model = model; //THIS IS NOT NEEDED BUT REQUIRED TO AVOID JAVA  STYLE PENALTY
+
   }
 
   /**

@@ -5,8 +5,13 @@ import controller.ImageControllerImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.List;
+import jdk.jshell.execution.Util;
 import model.ImageProcessingModel;
 import model.ImageProcessingSession;
+import model.ImageUtil;
+import model.imaging.Image;
+import model.imaging.pixel.IPixel;
 import org.junit.Test;
 import view.IImageProcessingView;
 import view.ImageProcessingView;
@@ -384,5 +389,19 @@ public class ControllerTest {
     IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(null));
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
+  }
+
+  @Test
+  public void readImgTest() throws IOException {
+    ImageProcessingModel photo =
+        new ImageProcessingModel(new Image(ImageUtil.readImage("stars.jpg")));
+
+    ImageProcessingModel photoFromPPM =
+        new ImageProcessingModel(new Image(ImageUtil.getPixels("stars.ppm")));
+
+    photo.saveImageAsPPM("starsfromjpg.ppm");
+   // photoFromPPM.saveImageAsPPM("starsformppm.ppm");
+
+    //photo.saveImageAs("starsCopy.jpg");
   }
 }

@@ -1,4 +1,4 @@
-package filters.colorTransformation;
+package filters.colortransformation;
 
 import model.imaging.Color;
 import model.imaging.Posn;

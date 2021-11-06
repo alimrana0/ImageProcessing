@@ -4,8 +4,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 
-import filters.flippingTransformation.FlipHorizontal;
-import filters.flippingTransformation.FlipVertical;
+import filters.flippingtransformation.FlipHorizontal;
+import filters.flippingtransformation.FlipVertical;
 import model.imaging.Color;
 import model.imaging.IColor;
 import model.imaging.Image;
@@ -45,11 +45,12 @@ public class FlippingTransformationTest {
     test2.add(pixel3);
     test2.add(pixel4);
     list2D.add(test2);
-    
+
   }
+
   @Test
   public void testFlipHorizontalTransformation() {
- 
+
     ImageOfPixel image = new Image(list2D);
 
     ImageOfPixel horizontalFlip = new FlipHorizontal().flipTransform(image);

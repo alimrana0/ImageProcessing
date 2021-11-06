@@ -1,6 +1,6 @@
-package filters.colorTransformation.greyscale;
+package filters.colortransformation.greyscale;
 
-import filters.colorTransformation.AbstractColorTransformation;
+import filters.colortransformation.AbstractColorTransformation;
 import model.imaging.Color;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;

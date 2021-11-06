@@ -88,4 +88,5 @@ public interface IImageProcessingModel {
    */
   void saveImageAsPPM(String filename) throws IOException;
 
+  void saveImageAs(String outputName) throws IOException;
 }
