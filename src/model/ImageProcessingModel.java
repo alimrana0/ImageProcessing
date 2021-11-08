@@ -188,6 +188,6 @@ public class ImageProcessingModel implements IImageProcessingModel {
   }
 
   public void saveImageAs(String outputName) throws IOException {
-    this.saveImageAs(outputName);
+    this.image.saveImageAs(outputName);
   }
   }

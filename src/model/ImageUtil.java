@@ -160,18 +160,21 @@ public class ImageUtil {
 
     List pixels = new ArrayList();
 
-
-    for (int i = 0; i < 3; i++) {
+    int rgb;
+    int r;
+    int g;
+    int b;
+    for (int i = 0; i < height; i++) {
       List temp = new ArrayList();
-      for (int j = 0; j < 3; j++) {
+      for (int j = 0; j < width; j++) {
 
-        int rgb = img.getRGB(i, j);
-        int r = (rgb >> 16) & 0xFF;
-        int g = (rgb >> 8) & 0xFF;
-        int b = rgb & 0xFF;
-
+        rgb = img.getRGB(j, i);
+        r = (rgb >> 16) & 0xFF;
+        g = (rgb >> 8) & 0xFF;
+        b = rgb & 0xFF;
+     //   System.out.println(b);
         Color color = new Color(r, g, b);
-        temp.add(new Pixel(new Posn(i, j), color));
+        temp.add(new Pixel(new Posn(j, i), color));
       }
       pixels.add(temp);
     }

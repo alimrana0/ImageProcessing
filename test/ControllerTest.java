@@ -11,6 +11,7 @@ import model.ImageProcessingModel;
 import model.ImageProcessingSession;
 import model.ImageUtil;
 import model.imaging.Image;
+import model.imaging.ImageOfPixel;
 import model.imaging.pixel.IPixel;
 import org.junit.Test;
 import view.IImageProcessingView;
@@ -393,15 +394,31 @@ public class ControllerTest {
 
   @Test
   public void readImgTest() throws IOException {
+    ImageOfPixel image = new Image(ImageUtil.readImage("stars.jpg"));
+    ImageOfPixel imageFromPPM = new Image(ImageUtil.getPixels("stars.ppm"));
+
+
+    /*
+    for( int i = 0; i < imageFromPPM.getPixels().size(); i++){
+      for (int j = 0; j < imageFromPPM.getPixels().get(0).size(); j++) {
+        System.out.println(image.getPixels().get(i).get(j).getColor().getBlue() + " " +
+            imageFromPPM.getPixels().get(i).get(j).getColor().getBlue());
+
+
+      //  assertEquals(image.getPixels().get(i).get(j).getColor().getGreen(),
+      //      imageFromPPM.getPixels().get(i).get(j).getColor().getGreen());
+      }
+    }*/
+
+
     ImageProcessingModel photo =
         new ImageProcessingModel(new Image(ImageUtil.readImage("stars.jpg")));
 
     ImageProcessingModel photoFromPPM =
         new ImageProcessingModel(new Image(ImageUtil.getPixels("stars.ppm")));
 
-    photo.saveImageAsPPM("starsfromjpg.ppm");
-   // photoFromPPM.saveImageAsPPM("starsformppm.ppm");
-
-    //photo.saveImageAs("starsCopy.jpg");
+   // photo.saveImageAsPPM("starsfromjpg.ppm");
+  //  photoFromPPM.saveImageAsPPM("starsformppm.ppm");
+    photo.saveImageAs("starsCopy.jpg");
   }
 }
