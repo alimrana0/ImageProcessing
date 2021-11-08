@@ -23,4 +23,6 @@ public interface ImageOfPixel {
    * @throws IOException Thrown if the file output stream does not function correctly.
    */
   void saveImageAsPPM(String filename) throws IOException;
+
+  void saveImageAs(String outputName) throws IOException;
 }

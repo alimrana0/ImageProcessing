@@ -95,20 +95,10 @@ public class Image implements ImageOfPixel {
         int red = pixel.getColor().getRed();
         int green = pixel.getColor().getGreen();
         int blue = pixel.getColor().getBlue();
-        System.out.println(blue + "\n");
         int value = (red << 16) + (green << 8) + blue;
         output.setRGB(pixel.getPosn().getX(),pixel.getPosn().getY(),value);
       }
     }
-    /*
-    description: Standard BMP Image Writer     format names: [bmp, BMP]
-    description: Standard JPEG Image Writer    format names: [JPEG, jpeg, JPG, jpg]
-    description: Standard WBMP Image Writer    format names: [wbmp, WBMP]
-    description: Standard PNG image writer     format names: [png, PNG]
-    description: Standard GIF image writer     format names: [gif, GIF]
-    description: Standard TIFF image writer    format names: [tif, TIF, tiff, TIFF]
-     */
-
     ImageIO.write(output,"jpg" , new File(outputName));
   }
 }
