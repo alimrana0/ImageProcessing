@@ -28,12 +28,11 @@ public class ImageProcessingSession {
    */
   public void load(String filepath, String modelName) {
 
-    String[] splitAtFormat = filepath.split("\\.",2);
+    String[] splitAtFormat = filepath.split("\\.", 2);
     if (splitAtFormat[1].equals("ppm")) {
       images.put(modelName,
           new ImageProcessingModel(new Image(ImageUtil.getPixels(filepath))));
-    }
-    else {
+    } else {
       images.put(modelName,
           new ImageProcessingModel(new Image(ImageUtil.readImage(filepath))));
     }
@@ -49,16 +48,13 @@ public class ImageProcessingSession {
   public void save(String saveLocation, String modelName) throws IOException {
     if (this.images.containsKey(modelName)) {
 
-      String[] splitAtFormat = saveLocation.split("\\.",2);
-      if (splitAtFormat[1].equals("ppm"))
-      {
+      String[] splitAtFormat = saveLocation.split("\\.", 2);
+      if (splitAtFormat[1].equals("ppm")) {
         this.images.get(modelName).saveImageAsPPM(saveLocation);
-      }
-      else {
+      } else {
         this.images.get(modelName).saveImageAs(saveLocation);
       }
-    }
-    else {
+    } else {
       throw new IllegalArgumentException("Invalid model name");
     }
   }
@@ -182,6 +178,13 @@ public class ImageProcessingSession {
     }
   }
 
+  /**
+   * Given the name of the stored image and a name to save the manipulation this method makes a
+   * blurred image.
+   *
+   * @param modelName Name of image to be blurred.
+   * @param newName   What the blurred image is stored as.
+   */
   public void blur(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
@@ -191,6 +194,13 @@ public class ImageProcessingSession {
     }
   }
 
+  /**
+   * Given the name of the stored image and a name to save the manipulation this method makes a
+   * sharpened image.
+   *
+   * @param modelName Name of image to be sharpened.
+   * @param newName   What the sharpened image is stored as.
+   */
   public void sharpen(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
@@ -200,6 +210,13 @@ public class ImageProcessingSession {
     }
   }
 
+  /**
+   * Given the name of the stored image and a name to save the manipulation this method makes a
+   * greyscale image.
+   *
+   * @param modelName Name of image to be Greyscaled.
+   * @param newName   What the greyScaled image is stored as.
+   */
   public void greyscale(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
@@ -209,6 +226,13 @@ public class ImageProcessingSession {
     }
   }
 
+  /**
+   * Given the name of the stored image and a name to save the manipulation this method makes an
+   * image with sepia applied.
+   *
+   * @param modelName Name of image sepia is applied to.
+   * @param newName   What the image after applying sepia is stored as.
+   */
   public void sepia(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,

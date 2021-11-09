@@ -15,6 +15,7 @@ import model.imaging.pixel.Pixel;
  * Class to represent an image made of pixels.
  */
 public class Image implements ImageOfPixel {
+
   private final List<ArrayList<IPixel>> pixels;
 
   /**
@@ -85,10 +86,16 @@ public class Image implements ImageOfPixel {
   }
 
 
+  /**
+   * Saves an image as a file type based on the name of the file to save it as.
+   *
+   * @param outputName The name of the file to create.
+   * @throws IOException Thrown if the file output stream does not function correctly.
+   */
   public void saveImageAs(String outputName) throws IOException {
     int width = this.pixels.get(1).size();
     int height = this.pixels.size();
-    BufferedImage output = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+    BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
     for (List<IPixel> pixelList : this.pixels) {
       for (IPixel pixel : pixelList) {
@@ -96,7 +103,7 @@ public class Image implements ImageOfPixel {
         int green = pixel.getColor().getGreen();
         int blue = pixel.getColor().getBlue();
         int value = (red << 16) + (green << 8) + blue;
-        output.setRGB(pixel.getPosn().getX(),pixel.getPosn().getY(),value);
+        output.setRGB(pixel.getPosn().getX(), pixel.getPosn().getY(), value);
       }
     }
     /*
@@ -107,8 +114,8 @@ public class Image implements ImageOfPixel {
     description: Standard GIF image writer     format names: [gif, GIF]
     description: Standard TIFF image writer    format names: [tif, TIF, tiff, TIFF]
      */
-    String[] splitAtFormat = outputName.split("\\.",2);
-    ImageIO.write(output,splitAtFormat[1] , new File(outputName));
+    String[] splitAtFormat = outputName.split("\\.", 2);
+    ImageIO.write(output, splitAtFormat[1], new File(outputName));
   }
 }
 

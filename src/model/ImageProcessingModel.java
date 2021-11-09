@@ -187,6 +187,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Filters the image by blurring the image.
+   *
    * @return The blurred image.
    */
   @Override
@@ -196,6 +197,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Filters the image by sharpening the image.
+   *
    * @return The sharpened image.
    */
   @Override
@@ -205,6 +207,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   /**
    * Transforms the image into a sepia colored image.
+   *
    * @return The transformed image.
    */
   @Override
@@ -236,9 +239,14 @@ public class ImageProcessingModel implements IImageProcessingModel {
     this.image.saveImageAsPPM(filename);
   }
 
-
+  /**
+   * Saves a file of the given filename as the type specified in the outputName file.
+   *
+   * @param outputName the file name of the image
+   * @throws IOException if the filename is invalid
+   */
   public void saveImageAs(String outputName) throws IOException {
     this.image.saveImageAs(outputName);
   }
 
-  }
+}
