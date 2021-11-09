@@ -1,0 +1,49 @@
+The commands used to control the image processor are based off of the example given
+in the assignment with a slight variation on the get component command.
+- First load the image and give it a name:
+  - load stars.ppm stars
+  - load stars.bmp stars
+  - load stars.png stars
+  - load stars.jpg stars
+  - Now you can manipulate the image stars, below example commands using stars are listed.
+  - load (filename) (name of image to be used in program)
+
+
+- get-component (component) (image name) (name of new saved image)
+  - get-component red stars stars-red
+  - you can replace component in parentheses with any of the following
+    - red
+    - green
+    - blue
+    - luma
+    - value
+    - intensity
+- brighten (integer) (image name) (name of new saved image)
+  - brighten 10 stars stars-bright
+- darken (integer) (image name) (name of new saved image)
+  - darken 10 stars stars-dark
+- vertical-flip (image name) (name of new saved image)
+  - vertical-flip stars stars-vflipped
+- horizontal-flip (image name) (name of new saved image)
+  - horizontal-flip stars stars-hflipped
+- greyscale (image name) (name of new saved image)
+  - greyscale stars stars-greyscale
+- sepia (image name) (name of new saved image)
+  - sepia stars stars-sepia
+- blur (image name) (name of new saved image)
+  - blur stars stars-blur
+- sharpen (image name) (name of new saved image)
+  - sharpen stars stars-sharpen
+
+- You can also run a script from a text file using the -file command
+- -file (script text file)
+  - -file script.txt
+
+- save (file name) (image to be saved as a ppm, bmp, jpg, png)
+  - save stars-copy.ppm stars
+  - save stars-copy.bmp stars
+  - save stars-copy.jpg stars
+  - save stars-copy.png stars
+
+- enter "q" to quit
+

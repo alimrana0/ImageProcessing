@@ -467,10 +467,17 @@ public class ControllerTest {
   public void controllerGreySepiaSharpenBlurTest() throws IOException {
     String inputString = "load\nstars.ppm\nstars\n"
         + "greyscale\nstars\nstarsGreyscale\n"
-        + "blur\nstarsGreyscale\nstarsBlur\n"
-        + "sharpen\nstarsBlur\nstarsSharpen\n"
-        + "sepia\nstarSharpen\nstarsSepia\n"
-        + "flip-horizontal\nstarSepia\nstarsHorizontal\nq";
+        + "save\nstarsGreyscale.jpg\nstarsGreyscale\n"
+
+        + "blur\nstars\nstarsBlur\n"
+        + "save\nstarsBlur.jpg\nstarsBlur\n"
+
+        + "sharpen\nstars\nstarsSharpen\n"
+        + "save\nstarsSharpen.jpg\nstarsSharpen\n"
+
+
+        + "sepia\nstars\nstarsSepia\n"
+        + "save\nstarsSepia.jpg\nstarsSepia\nq";
     BufferedReader input = new BufferedReader(new StringReader(inputString));
     StringBuffer outBuffer = new StringBuffer();
 
@@ -493,13 +500,14 @@ public class ControllerTest {
         + "darken\n"
         + "Q or q to quit\n"
         + "Image Loaded\n"
+        + "Greyscaled Image Made\n"
         + "Image saved\n"
+        + "Blurred Image Made\n"
         + "Image saved\n"
+        + "Sharpened Image Made\n"
         + "Image saved\n"
-        + "Image saved\n"
-        + "Image Loaded\n"
-        + "Image Loaded\n"
-        + "Image Loaded";
+        + "Sepia Image Made\n"
+        + "Image saved";
     assertEquals(expectedOutput, actualOutput);
   }
 
@@ -528,6 +536,33 @@ public class ControllerTest {
         + "darken\n"
         + "Q or q to quit\n"
         + "Image Loaded\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Brightened Image made\n"
+        + "Image saved\n"
+        + "Darkened Image made\n"
+        + "Image saved\n"
+        + "Vertical Image made\n"
+        + "Image saved\n"
+        + "Horizontal Image made\n"
+        + "Image saved\n"
+        + "Greyscaled Image Made\n"
+        + "Image saved\n"
+        + "Sepia Image Made\n"
+        + "Image saved\n"
+        + "Blurred Image Made\n"
+        + "Image saved\n"
+        + "Sharpened Image Made\n"
         + "Image saved\n"
         + "Image saved\n"
         + "Image saved\n"
