@@ -99,6 +99,54 @@ public class ImageControllerImpl implements ImageController {
           }
           break;
 
+        //Creates a new image after blurring
+        // then stores it in the hashmap.
+        case "blur":
+          this.readModelNameAndNewName();
+          try {
+            this.model.blur(this.modelName, this.newName);
+            this.view.renderMessage("\nBlurred Image Made");
+          } catch (IllegalArgumentException e) {
+            this.view.renderMessage("\n" + e.getMessage());
+          }
+          break;
+
+        //Creates a new image after sharpening
+        // then stores it in the hashmap.
+        case "sharpen":
+          this.readModelNameAndNewName();
+          try {
+            this.model.sharpen(this.modelName, this.newName);
+            this.view.renderMessage("\nSharpened Image Made");
+          } catch (IllegalArgumentException e) {
+            this.view.renderMessage("\n" + e.getMessage());
+          }
+          break;
+
+        //Creates a new image after greyscale
+        // then stores it in the hashmap.
+        case "greyscale":
+          this.readModelNameAndNewName();
+          try {
+            this.model.greyscale(this.modelName, this.newName);
+            this.view.renderMessage("\nGreyscaled Image Made");
+          } catch (IllegalArgumentException e) {
+            this.view.renderMessage("\n" + e.getMessage());
+          }
+          break;
+
+        //Creates a new image after sepia
+        // then stores it in the hashmap.
+        case "sepia":
+          this.readModelNameAndNewName();
+          try {
+            this.model.sepia(this.modelName, this.newName);
+            this.view.renderMessage("\nSepia Image Made");
+          } catch (IllegalArgumentException e) {
+            this.view.renderMessage("\n" + e.getMessage());
+          }
+          break;
+
         //Creates a new image after horizontally flipping the image of the given name and
         //then stores it in the hashmap
         case "horizontal-flip":

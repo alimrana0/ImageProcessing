@@ -108,5 +108,4 @@ public interface IImageProcessingModel {
 
   void saveImageAs(String outputName) throws IOException;
 
-
 }
