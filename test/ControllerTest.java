@@ -418,6 +418,6 @@ public class ControllerTest {
 
    // photo.saveImageAsPPM("starsfromjpg.ppm");
   //  photoFromPPM.saveImageAsPPM("starsformppm.ppm");
-    photo.saveImageAs("starsCopy.jpg");
+    photoFromPPM.saveImageAs("starsCopy.JPEG");
   }
 }

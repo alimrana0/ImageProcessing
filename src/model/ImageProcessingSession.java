@@ -27,8 +27,16 @@ public class ImageProcessingSession {
    * @param modelName The name the file is stored under during the session.
    */
   public void load(String filepath, String modelName) {
-    images.put(modelName,
-        new ImageProcessingModel(new Image(ImageUtil.getPixels(filepath))));
+
+    String[] splitAtFormat = filepath.split("\\.",2);
+    if (splitAtFormat[1].equals("ppm")) {
+      images.put(modelName,
+          new ImageProcessingModel(new Image(ImageUtil.getPixels(filepath))));
+    }
+    else {
+      images.put(modelName,
+          new ImageProcessingModel(new Image(ImageUtil.readImage(filepath))));
+    }
   }
 
   /**
@@ -40,7 +48,15 @@ public class ImageProcessingSession {
    */
   public void save(String saveLocation, String modelName) throws IOException {
     if (this.images.containsKey(modelName)) {
-      this.images.get(modelName).saveImageAsPPM(saveLocation);
+
+      String[] splitAtFormat = saveLocation.split("\\.",2);
+      if (splitAtFormat[1].equals("ppm"))
+      {
+        this.images.get(modelName).saveImageAsPPM(saveLocation);
+      }
+      else {
+        this.images.get(modelName).saveImageAs(saveLocation);
+      }
     }
     else {
       throw new IllegalArgumentException("Invalid model name");

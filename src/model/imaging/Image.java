@@ -99,7 +99,17 @@ public class Image implements ImageOfPixel {
         output.setRGB(pixel.getPosn().getX(),pixel.getPosn().getY(),value);
       }
     }
-    ImageIO.write(output,"jpg" , new File(outputName));
+    /*
+    description: Standard BMP Image Writer     format names: [bmp, BMP]
+    description: Standard JPEG Image Writer    format names: [JPEG, jpeg, JPG, jpg]
+    description: Standard WBMP Image Writer    format names: [wbmp, WBMP]
+    description: Standard PNG image writer     format names: [png, PNG]
+    description: Standard GIF image writer     format names: [gif, GIF]
+    description: Standard TIFF image writer    format names: [tif, TIF, tiff, TIFF]
+     */
+    String[] splitAtFormat = outputName.split("\\.",2);
+    System.out.println(splitAtFormat[1]);
+    ImageIO.write(output,splitAtFormat[1] , new File(outputName));
   }
 }
 

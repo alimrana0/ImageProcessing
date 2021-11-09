@@ -29,8 +29,8 @@ public class ImageControllerImpl implements ImageController {
    * @throws IllegalArgumentException input is null.
    */
   public ImageControllerImpl(ImageProcessingSession model, IImageProcessingView view,
-                             Readable input)
-          throws IllegalArgumentException {
+      Readable input)
+      throws IllegalArgumentException {
     if (model == null || view == null || input == null) {
       throw new IllegalArgumentException("Parameters for controller cannot be null");
     }

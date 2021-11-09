@@ -24,5 +24,12 @@ public interface ImageOfPixel {
    */
   void saveImageAsPPM(String filename) throws IOException;
 
+  /**
+   * Saves an image as a common file type based on the extension of the output name.
+   * If the extension is not a valid file type nothing happens.
+   *
+   * @param outputName The name of the file including its extension (example.jpg).
+   * @throws IOException
+   */
   void saveImageAs(String outputName) throws IOException;
 }

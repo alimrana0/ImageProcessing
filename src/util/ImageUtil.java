@@ -120,8 +120,7 @@ public class ImageUtil {
         int g = sc.nextInt();
         int b = sc.nextInt();
 
-        //TODO POSN is X Y, IMAGE READ IN ROW/COL AND STARTS IN TOP LEFT CORNER
-        temp.add(new Pixel(new Posn(i, j), new Color(r, g, b)));
+        temp.add(new Pixel(new Posn(j, i), new Color(r, g, b)));
       }
       pixels.add(temp);
     }
