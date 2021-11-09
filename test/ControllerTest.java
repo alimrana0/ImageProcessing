@@ -5,13 +5,14 @@ import controller.ImageControllerImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-
+import java.util.List;
+import jdk.jshell.execution.Util;
 import model.ImageProcessingModel;
 import model.ImageProcessingSession;
 import util.ImageUtil;
 import model.imaging.Image;
 import model.imaging.ImageOfPixel;
-
+import model.imaging.pixel.IPixel;
 import org.junit.Test;
 import view.IImageProcessingView;
 import view.ImageProcessingView;
@@ -391,33 +392,47 @@ public class ControllerTest {
     controller.run();
   }
 
+
+
   @Test
-  public void readImgTest() throws IOException {
-    ImageOfPixel image = new Image(ImageUtil.readImage("stars.jpg"));
-    ImageOfPixel imageFromPPM = new Image(ImageUtil.getPixels("stars.ppm"));
+  public void controllerSaveAndLoadAsAllTypes() throws IOException {
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "save\nstarsJPG.jpg\nstars\n"
+        + "save\nstarsPNG.png\nstars\n"
+        + "save\nstarsBMP.bmp\nstars\n"
+        + "save\nstarsPPM.ppm\nstars\n"
+        + "load\nstarsJPG.jpg\nstarsJPG\n"
+        + "load\nstarsPNG.png\nstarsPNG\n"
+        + "load\nstarsBMP.bmp\nstarsBMP\nq";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
 
+    ImageProcessingSession session = new ImageProcessingSession();
 
-    /*
-    for( int i = 0; i < imageFromPPM.getPixels().size(); i++){
-      for (int j = 0; j < imageFromPPM.getPixels().get(0).size(); j++) {
-        System.out.println(image.getPixels().get(i).get(j).getColor().getBlue() + " " +
-            imageFromPPM.getPixels().get(i).get(j).getColor().getBlue());
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
 
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
 
-      //  assertEquals(image.getPixels().get(i).get(j).getColor().getGreen(),
-      //      imageFromPPM.getPixels().get(i).get(j).getColor().getGreen());
-      }
-    }*/
-
-
-    ImageProcessingModel photo =
-        new ImageProcessingModel(new Image(ImageUtil.readImage("stars.jpg")));
-
-    ImageProcessingModel photoFromPPM =
-        new ImageProcessingModel(new Image(ImageUtil.getPixels("stars.ppm")));
-
-   // photo.saveImageAsPPM("starsfromjpg.ppm");
-  //  photoFromPPM.saveImageAsPPM("starsformppm.ppm");
-    photoFromPPM.saveImageAs("starsCopy.JPEG");
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "Commands:\n"
+        + "load filepath name\n"
+        + "save saveLocation name\n"
+        + "get-component component \n"
+        + "horizontal-flip\n"
+        + "vertical-flip\n"
+        + "brighten\n"
+        + "darken\n"
+        + "Q or q to quit\n"
+        + "Image Loaded\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image Loaded\n"
+        + "Image Loaded\n"
+        + "Image Loaded";
+    assertEquals(expectedOutput, actualOutput);
   }
+
 }
