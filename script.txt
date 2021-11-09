@@ -1,0 +1,36 @@
+load stars.ppm stars
+get-component red stars
+red-stars save redstars.ppm red-stars
+get-component green stars green-stars
+save greenstars.ppm green-stars
+get-component blue stars blue-stars
+save bluestars.ppm blue-stars
+get-component luma stars lumastars
+save lumastars.ppm lumastars
+get-component value stars valuestars
+save valuestars.ppm valuestars
+get-component intensity stars
+intensitystars save intensitystars.ppm intensitystars
+brighten 10 stars brightstars
+save brightstars.ppm brightstars
+darken 10 stars darkstars
+save darkstars.ppm darkstars
+vertical-flip stars verticalstars
+save verticalstars.ppm verticalstars
+horizontal-flip stars horizontalstars
+save horizontalstars.ppm horizontalstars
+greyscale stars starsGreyscale
+save starsGreyscale.ppm starsGreyscale
+sepia stars starsSepia
+save starsSepia.ppm starsSepia
+blur stars starsBlur
+save starsBlur.ppm starsBlur
+sharpen stars starsSharpen
+save starsSharpen.ppm starsSharpen
+save starsJPG.jpg stars
+save starsPNG.png stars
+save starsBMP.bmp stars
+load starsJPG.jpg stars
+load starsPNG.png stars
+load starsBMP.bmp stars
+q

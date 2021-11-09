@@ -108,7 +108,6 @@ public class Image implements ImageOfPixel {
     description: Standard TIFF image writer    format names: [tif, TIF, tiff, TIFF]
      */
     String[] splitAtFormat = outputName.split("\\.",2);
-    System.out.println(splitAtFormat[1]);
     ImageIO.write(output,splitAtFormat[1] , new File(outputName));
   }
 }

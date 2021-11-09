@@ -463,4 +463,78 @@ public class ControllerTest {
     assertEquals(expectedOutput, actualOutput);
   }
 
+  @Test
+  public void controllerGreySepiaSharpenBlurTest() throws IOException {
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "greyscale\nstars\nstarsGreyscale\n"
+        + "blur\nstarsGreyscale\nstarsBlur\n"
+        + "sharpen\nstarsBlur\nstarsSharpen\n"
+        + "sepia\nstarSharpen\nstarsSepia\n"
+        + "flip-horizontal\nstarSepia\nstarsHorizontal\nq";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
+
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
+
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "Commands:\n"
+        + "load filepath name\n"
+        + "save saveLocation name\n"
+        + "get-component component \n"
+        + "horizontal-flip\n"
+        + "vertical-flip\n"
+        + "brighten\n"
+        + "darken\n"
+        + "Q or q to quit\n"
+        + "Image Loaded\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image Loaded\n"
+        + "Image Loaded\n"
+        + "Image Loaded";
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+  @Test
+  public void scriptTest() throws IOException {
+    String inputString = "-file script.txt";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
+
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
+
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "Commands:\n"
+        + "load filepath name\n"
+        + "save saveLocation name\n"
+        + "get-component component \n"
+        + "horizontal-flip\n"
+        + "vertical-flip\n"
+        + "brighten\n"
+        + "darken\n"
+        + "Q or q to quit\n"
+        + "Image Loaded\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image Loaded\n"
+        + "Image Loaded\n"
+        + "Image Loaded";
+    assertEquals(expectedOutput, actualOutput);
+  }
 }
