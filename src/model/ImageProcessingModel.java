@@ -1,5 +1,8 @@
 package model;
 
+import filters.BlurFilter;
+import filters.SharpenFilter;
+import filters.colortransformation.SepiaTransformation;
 import filters.colortransformation.greyscale.BlueGreyscale;
 import filters.colortransformation.greyscale.GreenGreyscale;
 import filters.colortransformation.greyscale.LumaGreyscale;
@@ -26,8 +29,12 @@ public class ImageProcessingModel implements IImageProcessingModel {
    * Constructor for an image processing model that uses a given image to set its image field.
    *
    * @param image An image which contains a 2d array of pixels.
+   * @throws IllegalArgumentException if the image is null
    */
-  public ImageProcessingModel(ImageOfPixel image) {
+  public ImageProcessingModel(ImageOfPixel image) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
     this.image = image;
   }
 
@@ -146,16 +153,6 @@ public class ImageProcessingModel implements IImageProcessingModel {
     return new LumaGreyscale().applyColorTransformation(this.image);
   }
 
-  /**
-   * Saves a file of the given filename as a PPM file.
-   *
-   * @param filename the file name of the image
-   * @throws IOException if the filename is invalid
-   */
-  @Override
-  public void saveImageAsPPM(String filename) throws IOException {
-    this.image.saveImageAsPPM(filename);
-  }
 
   /**
    * Flips the image horizontally.
@@ -187,7 +184,47 @@ public class ImageProcessingModel implements IImageProcessingModel {
     return new FlipVertical().flipTransform(this.image);
   }
 
+  /**
+   * Filters the image by blurring the image.
+   * @return The blurred image.
+   */
+  @Override
+  public ImageOfPixel blur() {
+    return new BlurFilter().transform(this.image);
+  }
+
+  /**
+   * Filters the image by sharpening the image.
+   * @return The sharpened image.
+   */
+  @Override
+  public ImageOfPixel sharpen() {
+    return new SharpenFilter().transform(this.image);
+  }
+
+  /**
+   * Transforms the image into a sepia colored image.
+   * @return The transformed image.
+   */
+  @Override
+  public ImageOfPixel sepia() {
+    return new SepiaTransformation().transform(this.image);
+  }
+
+  /**
+   * Saves a file of the given filename as a PPM file.
+   *
+   * @param filename the file name of the image
+   * @throws IOException if the filename is invalid
+   */
+  @Override
+  public void saveImageAsPPM(String filename) throws IOException {
+    this.image.saveImageAsPPM(filename);
+  }
+
+
   public void saveImageAs(String outputName) throws IOException {
     this.image.saveImageAs(outputName);
   }
+
   }

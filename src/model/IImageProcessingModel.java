@@ -82,6 +82,24 @@ public interface IImageProcessingModel {
   ImageOfPixel verticalFlip() throws IllegalArgumentException;
 
   /**
+   * Filters the image by blurring the image.
+   * @return The blurred image.
+   */
+  ImageOfPixel blur();
+
+  /**
+   * Filters the image by sharpening the image.
+   * @return The sharpened image.
+   */
+  ImageOfPixel sharpen();
+
+  /**
+   * Transforms the image into a sepia colored image.
+   * @return The transformed image.
+   */
+  ImageOfPixel sepia();
+
+  /**
    * Saves a file of the given filename as a PPM file.
    * @param filename the file name of the image
    * @throws IOException if the filename is invalid
@@ -89,4 +107,6 @@ public interface IImageProcessingModel {
   void saveImageAsPPM(String filename) throws IOException;
 
   void saveImageAs(String outputName) throws IOException;
+
+
 }
