@@ -48,6 +48,11 @@ public class Kernel implements IKernel {
   }
 
   @Override
+  public final double[][] getValues() {
+    return values;
+  }
+
+  @Override
   public final int getXCenter() {
     int xCenter = (this.width - 1) / 2;
     return xCenter;

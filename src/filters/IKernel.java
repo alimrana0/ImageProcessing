@@ -20,6 +20,12 @@ public interface IKernel {
   int getWidth();
 
   /**
+   * Gets the values of the matrix of values of the kernel.
+   *
+   * @return 2D matrix representing the kernel's values.
+   */
+  double[][] getValues();
+  /**
    * Gets the distance from the edge to the center of the kernel horizontally.
    *
    * @return int representing the center of the Matrix.
