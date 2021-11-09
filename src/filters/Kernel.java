@@ -53,18 +53,6 @@ public class Kernel implements IKernel {
   }
 
   @Override
-  public final int getXCenter() {
-    int xCenter = (this.width - 1) / 2;
-    return xCenter;
-  }
-
-  @Override
-  public final int getYCenter() {
-    int yCenter = (this.height - 1) / 2;
-    return yCenter;
-  }
-
-  @Override
   public final double getValueAt(int x, int y) {
     try {
       return this.values[y][x];

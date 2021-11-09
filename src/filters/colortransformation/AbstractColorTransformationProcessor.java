@@ -1,8 +1,5 @@
 package filters.colortransformation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import filters.FilterClamp;
 import filters.IFilter;
 import filters.IKernel;
@@ -13,30 +10,35 @@ import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractColorTransformationProcessor implements IFilter {
 
   protected IKernel kernel;
+  protected double[][] kernelValues;
 
   /**
-   * Constructs an AbstractColorTransformation using a given kernel.
+   * Creates an AbstractColorTransformation using a provided kernel.
    *
    * @param kernel kernel to be applied to each pixel in an image.
-   * @throws IllegalArgumentException If the given kernel is null or not 3 x 3.
+   * @throws IllegalArgumentException If the supplied kernel is not 3 x 3 or is null.
    */
   protected AbstractColorTransformationProcessor(IKernel kernel) throws IllegalArgumentException {
     if (kernel == null) {
-      throw new IllegalArgumentException("Argument can't be null.");
+      throw new IllegalArgumentException("Kernel can't be null");
     }
-    if (kernel.getWidth() != 3 || kernel.getHeight() != 3) {
-      throw new IllegalArgumentException("kernel must be 3 x 3.");
+    if (kernel.getHeight() != 3 || kernel.getWidth()!= 3) {
+      throw new IllegalArgumentException("Kernel must be 3 x 3.");
     }
     this.kernel = kernel;
+    this.kernelValues = kernel.getValues();
+
   }
 
 
   /**
-   * Applies a transformation on an image's color.
+   * Applies some transformation on the color of the given image.
    *
    * @param iop Image to apply the transformation to.
    * @return The transformed image.
@@ -44,23 +46,23 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
    */
   public ImageOfPixel transform(ImageOfPixel iop) throws IllegalArgumentException {
     if (iop == null) {
-      throw new IllegalArgumentException("Image cannot be null.");
+      throw new IllegalArgumentException("Image can't be null.");
     }
-    List<List<IPixel>> imagePixels = iop.getPixels();
-    return new Image(applyTransform(imagePixels));
+    List<List<IPixel>> imagePix = iop.getPixels();
+    return new Image(applyTransform(imagePix));
   }
 
-   /**
+  /**
    * Applies the correct transformation to an image and its pixels.
    *
-   * @param imagePixels Pixels of the image.
+   * @param imagePix Pixels of the image.
    * @return The updated pixels with the transformation applied.
    */
-  protected List<ArrayList<IPixel>> applyTransform(List<List<IPixel>> imagePixels) {
+  protected List<ArrayList<IPixel>> applyTransform( List<List<IPixel>> imagePix) {
     List<ArrayList<IPixel>> newPixels = new ArrayList<>();
-    for (List<IPixel> l : imagePixels) {
+    for (List<IPixel> c : imagePix) {
       ArrayList<IPixel> r = new ArrayList<>();
-      for (IPixel p : l) {
+      for (IPixel p : c) {
         r.add(colorTransform(p));
       }
       newPixels.add(r);
@@ -77,15 +79,15 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
    */
   protected IPixel colorTransform(IPixel pixel) {
 
-    int changedRed = (int) (pixel.getColor().getRed() * this.kernel.getValueAt(0,0)
-            + pixel.getColor().getGreen() * this.kernel.getValueAt(0,1)
-            + pixel.getColor().getBlue() * this.kernel.getValueAt(0,2));
-    int changedGreen = (int) (pixel.getColor().getRed() * this.kernel.getValueAt(1,0)
-            + pixel.getColor().getGreen() * this.kernel.getValueAt(1,1)
-            + pixel.getColor().getBlue() * this.kernel.getValueAt(1,2));
-    int changedBlue = (int) (pixel.getColor().getRed() * this.kernel.getValueAt(2,0)
-            + pixel.getColor().getGreen() * this.kernel.getValueAt(2,1)
-            + pixel.getColor().getBlue() * this.kernel.getValueAt(2,2));
+    int changedRed = (int) (pixel.getColor().getRed() * this.kernelValues[0][0] 
+            + pixel.getColor().getGreen() * this.kernelValues[0][1]
+            + pixel.getColor().getBlue() * this.kernelValues[0][2]);
+    int changedGreen = (int) (pixel.getColor().getRed() * this.kernelValues[1][0] 
+            + pixel.getColor().getGreen() * this.kernelValues[1][1]
+            + pixel.getColor().getBlue() * this.kernelValues[1][2]);
+    int changedBlue = (int) (pixel.getColor().getRed() * this.kernelValues[2][0] 
+            + pixel.getColor().getGreen() * this.kernelValues[2][1]
+            + pixel.getColor().getBlue() * this.kernelValues[2][2]);
 
     changedRed = FilterClamp.clamp(changedRed);
     changedGreen = FilterClamp.clamp(changedGreen);
@@ -95,7 +97,6 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
             changedGreen, changedBlue));
 
   }
-
 
 
 }

@@ -14,7 +14,7 @@ public class GreyscaleTransformation extends AbstractColorTransformationProcesso
    * values such that the pixel can be transformed.
    */
   public GreyscaleTransformation() {
-    super(new Kernel(3, 3, new double[][]{{0.2126, 0.7152, 0.0722},
+    super(new Kernel(3,3, new double[][]{{0.2126, 0.7152, 0.0722},
             {0.2126, 0.7152, 0.0722},
             {0.2126, 0.7152, 0.0722}}));
   }

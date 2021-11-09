@@ -25,19 +25,6 @@ public interface IKernel {
    * @return 2D matrix representing the kernel's values.
    */
   double[][] getValues();
-  /**
-   * Gets the distance from the edge to the center of the kernel horizontally.
-   *
-   * @return int representing the center of the Matrix.
-   */
-  int getXCenter();
-
-  /**
-   * Gets the distance from the edge to the center of the kernel vertically.
-   *
-   * @return int representing the center of the Matrix.
-   */
-  int getYCenter();
 
   /**
    * Returns the value at a specific x or y of a given 2D Array.
