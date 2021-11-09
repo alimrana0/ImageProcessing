@@ -5,10 +5,16 @@ import controller.ImageControllerImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 import jdk.jshell.execution.Util;
 import model.ImageProcessingModel;
 import model.ImageProcessingSession;
+import model.imaging.Color;
+import model.imaging.IColor;
+import model.imaging.Posn;
+import model.imaging.pixel.Pixel;
+import org.junit.Before;
 import util.ImageUtil;
 import model.imaging.Image;
 import model.imaging.ImageOfPixel;
@@ -21,6 +27,19 @@ import view.ImageProcessingView;
  * Test for the ImageController class.
  */
 public class ControllerTest {
+
+  //private Pixel emptyPixel = new Pixel(new Posn(0,0), new Color(0,0,0));
+  private Image emptyImage;
+
+  @Before
+  public void setUp() {
+    ArrayList<IPixel> pixelArray = new ArrayList<>();
+    pixelArray.add(new Pixel(new Posn(0, 0), new Color(0, 0, 0)));
+    List<ArrayList<IPixel>> basicArray = new ArrayList<>();
+    basicArray.add(pixelArray);
+
+    emptyImage = new Image(basicArray);
+  }
 
   @Test(expected = IllegalArgumentException.class)
   public void nullModelConstructor() throws IllegalArgumentException {
@@ -56,7 +75,8 @@ public class ControllerTest {
     BufferedReader input = new BufferedReader(new StringReader(inputString));
     StringBuffer outBuffer = new StringBuffer();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
     ImageProcessingSession session = new ImageProcessingSession();
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -86,7 +106,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new MockImageProcessingSession(mockLog);
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -122,7 +143,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new MockImageProcessingSession(mockLog);
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -166,7 +188,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new MockImageProcessingSession(mockLog);
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -217,7 +240,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new MockImageProcessingSession(mockLog);
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -257,7 +281,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -288,7 +313,8 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -316,7 +342,8 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -352,7 +379,8 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -387,11 +415,10 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(null));
+    IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(emptyImage));
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
   }
-
 
 
   @Test
@@ -409,7 +436,8 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
