@@ -5,13 +5,20 @@ import controller.ImageControllerImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-
+import java.util.ArrayList;
+import java.util.List;
+import jdk.jshell.execution.Util;
 import model.ImageProcessingModel;
 import model.ImageProcessingSession;
+import model.imaging.Color;
+import model.imaging.IColor;
+import model.imaging.Posn;
+import model.imaging.pixel.Pixel;
+import org.junit.Before;
 import util.ImageUtil;
 import model.imaging.Image;
 import model.imaging.ImageOfPixel;
-
+import model.imaging.pixel.IPixel;
 import org.junit.Test;
 import view.IImageProcessingView;
 import view.ImageProcessingView;
@@ -20,6 +27,19 @@ import view.ImageProcessingView;
  * Test for the ImageController class.
  */
 public class ControllerTest {
+
+  //private Pixel emptyPixel = new Pixel(new Posn(0,0), new Color(0,0,0));
+  private Image emptyImage;
+
+  @Before
+  public void setUp() {
+    ArrayList<IPixel> pixelArray = new ArrayList<>();
+    pixelArray.add(new Pixel(new Posn(0, 0), new Color(0, 0, 0)));
+    List<ArrayList<IPixel>> basicArray = new ArrayList<>();
+    basicArray.add(pixelArray);
+
+    emptyImage = new Image(basicArray);
+  }
 
   @Test(expected = IllegalArgumentException.class)
   public void nullModelConstructor() throws IllegalArgumentException {
@@ -55,7 +75,8 @@ public class ControllerTest {
     BufferedReader input = new BufferedReader(new StringReader(inputString));
     StringBuffer outBuffer = new StringBuffer();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
     ImageProcessingSession session = new ImageProcessingSession();
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -85,7 +106,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new MockImageProcessingSession(mockLog);
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -121,7 +143,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new MockImageProcessingSession(mockLog);
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -165,7 +188,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new MockImageProcessingSession(mockLog);
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -216,7 +240,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new MockImageProcessingSession(mockLog);
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -256,7 +281,8 @@ public class ControllerTest {
     StringBuilder mockLog = new StringBuilder();
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -287,7 +313,8 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -315,7 +342,8 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -351,7 +379,8 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(null), outBuffer);
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
@@ -386,38 +415,52 @@ public class ControllerTest {
 
     ImageProcessingSession session = new ImageProcessingSession();
 
-    IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(null));
+    IImageProcessingView view = new MockImageProcessingView(new ImageProcessingModel(emptyImage));
     ImageController controller = new ImageControllerImpl(session, view, input);
     controller.run();
   }
 
+
   @Test
-  public void readImgTest() throws IOException {
-    ImageOfPixel image = new Image(ImageUtil.readImage("stars.jpg"));
-    ImageOfPixel imageFromPPM = new Image(ImageUtil.getPixels("stars.ppm"));
+  public void controllerSaveAndLoadAsAllTypes() throws IOException {
+    String inputString = "load\nstars.ppm\nstars\n"
+        + "save\nstarsJPG.jpg\nstars\n"
+        + "save\nstarsPNG.png\nstars\n"
+        + "save\nstarsBMP.bmp\nstars\n"
+        + "save\nstarsPPM.ppm\nstars\n"
+        + "load\nstarsJPG.jpg\nstarsJPG\n"
+        + "load\nstarsPNG.png\nstarsPNG\n"
+        + "load\nstarsBMP.bmp\nstarsBMP\nq";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
 
+    ImageProcessingSession session = new ImageProcessingSession();
 
-    /*
-    for( int i = 0; i < imageFromPPM.getPixels().size(); i++){
-      for (int j = 0; j < imageFromPPM.getPixels().get(0).size(); j++) {
-        System.out.println(image.getPixels().get(i).get(j).getColor().getBlue() + " " +
-            imageFromPPM.getPixels().get(i).get(j).getColor().getBlue());
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
 
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
 
-      //  assertEquals(image.getPixels().get(i).get(j).getColor().getGreen(),
-      //      imageFromPPM.getPixels().get(i).get(j).getColor().getGreen());
-      }
-    }*/
-
-
-    ImageProcessingModel photo =
-        new ImageProcessingModel(new Image(ImageUtil.readImage("stars.jpg")));
-
-    ImageProcessingModel photoFromPPM =
-        new ImageProcessingModel(new Image(ImageUtil.getPixels("stars.ppm")));
-
-   // photo.saveImageAsPPM("starsfromjpg.ppm");
-  //  photoFromPPM.saveImageAsPPM("starsformppm.ppm");
-    photoFromPPM.saveImageAs("starsCopy.JPEG");
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "Commands:\n"
+        + "load filepath name\n"
+        + "save saveLocation name\n"
+        + "get-component component \n"
+        + "horizontal-flip\n"
+        + "vertical-flip\n"
+        + "brighten\n"
+        + "darken\n"
+        + "Q or q to quit\n"
+        + "Image Loaded\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image Loaded\n"
+        + "Image Loaded\n"
+        + "Image Loaded";
+    assertEquals(expectedOutput, actualOutput);
   }
+
 }

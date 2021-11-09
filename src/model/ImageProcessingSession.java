@@ -181,4 +181,40 @@ public class ImageProcessingSession {
       throw new IllegalArgumentException("invalid inputs");
     }
   }
+
+  public void blur(String modelName, String newName) {
+    if (this.images.containsKey(modelName)) {
+      images.put(newName,
+          new ImageProcessingModel(this.images.get(modelName).blur()));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
+
+  public void sharpen(String modelName, String newName) {
+    if (this.images.containsKey(modelName)) {
+      images.put(newName,
+          new ImageProcessingModel(this.images.get(modelName).sharpen()));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
+
+  public void greyscale(String modelName, String newName) {
+    if (this.images.containsKey(modelName)) {
+      images.put(newName,
+          new ImageProcessingModel(this.images.get(modelName).greyscale()));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
+
+  public void sepia(String modelName, String newName) {
+    if (this.images.containsKey(modelName)) {
+      images.put(newName,
+          new ImageProcessingModel(this.images.get(modelName).sepia()));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
 }
