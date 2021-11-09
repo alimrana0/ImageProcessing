@@ -100,6 +100,13 @@ public interface IImageProcessingModel {
   ImageOfPixel sepia();
 
   /**
+   * Greyscale an image by using a matrix for component conversion.
+   *
+   * @return the greyscale image.
+   */
+  ImageOfPixel greyscale();
+
+  /**
    * Saves a file of the given filename as a PPM file.
    * @param filename the file name of the image
    * @throws IOException if the filename is invalid

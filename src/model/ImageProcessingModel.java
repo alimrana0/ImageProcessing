@@ -2,6 +2,7 @@ package model;
 
 import filters.BlurFilter;
 import filters.SharpenFilter;
+import filters.colortransformation.GreyscaleTransformation;
 import filters.colortransformation.SepiaTransformation;
 import filters.colortransformation.greyscale.BlueGreyscale;
 import filters.colortransformation.greyscale.GreenGreyscale;
@@ -209,6 +210,19 @@ public class ImageProcessingModel implements IImageProcessingModel {
   @Override
   public ImageOfPixel sepia() {
     return new SepiaTransformation().transform(this.image);
+  }
+
+  /**
+   * Greyscale an image by using a matrix for component conversion.
+   *
+   * @return the greyscale image.
+   */
+  @Override
+  public ImageOfPixel greyscale() {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    return new GreyscaleTransformation().transform(this.image);
   }
 
   /**
