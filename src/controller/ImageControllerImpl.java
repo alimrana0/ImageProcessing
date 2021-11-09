@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -208,6 +209,14 @@ public class ImageControllerImpl implements ImageController {
             this.view.renderMessage("\n" + e.getMessage());
           }
           break;
+
+        //runs the controller based off of a script
+        case "-file":
+          String fileName = in.next();
+          File file = new File(fileName);
+          this.in = new Scanner(file);
+          break;
+
 
         case "Q":
         case "q":
