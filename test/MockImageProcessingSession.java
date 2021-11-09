@@ -4,7 +4,7 @@ import java.util.HashMap;
 import model.IImageProcessingModel;
 import model.ImageProcessingModel;
 import model.ImageProcessingSession;
-import model.ImageUtil;
+import util.ImageUtil;
 import model.imaging.Image;
 
 /**
