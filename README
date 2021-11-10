@@ -47,33 +47,51 @@ The Pixel class implements the Pixel interface. It overrides the equals and hash
 #filters
 **-- FilterClamp**
 The FilterClamp class clamps any RGB value to a minimum value of 0 or maximum value of 255.
+**-- AbstractImageProcessing**
+This is an abstract class that represents any filter on an image/pixel using kernels. Includes things like image blur or image sharpening.
+**-- BlurFilter**
+The BlurFilter class creates an instance that creates a kernel matrix that will allow for an image to be blurred.
+**-- SharpenFilter**
+The SharpenFilter class creates an instance that creates a kernel matrix that will allow for an image to be sharpened.
+**-- IFilter**
+The IFilter interface class holds one method that allows for the general filtering of an Image.
+**-- IKernel**
+The IKernel interface represents a kernel that holds a square matrix that can be used to manipulate an image through its matrix values.
+**-- Kernel**
+The Kernel class implements IKernel. It holds general methods to get the kernel's width, height, and values, as well as a method to retrieve a value of the matrix at a specific index.
 ##ColorTransformation
 **-- AbstractColorTransformation**
--- This is an abstract class that represents the many transformations we can do on the color of an image/pixel. Includes things like greyscaling an image, visualizing the red, green, and blue components of an image, or visualizing the intensity of an image.
+This is an abstract class that represents the many transformations we can do on the color of an image/pixel. Includes things like greyscaling an image, visualizing the red, green, and blue components of an image, or visualizing the intensity of an image.
 **-- IColorTransform**
 The IColorTransform interface contains one method that applies a color transformation to an image.
 **-- IntensityChange**
--- A class that represents an intensity transformation, which just sets each pixel to the average of the three components for that pixel.
+A class that represents an intensity transformation, which just sets each pixel to the average of the three components for that pixel.
 **-- ValueChange**
--- This is a class that represents a value transformation, which sets each rgb value to the maximum value of the three components for each pixel.
+This is a class that represents a value transformation, which sets each rgb value to the maximum value of the three components for each pixel.
+**-- AbstractColorTransformationProcessor**
+This is an abstract class that represents any color transformation on an image/pixel using kernels. Includes things like image greyscale or image sepia.
+**-- GreyscaleTransformation**
+This is a class that represents a greyscale transformation, which sets matrix values for RGB components for a pixel to be transformed into its greyscale version.
+**-- SepiaTransformation**
+This is a class that represents a sepia transformation, which sets matrix values for RGB components for a pixel to be transformed into its sepia version.
 ###Greyscale
 **-- BlueGreyscale**.
--- The BlueGreyscale class represents a greyscale transformation on the blue component of an image. All RGB color values are set to the image's blue component value.
+The BlueGreyscale class represents a greyscale transformation on the blue component of an image. All RGB color values are set to the image's blue component value.
 **-- GreenGreyscale**.
--- The GreenGreyscale class represents a greyscale transformation on the green component of an image. All RGB color values are set to the image's green component value. **--RedGreyscale**.
+The GreenGreyscale class represents a greyscale transformation on the green component of an image. All RGB color values are set to the image's green component value. **--RedGreyscale**.
 **-- RedGreyscale**
--- The RedGreyscale class represents a greyscale transformation on the red component of an image. All RGB color values are set to the image's red component value.
+The RedGreyscale class represents a greyscale transformation on the red component of an image. All RGB color values are set to the image's red component value.
 **-- LumaGreyscale**
--- The LumaGreyscale class represents a luma greyscale transformation, which uses the weighted sum of 0.2126r + 0.7152g + 0.0722b to set the RGB values to greyscale the image.
+The LumaGreyscale class represents a luma greyscale transformation, which uses the weighted sum of 0.2126r + 0.7152g + 0.0722b to set the RGB values to greyscale the image.
 ##IntensityTransformation
 **-- AbstractIntensityTransformation**
--- The AbstractIntensityTransformation applies some intensity transformation on a given image and returns the transformed image.
+The AbstractIntensityTransformation applies some intensity transformation on a given image and returns the transformed image.
 **-- IIntensityTransform**
 The IIntensityTransform interface contains one method that applies an intensity transformation to an image.
 **-- BrightenTransform**
--- The BrightenTransform class represents a transformation that adds certain value to the RGB components of an image which effectively brightens the image.
+The BrightenTransform class represents a transformation that adds certain value to the RGB components of an image which effectively brightens the image.
 **-- DarkenTransform**
--- The DarkenTransform class represents a transformation that subtracts certain value to the RGB components of an image which effectively darkens the image.
+The DarkenTransform class represents a transformation that subtracts certain value to the RGB components of an image which effectively darkens the image.
 ##FlippingTransformation
 **-- IFlipTransform**
 The IFlipTransform interface contains one method that applies a translational transformation to an image.
