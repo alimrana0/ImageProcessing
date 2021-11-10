@@ -19,10 +19,10 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
   protected double[][] kernelValues;
 
   /**
-   * Creates an AbstractColorTransformation using a provided kernel.
+   * Constructs an AbstractColorTransformation using a given kernel.
    *
-   * @param kernel kernel to be applied to each pixel in an image.
-   * @throws IllegalArgumentException If the supplied kernel is not 3 x 3 or is null.
+   * @param kernel kernel being applied to the image.
+   * @throws IllegalArgumentException If the kernel is null or not 3x3.
    */
   protected AbstractColorTransformationProcessor(IKernel kernel) throws IllegalArgumentException {
     if (kernel == null) {
@@ -49,35 +49,34 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
       throw new IllegalArgumentException("Image can't be null.");
     }
     List<List<IPixel>> imagePix = iop.getPixels();
-    return new Image(applyTransform(imagePix));
+    return new Image(applyChange(imagePix));
   }
 
   /**
-   * Applies the correct transformation to an image and its pixels.
+   * Applies a color transformation to every pixel in a given image of pixels.
    *
-   * @param imagePix Pixels of the image.
-   * @return The updated pixels with the transformation applied.
+   * @param imagePix the image's pixels.
+   * @return the transformed 2D pixel array.
    */
-  protected List<ArrayList<IPixel>> applyTransform( List<List<IPixel>> imagePix) {
+  protected List<ArrayList<IPixel>> applyChange(List<List<IPixel>> imagePix) {
     List<ArrayList<IPixel>> newPixels = new ArrayList<>();
     for (List<IPixel> c : imagePix) {
-      ArrayList<IPixel> r = new ArrayList<>();
+      ArrayList<IPixel> temp = new ArrayList<>();
       for (IPixel p : c) {
-        r.add(colorTransform(p));
+        temp.add(changeColor(p));
       }
-      newPixels.add(r);
+      newPixels.add(temp);
     }
     return newPixels;
   }
 
   /**
-   * Applies the given transformation to the given pixel by updating its rgb values. Any out of
-   * range rgb value is clamped to the minimum value of 0 or the maximum value of 255.
+   * Applies the color transformation to the given pixel. Values are clamped to 0 255.
    *
-   * @param pixel Pixel to transform.
+   * @param pixel Pixel being transformed.
    * @return The transformed pixel.
    */
-  protected IPixel colorTransform(IPixel pixel) {
+  protected IPixel changeColor(IPixel pixel) {
 
     int changedRed = (int) (pixel.getColor().getRed() * this.kernelValues[0][0] 
             + pixel.getColor().getGreen() * this.kernelValues[0][1]

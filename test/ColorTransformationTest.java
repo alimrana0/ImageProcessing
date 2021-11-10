@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import filters.colortransformation.GreyscaleTransformation;
+import filters.colortransformation.SepiaTransformation;
 import filters.colortransformation.greyscale.BlueGreyscale;
 import filters.colortransformation.greyscale.GreenGreyscale;
 import filters.colortransformation.greyscale.LumaGreyscale;
@@ -126,11 +128,36 @@ public class ColorTransformationTest {
   }
 
   @Test
-  public void testGreyScaleTransformation() {
+  public void testLumaGreyScaleTransformation() {
 
     ImageOfPixel image = new Image(list2D);
 
     ImageOfPixel greyScale = new LumaGreyscale().applyColorTransformation(image);
+
+    assertEquals(greyScale.getPixels().get(0).get(0).getColor().getRed(), 54);
+    assertEquals(greyScale.getPixels().get(0).get(0).getColor().getGreen(), 54);
+    assertEquals(greyScale.getPixels().get(0).get(0).getColor().getBlue(), 54);
+
+    assertEquals(greyScale.getPixels().get(0).get(1).getColor().getRed(), 182);
+    assertEquals(greyScale.getPixels().get(0).get(1).getColor().getGreen(), 182);
+    assertEquals(greyScale.getPixels().get(0).get(1).getColor().getBlue(), 182);
+
+    assertEquals(greyScale.getPixels().get(1).get(0).getColor().getRed(), 18);
+    assertEquals(greyScale.getPixels().get(1).get(0).getColor().getGreen(), 18);
+    assertEquals(greyScale.getPixels().get(1).get(0).getColor().getBlue(), 18);
+
+    assertEquals(greyScale.getPixels().get(1).get(1).getColor().getRed(), 254);
+    assertEquals(greyScale.getPixels().get(1).get(1).getColor().getGreen(), 254);
+    assertEquals(greyScale.getPixels().get(1).get(1).getColor().getBlue(), 254);
+
+  }
+
+  @Test
+  public void testGreyScaleTransformation() {
+
+    ImageOfPixel image = new Image(list2D);
+
+    ImageOfPixel greyScale = new GreyscaleTransformation().transform(image);
 
     assertEquals(greyScale.getPixels().get(0).get(0).getColor().getRed(), 54);
     assertEquals(greyScale.getPixels().get(0).get(0).getColor().getGreen(), 54);
@@ -204,6 +231,29 @@ public class ColorTransformationTest {
     assertEquals(valueImage.getPixels().get(1).get(1).getColor().getGreen(), 255);
     assertEquals(valueImage.getPixels().get(1).get(1).getColor().getBlue(), 255);
 
+  }
+
+  @Test
+  public void testSepiaTransformation() {
+    ImageOfPixel image = new Image(list2D);
+
+    ImageOfPixel sepiaImage = new SepiaTransformation().transform(image);
+
+    assertEquals(sepiaImage.getPixels().get(0).get(0).getColor().getRed(), 100);
+    assertEquals(sepiaImage.getPixels().get(0).get(0).getColor().getGreen(), 88);
+    assertEquals(sepiaImage.getPixels().get(0).get(0).getColor().getBlue(), 69);
+
+    assertEquals(sepiaImage.getPixels().get(0).get(1).getColor().getRed(), 196);
+    assertEquals(sepiaImage.getPixels().get(0).get(1).getColor().getGreen(), 174);
+    assertEquals(sepiaImage.getPixels().get(0).get(1).getColor().getBlue(), 136);
+
+    assertEquals(sepiaImage.getPixels().get(1).get(0).getColor().getRed(), 48);
+    assertEquals(sepiaImage.getPixels().get(1).get(0).getColor().getGreen(), 42);
+    assertEquals(sepiaImage.getPixels().get(1).get(0).getColor().getBlue(), 33);
+
+    assertEquals(sepiaImage.getPixels().get(1).get(1).getColor().getRed(), 255);
+    assertEquals(sepiaImage.getPixels().get(1).get(1).getColor().getGreen(), 255);
+    assertEquals(sepiaImage.getPixels().get(1).get(1).getColor().getBlue(), 238);
   }
 
 

@@ -1,6 +1,5 @@
 package filters;
 
-import java.util.List;
 
 /**
  * Class representing a Filters.Kernel which is used to calculate the new color of a pixel for a
@@ -48,9 +47,9 @@ public class Kernel implements IKernel {
   }
 
   @Override
-  public final double[][] getValues() {
-    return values;
-  }
+  public final double[][] getValues() { return values;}
+
+
 
   @Override
   public final double getValueAt(int x, int y) {
