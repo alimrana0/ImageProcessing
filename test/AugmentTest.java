@@ -44,6 +44,7 @@ public class AugmentTest {
     list2D.add(temp2);
 
   }
+
   @Test
   public void testBlurFilter() {
     ImageOfPixel image = new Image(list2D);

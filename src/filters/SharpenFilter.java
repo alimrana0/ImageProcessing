@@ -6,8 +6,8 @@ package filters;
 public class SharpenFilter extends AbstractImageProcessing {
 
   /**
-   * Constructor for a sharpening transformation with a matrix of values that will allow for a pixel to be
-   * sharpened.
+   * Constructor for a sharpening transformation with a matrix of values that will allow for a pixel
+   * to be sharpened.
    */
   public SharpenFilter() {
 

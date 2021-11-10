@@ -45,7 +45,9 @@ public class Kernel implements IKernel {
   }
 
   @Override
-  public final double[][] getValues() { return values;}
+  public final double[][] getValues() {
+    return values;
+  }
 
   @Override
   public final double getValueAt(int x, int y) {
