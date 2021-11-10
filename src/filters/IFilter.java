@@ -3,17 +3,16 @@ package filters;
 import model.imaging.ImageOfPixel;
 
 /**
- * Represents some type of transformation that can be done on a PixelImage. Includes things such as
- * grayscale, brightening, darkening, etc.
+ * Interface to represent a filter that can be applied on an image.
  */
 public interface IFilter {
 
   /**
-   * Performs some transformation on the given image.
+   * Transforms the given image by using some filter.
    *
-   * @param image The image to be manipulated.
-   * @return The transformed image.
-   * @throws IllegalArgumentException If the provided image is null.
+   * @param image The image being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If image is null.
    */
   ImageOfPixel transform(ImageOfPixel image) throws IllegalArgumentException;
 }

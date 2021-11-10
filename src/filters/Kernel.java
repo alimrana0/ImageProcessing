@@ -2,8 +2,7 @@ package filters;
 
 
 /**
- * Class representing a Filters.Kernel which is used to calculate the new color of a pixel for a
- * given image.
+ * Class a kernel which may be used for image processing.
  */
 public class Kernel implements IKernel {
 
@@ -12,16 +11,15 @@ public class Kernel implements IKernel {
   private double[][] values;
 
   /**
-   * Constructor for the Kerenel class that implements the Filters.IKernel. Initializes the width,
-   * height, and values of the Filters.Kernel.
+   * Constructs a kernel of given width, height, and matrix values.
    *
-   * @param width  int representing how wide the kernel 2D array is
-   * @param height int representing how tall the kerenl 2D array is
-   * @param values List of List of Doubles representing the values in the kernel
+   * @param width  width of the 2D kernel array
+   * @param height height of the 2D kernel array
+   * @param values List of List of Doubles representing the values of the kernel
    */
   public Kernel(int width, int height, double[][] values) {
     if (width == 0 || height == 0 || values == null || values.length == 0) {
-      throw new IllegalArgumentException("Invalid Filters.Kernel");
+      throw new IllegalArgumentException("Invalid Kernel");
     }
 
     this.width = width;
@@ -48,8 +46,6 @@ public class Kernel implements IKernel {
 
   @Override
   public final double[][] getValues() { return values;}
-
-
 
   @Override
   public final double getValueAt(int x, int y) {

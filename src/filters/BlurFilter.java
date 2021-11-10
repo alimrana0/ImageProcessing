@@ -1,13 +1,13 @@
 package filters;
 
 /**
- * Class that represents the blurring of an image.
+ * Class to represent a blur filter on an image.
  */
 public class BlurFilter extends AbstractImageProcessing {
 
   /**
-   * Creates an instance of the blur filter using a matrix that performs a linear transformation on
-   * the RGB values of the pixels in order to blur the image.
+   * Constructor for a blur transformation with a matrix of values that will allow for a pixel to be
+   * blurred.
    */
   public BlurFilter() {
 

@@ -12,27 +12,25 @@ import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
 
 /**
- * A class to represent a filter on an image. The filter is applied using the given kernel.
- * kernel must be square with odd dimensions. 1x1, 3x3, 5x5, etc. Uses a kernel to apply a
- * filter to an image.
+ * An abstract class to allow for a filter to be used on an image using a given kernel (must be
+ * of odd dimensions).
  */
 public abstract class AbstractImageProcessing implements IFilter {
 
   protected final IKernel kernel;
 
   /**
-   * Creates and instance of the abstract filter with the given kernel.
+   * Constructs an abstract filter with a given kernel.
    *
-   * @param kernel kernel to be associated with the filter.
-   * @throws IllegalArgumentException If th kernel is null, it does not have odd dimensions, or it
-   *                                  is not square.
+   * @param kernel kernel being used for filtering.
+   * @throws IllegalArgumentException If kernel is null, not square, or not of odd dimensions.
    */
   protected AbstractImageProcessing(IKernel kernel) throws IllegalArgumentException {
     if (kernel == null) {
-      throw new IllegalArgumentException("Argument cannot be null.");
+      throw new IllegalArgumentException("Argument can't be null.");
     }
     if (kernel.getHeight() % 2 == 0 || kernel.getWidth() % 2 == 0) {
-      throw new IllegalArgumentException("Dimensions of kernel must be odd.");
+      throw new IllegalArgumentException("Kernel dimensions must be odd");
     }
     this.kernel = kernel;
   }
@@ -40,7 +38,7 @@ public abstract class AbstractImageProcessing implements IFilter {
   @Override
   public ImageOfPixel transform(ImageOfPixel image) throws IllegalArgumentException {
     if (image == null) {
-      throw new IllegalArgumentException("Image cannot be null.");
+      throw new IllegalArgumentException("Image can't be null.");
     }
     List<List<IPixel>> imagePixels = image.getPixels();
 
@@ -48,11 +46,11 @@ public abstract class AbstractImageProcessing implements IFilter {
   }
 
   /**
-   * Returns the pixels of the image after the filter has been applied.
+   * Returns the filtered 2D array of pixels of the image.
    *
-   * @param pixels Pixels of the image to be filtered.
-   * @param image  Image to be filtered.
-   * @return The filtered pixels.
+   * @param pixels Pixels of the image being filtered.
+   * @param image  Image being filtered.
+   * @return The filtered 2D pixel array.
    */
   protected List<ArrayList<IPixel>> filtered(List<List<IPixel>> pixels,
                                              ImageOfPixel image) {
@@ -70,11 +68,11 @@ public abstract class AbstractImageProcessing implements IFilter {
   }
 
   /**
-   * Applies the filter to the given pixel using the filter's kernel. RGB values are clamped at a
-   * max of 255 and a min of 0.
+   * Applies a transformation to a given pixel by use of the given kernel. Values are clamped to 0
+   * or 255.
    *
-   * @param pixel Pixel to be filtered.
-   * @param image Original image.
+   * @param pixel pixel being filtered.
+   * @param image image being filtered.
    * @return The filtered pixel
    */
   protected IPixel filter(IPixel pixel, ImageOfPixel image) {

@@ -3,13 +3,13 @@ package filters.colortransformation;
 import filters.Kernel;
 
 /**
- * Represents a sepia transformation that can be performed on an image that is stored as pixels.
+ * Class to represent a sepia transformation on a pixel.
  */
 public class SepiaTransformation extends AbstractColorTransformationProcessor {
 
   /**
-   * Constructs a new SepiaTransformation, with the transformation matrix being set to the correct
-   * values such that the pixel can be transformed into a sepia color.
+   * Constructor for a sepia transformation with values that will allow for a pixel to be
+   * sepia transformed.
    */
   public SepiaTransformation() {
 

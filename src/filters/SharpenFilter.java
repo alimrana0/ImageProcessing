@@ -1,12 +1,13 @@
 package filters;
 
 /**
- * A class that represents the sharpening of an image.
+ * Class to represent a sharpening filter on an image.
  */
 public class SharpenFilter extends AbstractImageProcessing {
 
   /**
-   * Creates an instance of a sharpen filter using the associated matrix for sharpening.
+   * Constructor for a sharpening transformation with a matrix of values that will allow for a pixel to be
+   * sharpened.
    */
   public SharpenFilter() {
 

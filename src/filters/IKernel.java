@@ -1,21 +1,21 @@
 package filters;
 
 /**
- * Interface representing a kernel which is used to calculate Image Processing filters.
+ * Interface representing a kernel which is used for image filters.
  */
 public interface IKernel {
 
   /**
-   * Method that returns the height (number of List in the List) of the 2D Array.
+   * Returns the height (number of rows) of the kernel.
    *
-   * @return int representing the height of the array
+   * @return integer representing the height of the array
    */
   int getHeight();
 
   /**
-   * Method that returns the width (number of Integers in the List) of the 2D Array.
+   * Returns the width (length of row) of the kernel.
    *
-   * @return int representing the width of the array
+   * @return integer representing the width of the array
    */
   int getWidth();
 
@@ -27,11 +27,10 @@ public interface IKernel {
   double[][] getValues();
 
   /**
-   * Returns the value at a specific x or y of a given 2D Array.
+   * Returns the matrix value at an x and y index of the kernel.
    *
-   * @param x int representing the width of the array starting at 0
-   * @param y int representing the height of the array starting at 0
-   * @return int representing the value at the specific coordinate
+   * @param x index of the array representing the row
+   * @param y index of the array representing the column
    */
   double getValueAt(int x, int y);
 }

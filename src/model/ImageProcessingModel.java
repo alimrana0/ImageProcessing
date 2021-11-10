@@ -223,7 +223,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
   @Override
   public ImageOfPixel greyscale() {
     if (image == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new GreyscaleTransformation().transform(this.image);
   }

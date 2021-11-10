@@ -14,6 +14,9 @@ import model.imaging.pixel.Pixel;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for general ImageProcessing filters.
+ */
 public class AugmentTest {
 
   Color red = new Color(255, 0, 0);
@@ -42,47 +45,47 @@ public class AugmentTest {
 
   }
   @Test
-  public void testBlurTransformation() {
+  public void testBlurFilter() {
     ImageOfPixel image = new Image(list2D);
-    ImageOfPixel blurImage = new BlurFilter().transform(image);
+    ImageOfPixel blurredImage = new BlurFilter().transform(image);
 
-    assertEquals(blurImage.getPixels().get(0).get(0).getColor().getRed(), 78);
-    assertEquals(blurImage.getPixels().get(0).get(0).getColor().getGreen(), 46);
-    assertEquals(blurImage.getPixels().get(0).get(0).getColor().getBlue(), 46);
+    assertEquals(blurredImage.getPixels().get(0).get(0).getColor().getRed(), 78);
+    assertEquals(blurredImage.getPixels().get(0).get(0).getColor().getGreen(), 46);
+    assertEquals(blurredImage.getPixels().get(0).get(0).getColor().getBlue(), 46);
 
-    assertEquals(blurImage.getPixels().get(0).get(1).getColor().getRed(), 62);
-    assertEquals(blurImage.getPixels().get(0).get(1).getColor().getGreen(), 46);
-    assertEquals(blurImage.getPixels().get(0).get(1).getColor().getBlue(), 94);
+    assertEquals(blurredImage.getPixels().get(0).get(1).getColor().getRed(), 62);
+    assertEquals(blurredImage.getPixels().get(0).get(1).getColor().getGreen(), 46);
+    assertEquals(blurredImage.getPixels().get(0).get(1).getColor().getBlue(), 94);
 
-    assertEquals(blurImage.getPixels().get(1).get(0).getColor().getRed(), 62);
-    assertEquals(blurImage.getPixels().get(1).get(0).getColor().getGreen(), 94);
-    assertEquals(blurImage.getPixels().get(1).get(0).getColor().getBlue(), 46);
+    assertEquals(blurredImage.getPixels().get(1).get(0).getColor().getRed(), 62);
+    assertEquals(blurredImage.getPixels().get(1).get(0).getColor().getGreen(), 94);
+    assertEquals(blurredImage.getPixels().get(1).get(0).getColor().getBlue(), 46);
 
-    assertEquals(blurImage.getPixels().get(1).get(1).getColor().getRed(), 78);
-    assertEquals(blurImage.getPixels().get(1).get(1).getColor().getGreen(), 94);
-    assertEquals(blurImage.getPixels().get(1).get(1).getColor().getBlue(), 94);
+    assertEquals(blurredImage.getPixels().get(1).get(1).getColor().getRed(), 78);
+    assertEquals(blurredImage.getPixels().get(1).get(1).getColor().getGreen(), 94);
+    assertEquals(blurredImage.getPixels().get(1).get(1).getColor().getBlue(), 94);
   }
 
   @Test
-  public void testSharpenTransformation() {
+  public void testSharpenFilter() {
     ImageOfPixel image = new Image(list2D);
-    ImageOfPixel sharpenImage = new SharpenFilter().transform(image);
+    ImageOfPixel sharpenedImage = new SharpenFilter().transform(image);
 
-    assertEquals(sharpenImage.getPixels().get(0).get(0).getColor().getRed(), 255);
-    assertEquals(sharpenImage.getPixels().get(0).get(0).getColor().getGreen(), 126);
-    assertEquals(sharpenImage.getPixels().get(0).get(0).getColor().getBlue(), 126);
+    assertEquals(sharpenedImage.getPixels().get(0).get(0).getColor().getRed(), 255);
+    assertEquals(sharpenedImage.getPixels().get(0).get(0).getColor().getGreen(), 126);
+    assertEquals(sharpenedImage.getPixels().get(0).get(0).getColor().getBlue(), 126);
 
-    assertEquals(sharpenImage.getPixels().get(0).get(1).getColor().getRed(), 126);
-    assertEquals(sharpenImage.getPixels().get(0).get(1).getColor().getGreen(), 126);
-    assertEquals(sharpenImage.getPixels().get(0).get(1).getColor().getBlue(), 255);
+    assertEquals(sharpenedImage.getPixels().get(0).get(1).getColor().getRed(), 126);
+    assertEquals(sharpenedImage.getPixels().get(0).get(1).getColor().getGreen(), 126);
+    assertEquals(sharpenedImage.getPixels().get(0).get(1).getColor().getBlue(), 255);
 
-    assertEquals(sharpenImage.getPixels().get(1).get(0).getColor().getRed(), 126);
-    assertEquals(sharpenImage.getPixels().get(1).get(0).getColor().getGreen(), 255);
-    assertEquals(sharpenImage.getPixels().get(1).get(0).getColor().getBlue(), 126);
+    assertEquals(sharpenedImage.getPixels().get(1).get(0).getColor().getRed(), 126);
+    assertEquals(sharpenedImage.getPixels().get(1).get(0).getColor().getGreen(), 255);
+    assertEquals(sharpenedImage.getPixels().get(1).get(0).getColor().getBlue(), 126);
 
-    assertEquals(sharpenImage.getPixels().get(1).get(1).getColor().getRed(), 255);
-    assertEquals(sharpenImage.getPixels().get(1).get(1).getColor().getGreen(), 255);
-    assertEquals(sharpenImage.getPixels().get(1).get(1).getColor().getBlue(), 255);
+    assertEquals(sharpenedImage.getPixels().get(1).get(1).getColor().getRed(), 255);
+    assertEquals(sharpenedImage.getPixels().get(1).get(1).getColor().getGreen(), 255);
+    assertEquals(sharpenedImage.getPixels().get(1).get(1).getColor().getBlue(), 255);
 
   }
 }
