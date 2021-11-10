@@ -15,5 +15,5 @@ public interface IFilter {
    * @return The transformed image.
    * @throws IllegalArgumentException If the provided image is null.
    */
-   ImageOfPixel transform(ImageOfPixel image) throws IllegalArgumentException;
+  ImageOfPixel transform(ImageOfPixel image) throws IllegalArgumentException;
 }

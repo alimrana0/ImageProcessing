@@ -1,6 +1,5 @@
 package filters;
 
-import java.util.List;
 
 /**
  * Class representing a Filters.Kernel which is used to calculate the new color of a pixel for a

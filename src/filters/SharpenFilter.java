@@ -1,5 +1,8 @@
 package filters;
 
+/**
+ * A class that represents the sharpening of an image.
+ */
 public class SharpenFilter extends AbstractImageProcessing {
 
   /**
@@ -7,11 +10,10 @@ public class SharpenFilter extends AbstractImageProcessing {
    */
   public SharpenFilter() {
 
-
-    super(new Kernel(5,5, new double[][]{{-0.125, -0.125, -0.125, -0.125, -0.125},
-                                                     {-0.125, 0.25, 0.25, 0.25, -0.125},
-                                                     {-0.125, 0.25, 1, 0.25, -0.12},
-                                                     {-0.125, 0.25, 0.25, 0.25, -0.125},
-                                                     {-0.125, -0.125, -0.125, -0.125, -0.125}}));
+    super(new Kernel(5, 5, new double[][]{{-0.125, -0.125, -0.125, -0.125, -0.125},
+        {-0.125, 0.25, 0.25, 0.25, -0.125},
+        {-0.125, 0.25, 1, 0.25, -0.12},
+        {-0.125, 0.25, 0.25, 0.25, -0.125},
+        {-0.125, -0.125, -0.125, -0.125, -0.125}}));
   }
 }

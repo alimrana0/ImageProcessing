@@ -13,6 +13,10 @@ import model.imaging.pixel.Pixel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents an abstracted version of a transformation processor in order to be extended by any
+ * transformation.
+ */
 public abstract class AbstractColorTransformationProcessor implements IFilter {
 
   protected IKernel kernel;
@@ -28,7 +32,7 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
     if (kernel == null) {
       throw new IllegalArgumentException("Kernel can't be null");
     }
-    if (kernel.getHeight() != 3 || kernel.getWidth()!= 3) {
+    if (kernel.getHeight() != 3 || kernel.getWidth() != 3) {
       throw new IllegalArgumentException("Kernel must be 3 x 3.");
     }
     this.kernel = kernel;
@@ -58,7 +62,7 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
    * @param imagePix Pixels of the image.
    * @return The updated pixels with the transformation applied.
    */
-  protected List<ArrayList<IPixel>> applyTransform( List<List<IPixel>> imagePix) {
+  protected List<ArrayList<IPixel>> applyTransform(List<List<IPixel>> imagePix) {
     List<ArrayList<IPixel>> newPixels = new ArrayList<>();
     for (List<IPixel> c : imagePix) {
       ArrayList<IPixel> r = new ArrayList<>();
@@ -79,22 +83,22 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
    */
   protected IPixel colorTransform(IPixel pixel) {
 
-    int changedRed = (int) (pixel.getColor().getRed() * this.kernelValues[0][0] 
-            + pixel.getColor().getGreen() * this.kernelValues[0][1]
-            + pixel.getColor().getBlue() * this.kernelValues[0][2]);
-    int changedGreen = (int) (pixel.getColor().getRed() * this.kernelValues[1][0] 
-            + pixel.getColor().getGreen() * this.kernelValues[1][1]
-            + pixel.getColor().getBlue() * this.kernelValues[1][2]);
-    int changedBlue = (int) (pixel.getColor().getRed() * this.kernelValues[2][0] 
-            + pixel.getColor().getGreen() * this.kernelValues[2][1]
-            + pixel.getColor().getBlue() * this.kernelValues[2][2]);
+    int changedRed = (int) (pixel.getColor().getRed() * this.kernelValues[0][0]
+        + pixel.getColor().getGreen() * this.kernelValues[0][1]
+        + pixel.getColor().getBlue() * this.kernelValues[0][2]);
+    int changedGreen = (int) (pixel.getColor().getRed() * this.kernelValues[1][0]
+        + pixel.getColor().getGreen() * this.kernelValues[1][1]
+        + pixel.getColor().getBlue() * this.kernelValues[1][2]);
+    int changedBlue = (int) (pixel.getColor().getRed() * this.kernelValues[2][0]
+        + pixel.getColor().getGreen() * this.kernelValues[2][1]
+        + pixel.getColor().getBlue() * this.kernelValues[2][2]);
 
     changedRed = FilterClamp.clamp(changedRed);
     changedGreen = FilterClamp.clamp(changedGreen);
     changedBlue = FilterClamp.clamp(changedBlue);
 
     return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
-            changedGreen, changedBlue));
+        changedGreen, changedBlue));
 
   }
 
