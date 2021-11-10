@@ -145,7 +145,12 @@ public class ImageUtil {
   }
 
 
-  //can't be used for ppm
+  /**
+   * Static method that retrieves the pixels in a list of an image under the filename.
+   *
+   * @param pathname name of the file. The file cannot be a PPM file.
+   * @return A 2D list of pixels representing this image file.
+   */
   public static List readImage(String pathname) {
 
     BufferedImage img = null;
@@ -171,7 +176,7 @@ public class ImageUtil {
         r = (rgb >> 16) & 0xFF;
         g = (rgb >> 8) & 0xFF;
         b = rgb & 0xFF;
-     //   System.out.println(b);
+        //   System.out.println(b);
         Color color = new Color(r, g, b);
         temp.add(new Pixel(new Posn(j, i), color));
       }

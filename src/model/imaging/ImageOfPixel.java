@@ -12,6 +12,7 @@ public interface ImageOfPixel {
 
   /**
    * Gets the 2D list of pixels of this pixel image.
+   *
    * @return
    */
   List<List<IPixel>> getPixels();
@@ -25,11 +26,11 @@ public interface ImageOfPixel {
   void saveImageAsPPM(String filename) throws IOException;
 
   /**
-   * Saves an image as a common file type based on the extension of the output name.
-   * If the extension is not a valid file type nothing happens.
+   * Saves an image as a common file type based on the extension of the output name. If the
+   * extension is not a valid file type nothing happens.
    *
    * @param outputName The name of the file including its extension (example.jpg).
-   * @throws IOException
+   * @throws IOException Thrown if the file output stream does not funciton correctly.
    */
   void saveImageAs(String outputName) throws IOException;
 }
