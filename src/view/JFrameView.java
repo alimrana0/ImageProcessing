@@ -48,6 +48,9 @@ public class JFrameView extends JFrame implements IGUI {
     setTitle("Image Processing Program");
     setSize(600, 600);
 
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
     mainPanel = new JPanel();
     //for elements to be arranged vertically within this panel
     mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));

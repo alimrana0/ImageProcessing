@@ -24,6 +24,7 @@ after every operation a png is made and displayed
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    System.out.println("ACTION PERFORMED");
 
     // TODO Auto-generated method stub
     switch (e.getActionCommand()) {
