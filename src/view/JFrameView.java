@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -74,7 +75,7 @@ public class JFrameView extends JFrame implements IGUI {
     dialogBoxesPanel.add(fileopenPanel);
     JButton fileOpenButton = new JButton("Open a file");
     fileOpenButton.setActionCommand("Open file");
-    fileOpenButton.addActionListener(evt -> this.features.load("s"));
+    fileOpenButton.addActionListener((ActionListener) this.features);
     fileopenPanel.add(fileOpenButton);
     fileOpenDisplay = new JLabel("File path will appear here");
     fileopenPanel.add(fileOpenDisplay);
@@ -100,33 +101,26 @@ public class JFrameView extends JFrame implements IGUI {
 
   @Override
   public void addFeatures(IFeatures features) {
-
+    this.features = features;
   }
 
   @Override
-  public void actionPerformed(ActionEvent arg0) {
-
-  }
-
-/*
-  @Override
-  public void actionPerformed(ActionEvent arg0) {
-    // TODO Auto-generated method stub
-    switch (arg0.getActionCommand()) {
-      case "Open file": {
-        final JFileChooser fchooser = new JFileChooser(".");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "JPG, BMP, and PNG Images", "jpg", "bmp", "png");
-        fchooser.setFileFilter(filter);
-        int retvalue = fchooser.showOpenDialog(SwingFeaturesFrame.this);
-        if (retvalue == JFileChooser.APPROVE_OPTION) {
-          File f = fchooser.getSelectedFile();
-          this.features.load(f.getPath());
-          fileOpenDisplay.setText(f.getAbsolutePath());
-        }
-      }
+  public String getFile() {
+    System.out.println("HERE");
+    final JFileChooser fchooser = new JFileChooser(".");
+    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+        "JPG, BMP, and PNG Images", "jpg", "bmp", "png");
+    fchooser.setFileFilter(filter);
+    int retvalue = fchooser.showOpenDialog(this);
+    if (retvalue == JFileChooser.APPROVE_OPTION) {
+      File f = fchooser.getSelectedFile();
+      fileOpenDisplay.setText(f.getAbsolutePath());
+      return f.getPath();
     }
+    else {
+      return null;
   }
+}
 
- */
+
 }

@@ -25,6 +25,7 @@ public interface IGUI {
 
   /**
    * Displays a message to the user running the image processing program.
+   *
    * @param message The string to show the user.
    */
   public void displayPopUp(String message);
@@ -32,6 +33,12 @@ public interface IGUI {
 
   void addFeatures(IFeatures features);
 
-  public void actionPerformed(ActionEvent arg0);
+  /**
+   * Returns the filepath of the file that the user selected. If the user selects the wrong file
+   * type, in this case something that is not a basic image type, this method returns null.
+   *
+   * @return The string of the filepath for the file selected.
+   */
+  public String getFile();
 
-  }
+}

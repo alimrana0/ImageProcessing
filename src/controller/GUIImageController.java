@@ -1,14 +1,39 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import model.ImageProcessingSession;
 import view.IGUI;
+import view.JFrameView;
 
-public class GUIImageController implements IFeatures{
+public class GUIImageController implements IFeatures, ActionListener {
+
   private ImageProcessingSession model;
   private IGUI view;
 
-  public GUIImageController (ImageProcessingSession model, IGUI view) {
+  public GUIImageController(ImageProcessingSession model, IGUI view) {
+    this.model = model;
+    this.view = view;
+    this.view.addFeatures(this);
+  }
 
+/*
+Image is loaded in and converted to pixels, the image is displayed,
+after every operation a png is made and displayed
+ */
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+
+    // TODO Auto-generated method stub
+    switch (e.getActionCommand()) {
+      case "Open file":
+        String filename = this.view.getFile();
+        if (!filename.equals(null)) {
+          this.load(filename);
+        }
+        break;
+    }
   }
 
   @Override
@@ -65,6 +90,7 @@ public class GUIImageController implements IFeatures{
   public void darken(Integer value) {
 
   }
+}
 
 //model view
 
@@ -85,4 +111,3 @@ public class GUIImageController implements IFeatures{
 
    */
 
-}
