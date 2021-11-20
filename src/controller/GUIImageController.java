@@ -6,7 +6,7 @@ import model.ImageProcessingSession;
 import view.IGUI;
 import view.JFrameView;
 
-public class GUIImageController implements IFeatures, ActionListener {
+public class GUIImageController implements ActionListener, IFeatures  {
 
   private ImageProcessingSession model;
   private IGUI view;
@@ -14,8 +14,10 @@ public class GUIImageController implements IFeatures, ActionListener {
   public GUIImageController(ImageProcessingSession model, IGUI view) {
     this.model = model;
     this.view = view;
-    this.view.addFeatures(this);
+    //this.view.addFeatures(this);
+
   }
+
 
 /*
 Image is loaded in and converted to pixels, the image is displayed,
@@ -34,6 +36,9 @@ after every operation a png is made and displayed
           this.load(filename);
         }
         break;
+
+      default:
+        System.out.println("HERE");
     }
   }
 
@@ -91,6 +96,7 @@ after every operation a png is made and displayed
   public void darken(Integer value) {
 
   }
+
 }
 
 //model view

@@ -22,10 +22,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class JFrameView extends JFrame implements IGUI {
 
-  private IFeatures features;
+  private ActionListener features;
   private JPanel mainPanel;
   private JScrollPane mainScrollPane;
   private JPanel dialogBoxesPanel;
+
+  private JLabel fileSaveDisplay;
 
   private JLabel fileOpenDisplay;
 
@@ -48,7 +50,6 @@ public class JFrameView extends JFrame implements IGUI {
     setTitle("Image Processing Program");
     setSize(600, 600);
 
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
     mainPanel = new JPanel();
@@ -64,13 +65,6 @@ public class JFrameView extends JFrame implements IGUI {
     dialogBoxesPanel.setLayout(new BoxLayout(dialogBoxesPanel, BoxLayout.PAGE_AXIS));
     mainPanel.add(dialogBoxesPanel);
 
-    //show an image with a scrollbar
-    JPanel imagePanel = new JPanel();
-    //a border around the panel with a caption
-    imagePanel.setBorder(BorderFactory.createTitledBorder("Showing an image"));
-    imagePanel.setLayout(new GridLayout(1, 0, 10, 10));
-    //imagePanel.setMaximumSize(null);
-    mainPanel.add(imagePanel);
 
     //file open
     JPanel fileopenPanel = new JPanel();
@@ -78,12 +72,25 @@ public class JFrameView extends JFrame implements IGUI {
     dialogBoxesPanel.add(fileopenPanel);
     JButton fileOpenButton = new JButton("Open a file");
     fileOpenButton.setActionCommand("Open file");
-    fileOpenButton.addActionListener((ActionListener) this.features);
+    fileOpenButton.addActionListener(this.features);
     fileopenPanel.add(fileOpenButton);
     fileOpenDisplay = new JLabel("File path will appear here");
     fileopenPanel.add(fileOpenDisplay);
 
+
+    //file save
+    JPanel filesavePanel = new JPanel();
+    filesavePanel.setLayout(new FlowLayout());
+    dialogBoxesPanel.add(filesavePanel);
+    JButton fileSaveButton = new JButton("Save a file");
+    fileSaveButton.setActionCommand("Save file");
+    fileSaveButton.addActionListener(this.features);
+    filesavePanel.add(fileSaveButton);
+    fileSaveDisplay = new JLabel("File path will appear here");
+    filesavePanel.add(fileSaveDisplay);
+
     pack();
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
   }
 
@@ -103,7 +110,7 @@ public class JFrameView extends JFrame implements IGUI {
   }
 
   @Override
-  public void addFeatures(IFeatures features) {
+  public void addFeatures(ActionListener features) {
     this.features = features;
   }
 
@@ -124,6 +131,7 @@ public class JFrameView extends JFrame implements IGUI {
       return null;
   }
 }
+
 
 
 }

@@ -2,6 +2,7 @@ package view;
 
 import controller.IFeatures;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public interface IGUI {
 
@@ -31,7 +32,7 @@ public interface IGUI {
   public void displayPopUp(String message);
 
 
-  void addFeatures(IFeatures features);
+  void addFeatures(ActionListener features);
 
   /**
    * Returns the filepath of the file that the user selected. If the user selects the wrong file
