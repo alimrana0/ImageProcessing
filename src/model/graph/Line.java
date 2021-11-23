@@ -24,11 +24,6 @@ public final class Line {
   }
 
   @Override
-  public String toString() {
-    return String.format("%s--%s", this.start.toString(), this.end.toString());
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;

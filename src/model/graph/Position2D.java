@@ -33,10 +33,6 @@ public final class Position2D {
     this(v.x, v.y);
   }
 
-  @Override
-  public String toString() {
-    return String.format("(%f, %f)", this.x, this.y);
-  }
 
   @Override
   public boolean equals(Object a) {
