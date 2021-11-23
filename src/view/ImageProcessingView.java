@@ -58,7 +58,6 @@ public class ImageProcessingView implements IImageProcessingView {
    * Shows the options that a client has for use.
    * @throws IOException if the option menu message fails to transmit to the data destination.
    */
-  @Override
   public void showOptions() throws IOException {
     String options = "Commands:"
             + "\nload filepath name"

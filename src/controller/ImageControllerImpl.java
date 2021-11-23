@@ -53,8 +53,7 @@ public class ImageControllerImpl implements ImageController {
   public void run() throws IOException {
     boolean quit = false;
 
-    //tell view to show options
-    view.showOptions();
+
 
     while (!quit) {
 
