@@ -1,12 +1,13 @@
 package view;
 
 import controller.IFeatures;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,31 +19,20 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import model.imaging.Color;
+import model.imaging.IColor;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
+import view.graph.GraphPanel;
 
 public class JFrameView extends JFrame implements IGUI {
 
-  private ActionListener features;
   private JPanel mainPanel;
   private JScrollPane mainScrollPane;
-  private JPanel dialogBoxesPanel;
 
-  private JLabel fileSaveDisplay;
-
-  private JLabel fileOpenDisplay;
-
-
-  //TODO ADD GET COMPONENT BUTTONS
-  private JButton loadButton;
-  private JButton saveButton;
-  private JButton blurButton;
-  private JButton sharpenButton;
-  private JButton greyscaleButton;
-  private JButton sepiaButton;
-  private JButton horizontalFlipButton;
-  private JButton verticalFlipButton;
-  private JButton brightenButton;
-  private JButton darkenButton;
 
 
   public JFrameView() {
@@ -59,37 +49,43 @@ public class JFrameView extends JFrame implements IGUI {
     mainScrollPane = new JScrollPane(mainPanel);
     add(mainScrollPane);
 
-    //dialog boxes
-    dialogBoxesPanel = new JPanel();
-    dialogBoxesPanel.setBorder(BorderFactory.createTitledBorder("Dialog boxes"));
-    dialogBoxesPanel.setLayout(new BoxLayout(dialogBoxesPanel, BoxLayout.PAGE_AXIS));
-    mainPanel.add(dialogBoxesPanel);
 
+    List<List<IPixel>> listPixels = new ArrayList<>();
+    for(int i = 0; i <256; i++) {
+      ArrayList<IPixel> pixels = new ArrayList<>();
+      IColor test = new model.imaging.Color(i, 0, 0);
+      IColor test1 = new model.imaging.Color(i, i, 0);
+      IColor test2 = new model.imaging.Color(i, i, i);
 
-    //file open
-    JPanel fileopenPanel = new JPanel();
-    fileopenPanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(fileopenPanel);
-    JButton fileOpenButton = new JButton("Open a file");
-    fileOpenButton.setActionCommand("Open file");
-    fileOpenButton.addActionListener(this.features);
-    fileopenPanel.add(fileOpenButton);
-    fileOpenDisplay = new JLabel("File path will appear here");
-    fileopenPanel.add(fileOpenDisplay);
+      IPixel pixel1 = new Pixel(new Posn(0, 0), test);
+      IPixel pixel2 = new Pixel(new Posn(0, 0), test1);
+      IPixel pixel3 = new Pixel(new Posn(0, 0), test2);
+      pixels.add(pixel1);
+      pixels.add(pixel2);
+      pixels.add(pixel3);
+      listPixels.add(pixels);
+    }
+    for(int i = 0; i <600; i++) {
+      ArrayList<IPixel> pixels = new ArrayList<>();
+      IColor test = new model.imaging.Color(200, 0, 0);
 
+      IPixel pixel1 = new Pixel(new Posn(0, 0), test);
+      pixels.add(pixel1);
+      listPixels.add(pixels);
+    }
+    for(int i = 0; i <600; i++) {
+      ArrayList<IPixel> pixels = new ArrayList<>();
+      IColor test = new model.imaging.Color(0, 100, 0);
 
-    //file save
-    JPanel filesavePanel = new JPanel();
-    filesavePanel.setLayout(new FlowLayout());
-    dialogBoxesPanel.add(filesavePanel);
-    JButton fileSaveButton = new JButton("Save a file");
-    fileSaveButton.setActionCommand("Save file");
-    fileSaveButton.addActionListener(this.features);
-    filesavePanel.add(fileSaveButton);
-    fileSaveDisplay = new JLabel("File path will appear here");
-    filesavePanel.add(fileSaveDisplay);
+      IPixel pixel1 = new Pixel(new Posn(0, 0), test);
+      pixels.add(pixel1);
+      listPixels.add(pixels);
+    }
+    JPanel graph = new GraphPanel(listPixels);
+    JScrollPane scrollGraph = new JScrollPane(graph);
+    mainPanel.add(scrollGraph);
 
-    pack();
+   pack();
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
   }
@@ -111,11 +107,11 @@ public class JFrameView extends JFrame implements IGUI {
 
   @Override
   public void addFeatures(ActionListener features) {
-    this.features = features;
   }
 
   @Override
   public String getFile() {
+    /*
     System.out.println("HERE");
     final JFileChooser fchooser = new JFileChooser(".");
     FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -129,9 +125,11 @@ public class JFrameView extends JFrame implements IGUI {
     }
     else {
       return null;
+
+     */
+    return null;
   }
 }
 
 
 
-}
