@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
+import javax.swing.Scrollable;
 import model.graph.Line;
 import model.graph.Position2D;
 import model.imaging.pixel.IPixel;

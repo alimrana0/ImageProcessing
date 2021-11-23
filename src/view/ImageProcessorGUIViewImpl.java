@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import model.graph.Line;
 import view.graph.GraphPanel;
 
 
@@ -76,6 +77,7 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
   private final JPanel ioPanel;
   private final JLayeredPane labels;
   private final JLayeredPane histogram;
+  private GraphPanel graph;
   private BufferedImage topImage;
   private int val;
 
@@ -297,12 +299,18 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
     mainPanel.add(labelScroll, BorderLayout.WEST);
 
 
+    //GRAPH PANEL CREATED
+    graph = new GraphPanel();
+
     histogram = new JLayeredPane();
+
+    histogram.add(graph);
+
     histogram.setLayout(new FlowLayout());
     histogram.setBorder(BorderFactory.createTitledBorder("Image Histograms"));
     histogram.setPreferredSize(new Dimension(200, 200));
 
-    JScrollPane histogramScroll = new JScrollPane(histogram);
+    JScrollPane histogramScroll = new JScrollPane(graph);
     mainPanel.add(histogramScroll, BorderLayout.EAST);
 
     //Buttons
@@ -797,6 +805,14 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
         }
       }
     }
+  }
+
+  /**
+   * Given a list of lines this method updates the histogram with the given lines.
+   * @param lines A list of lines that are drawn to make a histogram.
+   */
+  public void updateGraph(List<Line> lines) {
+    this.graph.setLines(lines);
   }
 
 

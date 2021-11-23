@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import model.graph.Histogram;
+import model.graph.Line;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
 
@@ -15,8 +17,8 @@ import model.imaging.pixel.Pixel;
  * Class to represent an image made of pixels.
  */
 public class Image implements ImageOfPixel {
-
   private final List<ArrayList<IPixel>> pixels;
+  private final Histogram histogram;
 
   /**
    * Constructs an image object from the given 2D list of pixels.
@@ -28,6 +30,7 @@ public class Image implements ImageOfPixel {
       throw new IllegalArgumentException("Pixels cannot be null!");
     }
     this.pixels = this.replicate(pixels);
+    this.histogram = new Histogram(pixels);
   }
 
 
@@ -116,6 +119,10 @@ public class Image implements ImageOfPixel {
      */
     String[] splitAtFormat = outputName.split("\\.", 2);
     ImageIO.write(output, splitAtFormat[1], new File(outputName));
+  }
+
+  public List<Line> getLines() {
+    return this.histogram.getLines();
   }
 }
 

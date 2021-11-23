@@ -8,15 +8,14 @@ import java.util.Map;
 import model.imaging.pixel.IPixel;
 
 public class Histogram {
-  private List<List<IPixel>> pixels;
+  private List<ArrayList<IPixel>> pixels;
   private List<Line> lines;
   private Map<Integer, Integer> red;
   private Map<Integer, Integer> blue;
   private Map<Integer, Integer> green;
   private Map<Integer, Integer> intensity;
 
-  public Histogram(List<List<IPixel>> pixels) {
-
+  public Histogram(List<ArrayList<IPixel>> pixels) {
     this.pixels = pixels;
     lines = new ArrayList<Line>();
 

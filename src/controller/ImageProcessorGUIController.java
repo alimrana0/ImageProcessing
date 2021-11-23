@@ -166,6 +166,7 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.blur(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -180,6 +181,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.sharpen(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -194,6 +197,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.verticalFlip(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -208,6 +213,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.horizontalFlip(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -222,6 +229,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.grayscale(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -236,6 +245,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.sepia(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -250,6 +261,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.redComponent(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -264,6 +277,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.greenComponent(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -278,6 +293,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.blueComponent(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -292,6 +309,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.valueComponent(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -306,6 +325,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.intensityComponent(current));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -320,6 +341,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.darken(current, val));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -334,6 +357,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.replaceImage(current, this.model.brighten(current, val));
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -348,6 +373,8 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
       try {
         this.model.showImage(current);
         this.view.updateImage(this.getTopVisibleLayer());
+        this.updateHistogram();
+
       } catch (IllegalArgumentException e) {
         renderHandler(e.getMessage());
       }
@@ -474,6 +501,13 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
     } catch (IOException e) {
       throw new IllegalStateException();
     }
+  }
+
+  /**
+   * Updates the histogram on the GUI
+   */
+  private void updateHistogram() {
+    this.view.updateGraph(this.model.getImage(current).getLines());
   }
 
 

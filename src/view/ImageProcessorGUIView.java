@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.image.BufferedImage;
+import java.util.List;
+import model.graph.Line;
 
 /**
  * Interface to represent the view for an image processing programs that uses an interactive GUI to
@@ -29,5 +31,10 @@ public interface ImageProcessorGUIView extends IImageProcessingView {
    */
   void updateImages(String imageName);
 
+  /**
+   * Given a list of lines this method updates the histogram with the given lines.
+   * @param lines A list of lines that are drawn to make a histogram.
+   */
+  public void updateGraph(List<Line> lines);
 
 }

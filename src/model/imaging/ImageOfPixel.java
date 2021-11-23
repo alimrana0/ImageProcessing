@@ -3,6 +3,7 @@ package model.imaging;
 import java.io.IOException;
 import java.util.List;
 
+import model.graph.Line;
 import model.imaging.pixel.IPixel;
 
 /**
@@ -33,4 +34,13 @@ public interface ImageOfPixel {
    * @throws IOException Thrown if the file output stream does not funciton correctly.
    */
   void saveImageAs(String outputName) throws IOException;
-}
+
+  /**
+   * Returns a list of lines for the image. Lines alternate from red, green, blue to intensity
+   * until the end of the list.
+   *
+   * @return A list of lines for the histogram to draw alternating from red, green, blue to
+   * intensity line segments.
+   */
+  public List<Line> getLines();
+  }
