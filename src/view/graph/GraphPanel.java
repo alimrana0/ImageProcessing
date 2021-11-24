@@ -29,7 +29,7 @@ public class GraphPanel extends JPanel {
     minD = new Position2D(0, 0);
     maxD = new Position2D(0, 0);
     this.setAutoscrolls(true);
-    this.setSize(300,400);
+    //this.setSize(300,400);
     this.setPreferredSize(new Dimension(1000,3000));
   }
 /*
@@ -106,7 +106,7 @@ public class GraphPanel extends JPanel {
     //so as a result of the two lines below,
     //each y will first be scaled, and then translated
     g2d.translate(0, this.getPreferredSize().getHeight());
-    g2d.scale(1, -1);
+    g2d.scale(1, -.25);
 
     for (Line l : lines) {
       if (Color.RED.equals(l.color)) {
