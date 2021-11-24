@@ -81,7 +81,7 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
   private final JPanel operationsPanel;
   private final JPanel ioPanel;
   private final JLayeredPane labels;
-  private  JLayeredPane histogram;
+  private ScrollPane histogram;
   private GraphPanel graph;
   private BufferedImage topImage;
   private int val;
@@ -306,14 +306,12 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
 //////////////////////
 
     //GRAPH PANEL CREATED
-     graph = new GraphPanel();
-     graph.setLayout(new FlowLayout());
-    histogram = new JLayeredPane();
+    graph = new GraphPanel();
+    histogram = new ScrollPane();
     histogram.add(graph);
 
-    histogram.setBorder(BorderFactory.createTitledBorder("Image Histograms"));
-    histogram.setPreferredSize(new Dimension(200, 200));
-
+   // histogram.setBorder(BorderFactory.createTitledBorder("Image Histograms"));
+   // histogram.setPreferredSize(new Dimension(200, 200));
     JScrollPane histogramScroll = new JScrollPane(histogram);
     mainPanel.add(histogramScroll, BorderLayout.EAST);
 
