@@ -413,6 +413,7 @@ public class ImageProcessorGUIController implements ImageController, IViewListen
   public void setCurrentLayerEvent(String layerID) {
     if (this.model.getLayers().containsKey(layerID)) {
       this.current = layerID;
+      this.updateHistogram();
     } else {
       renderHandler("This image does not exist");
     }
