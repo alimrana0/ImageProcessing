@@ -6,22 +6,25 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JPanel;
-import javax.swing.Scrollable;
 import model.graph.Line;
 import model.graph.Position2D;
-import model.imaging.pixel.IPixel;
 
+/**
+ * Creates a panel that holds the histogram of an image.
+ */
 public class GraphPanel extends JPanel {
 
   private List<Line> lines;
   //the rectangle within which all lines lie
-  private Position2D minD, maxD;
+  private Position2D minD;
+  private Position2D maxD;
 
 
+  /**
+   * Constructs a graph panel that displays a histogram based on the lines given.
+   */
   public GraphPanel() {
     super();
     lines = new ArrayList<Line>();
@@ -30,16 +33,15 @@ public class GraphPanel extends JPanel {
     maxD = new Position2D(0, 0);
     this.setAutoscrolls(true);
     //this.setSize(300,400);
-    this.setPreferredSize(new Dimension(1000,3000));
+    this.setPreferredSize(new Dimension(1000, 3000));
   }
-/*
-  @Override
-  public Dimension getPreferredSize() {
-    return new Dimension(3000, 3000);
-  }
-  */
 
-
+  /**
+   * Sets the lines for the histogram to display. All lines are given at once and
+   * are distinguished by the color parameter of the line.
+   *
+   * @param lines A list of lines to be drawn.
+   */
   public void setLines(List<Line> lines) {
     this.lines = new ArrayList<Line>(lines);
 
@@ -73,14 +75,13 @@ public class GraphPanel extends JPanel {
     }
 
 
-
   }
 
 
   /**
-   * Override the paintComponent method of the JPanel Do NOT override paint!
+   * Override the paintComponent method of the JPanel Do NOT override paint.
    *
-   * @param g
+   * @param g The graph used for paintComponent.
    */
   @Override
   protected void paintComponent(Graphics g) {

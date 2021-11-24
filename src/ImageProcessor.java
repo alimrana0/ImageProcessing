@@ -18,7 +18,6 @@ import model.imaging.Image;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
-import view.IImageProcessingView;
 import view.ImageProcessingView;
 
 /**
@@ -52,10 +51,9 @@ public final class ImageProcessor {
     if (args.length == 2) {
       if (args[0].equals("-script")) {
         new ImageProcessorControllerImpl(new ImageProcessingSessionImpl(),
-                new FileReader(args[1]), System.out).run();
+            new FileReader(args[1]), System.out).run();
       }
-    }
-    else if (args.length == 1 && args[0].equals("-text")) {
+    } else if (args.length == 1 && args[0].equals("-text")) {
       Readable rd = new InputStreamReader(System.in);
 
       ArrayList<IPixel> pixelArray = new ArrayList<>();
@@ -66,7 +64,7 @@ public final class ImageProcessor {
       Image startingImage = new Image(list);
       ImageProcessingSession instance = new ImageProcessingSession();
       ImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(startingImage),
-              System.out);
+          System.out);
 
       ImageController controller = new ImageControllerImpl(instance, view, rd);
       controller.run();
@@ -76,7 +74,8 @@ public final class ImageProcessor {
     /*else if (args.length == 1 && args[0].equals("-text")) {
       new ImageProcessorControllerImpl(new ImageProcessorInstanceImpl(),
           new InputStreamReader(System.in), System.out).start();
-    }*/ else if (args.length == 0) {
+    }*/
+    else if (args.length == 0) {
       IImageProcessingSession testModel = new ImageProcessingSessionImpl();
       ImageController controller = new ImageProcessorGUIController(testModel);
       controller.run();

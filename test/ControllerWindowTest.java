@@ -1,24 +1,18 @@
-import controller.ImageProcessorGUIController;
-import java.awt.Color;
+
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
+
 import model.IImageProcessingSession;
 import model.ImageProcessingSessionImpl;
-import model.graph.Histogram;
-import model.graph.Line;
-import model.graph.Position2D;
-import model.imaging.IColor;
-import model.imaging.Posn;
-import model.imaging.pixel.IPixel;
-import model.imaging.pixel.Pixel;
+
 import org.junit.Test;
-import view.IViewListener;
 import view.ImageProcessorGUIViewImpl;
 
 import static org.junit.Assert.assertEquals;
 
 
+/**
+ * A class that tests to ensure the gui and controller pass information correctly.
+ */
 public class ControllerWindowTest {
 
 

@@ -40,7 +40,7 @@ public class ImageProcessorControllerImpl implements ImageController {
    * @throws IllegalArgumentException If any argument is null.
    */
   public ImageProcessorControllerImpl(IImageProcessingSession model, Readable stringReader,
-                                      Appendable out) throws IllegalArgumentException {
+      Appendable out) throws IllegalArgumentException {
     if (model == null || stringReader == null || out == null) {
       throw new IllegalArgumentException("Null parameter.");
     }
@@ -82,57 +82,57 @@ public class ImageProcessorControllerImpl implements ImageController {
    */
   private void commandChecking(String[] command) {
 
-      switch (command[0]) {
-        case "create":
-          createCommand(command);
-          break;
-        case "remove":
-          removeCommand(command);
-          break;
-        case "current":
-          currentCommand(command);
-          break;
-        case "blur":
-          blurCommand(command);
-          break;
-        case "sharpen":
-          sharpenCommand(command);
-          break;
-        case "grayscale":
-          grayscaleCommand(command);
-          break;
-        case "sepia":
-          sepiaCommand(command);
-          break;
-        case "show":
-          showCommand(command);
-          break;
-        case "hide":
-          hideCommand(command);
-          break;
-        case "save":
-          saveCommand(command);
-          break;
-        case "saveall":
-          saveAllCommand(command);
-          break;
-        case "addmulti":
-          addMultiCommand(command);
-          break;
-        case "add":
-          renderHandler("Add command must be used in the create command.");
-          break;
-        case "checkerboard":
-          renderHandler("Checkerboard command must be used in the create command.");
-          break;
-        case "exit":
-          System.exit(0);
-          break;
-        default:
-          renderHandler("Invalid command");
-      }
-
+    switch (command[0]) {
+      case "create":
+        createCommand(command);
+        break;
+      case "remove":
+        removeCommand(command);
+        break;
+      case "current":
+        currentCommand(command);
+        break;
+      case "blur":
+        blurCommand(command);
+        break;
+      case "sharpen":
+        sharpenCommand(command);
+        break;
+      case "grayscale":
+        grayscaleCommand(command);
+        break;
+      case "sepia":
+        sepiaCommand(command);
+        break;
+      case "show":
+        showCommand(command);
+        break;
+      case "hide":
+        hideCommand(command);
+        break;
+      case "save":
+        saveCommand(command);
+        break;
+      case "saveall":
+        saveAllCommand(command);
+        break;
+      case "addmulti":
+        addMultiCommand(command);
+        break;
+      case "add":
+        renderHandler("Add command must be used in the create command.");
+        break;
+      case "checkerboard":
+        renderHandler("Checkerboard command must be used in the create command.");
+        break;
+      case "exit":
+        System.exit(0);
+        break;
+      default:
+        renderHandler("Invalid command");
     }
+
+  }
 
 
   /**

@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.Map;
 import model.imaging.pixel.IPixel;
 
+/**
+ * Represents a histogram for an image with lines representing red blue and intensity frequency.
+ */
 public class Histogram {
+
   private List<ArrayList<IPixel>> pixels;
   private List<Line> lines;
   private Map<Integer, Integer> red;
@@ -15,6 +19,13 @@ public class Histogram {
   private Map<Integer, Integer> green;
   private Map<Integer, Integer> intensity;
 
+  /**
+   * Constructs a histogram given an array of pixels that represent an image. The histogram contains
+   * a list of lines that make up the graph as well as maps with representing frequencies of the
+   * different components.
+   *
+   * @param pixels A list of and array list of pixels representing an image.
+   */
   public Histogram(List<ArrayList<IPixel>> pixels) {
     this.pixels = pixels;
     lines = new ArrayList<Line>();
@@ -72,7 +83,13 @@ public class Histogram {
     }
   }
 
-  public List<Line> getLines(){
+  /**
+   * Retrieves the list of lines that make up the histogram of the red, blue, green, and intensity
+   * components.
+   *
+   * @return A list of lines.
+   */
+  public List<Line> getLines() {
     return this.lines;
   }
 }

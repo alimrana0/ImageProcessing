@@ -1,30 +1,13 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import model.graph.Line;
 import view.IViewListener;
 import view.ImageProcessorGUIViewImpl;
 
+/**
+ * A fake window that is used to "Fire" button commands to the controller to ensure the controller
+ * is receiving commands correctly.
+ */
 public class MockWindow extends ImageProcessorGUIViewImpl {
 
   IViewListener listener;
@@ -117,6 +100,9 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
         break;
       case "Load Multi":
         emitLoadAllEvent();
+        break;
+      default:
+        break;
     }
   }
 
@@ -125,7 +111,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * file path.
    */
   private void emitLoadAllEvent() {
-      listener.handleLoadAllLayerEvent("f.getAbsolutePath()");
+    listener.handleLoadAllLayerEvent("f.getAbsolutePath()");
 
   }
 
@@ -134,16 +120,17 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * selected file path.
    */
   private void emitSaveEvent() {
-          listener.handleSaveLayerEvent("f.getAbsolutePath()",
-              "optionsFileType[filetypeValue]");
+    listener.handleSaveLayerEvent("f.getAbsolutePath()",
+        "optionsFileType[filetypeValue]");
 
   }
+
   /**
    * Tells the listener to save the whole image with the specified type from the user and the
    * selected path from the user.
    */
   private void emitSaveAllEvent() {
-      listener.handleSaveAllLayerEvent("name", "type");
+    listener.handleSaveAllLayerEvent("name", "type");
   }
 
   /**
@@ -211,16 +198,16 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
   }
 
   /**
-   * Tells the listener to apply a darken transformation with the given val to the current
-   * layer in the image.
+   * Tells the listener to apply a darken transformation with the given val to the current layer in
+   * the image.
    */
   private void emitDarkenEvent(int val) {
     listener.handleDarkenEvent(val);
   }
 
   /**
-   * Tells the listener to apply a brighten transformation with the given val to the current
-   * layer in the image.
+   * Tells the listener to apply a brighten transformation with the given val to the current layer
+   * in the image.
    */
   private void emitBrightenEvent(int val) {
     listener.handleBrightenEvent(val);
@@ -242,7 +229,6 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
   }
 
 
-
   /**
    * Tells the listener to remove the current layer. It then updates the list of layers in the GUI
    * with the new list of layers.
@@ -257,7 +243,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    */
   private void emitSelectLayerEvent() {
     String layerName = JOptionPane.showInputDialog("Layer Name");
-      listener.setCurrentLayerEvent(layerName);
+    listener.setCurrentLayerEvent(layerName);
   }
 
   /**
@@ -279,10 +265,9 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * file path as a layer in the program. The name of the layer is also taken from the user.
    */
   private void emitLoadImageEvent() {
-    listener.handleLoadLayerEvent("name","type", "name");
+    listener.handleLoadLayerEvent("name", "type", "name");
 
   }
-
 
 
 }

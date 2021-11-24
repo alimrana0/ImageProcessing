@@ -32,7 +32,7 @@ public interface IImageProcessingSession {
   void hideImage(String id) throws IllegalArgumentException;
 
   /**
-   * Adds multiple images at the same time to this model
+   * Adds multiple images at the same time to this model.
    *
    * @param images          Strings and images to make up the layers of the image.
    * @param invisibleLayers List containing the ids of invisible layers for this multi layer image.

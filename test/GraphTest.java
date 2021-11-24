@@ -9,24 +9,26 @@ import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
-
-
+/**
+ * A test class in order to ensure a histogram and its components function correctly.
+ */
 public class GraphTest {
 
 
   @Test
   public void testPosition2D() {
-    Position2D pos = new Position2D(33,5);
-    assertEquals(33, (int)pos.getX());
-    assertEquals(5, (int)pos.getY());
+    Position2D pos = new Position2D(33, 5);
+    assertEquals(33, (int) pos.getX());
+    assertEquals(5, (int) pos.getY());
   }
 
   @Test
   public void testLine() {
-    Position2D start = new Position2D(0,0);
-    Position2D end = new Position2D(50,52);
+    Position2D start = new Position2D(0, 0);
+    Position2D end = new Position2D(50, 52);
     Line line = new Line(start, end, Color.BLACK);
     assertEquals(end, line.getEnd());
     assertEquals(start, line.getStart());
@@ -36,7 +38,7 @@ public class GraphTest {
   @Test
   public void testHistogram() {
     List<ArrayList<IPixel>> listPixels = new ArrayList<>();
-    for(int i = 0; i <5; i++) {
+    for (int i = 0; i < 5; i++) {
       ArrayList<IPixel> pixels = new ArrayList<>();
       IColor test = new model.imaging.Color(i, i, i);
       IPixel pixel1 = new Pixel(new Posn(i, i), test);
@@ -47,16 +49,15 @@ public class GraphTest {
 
     List<Line> expected;
     expected = new ArrayList<>();
-    for(int i = 0; i <5; i++) {
-      expected.add(new Line(new Position2D(i,1),new Position2D(i + 1,1),Color.RED));
-      expected.add(new Line(new Position2D(i,1),new Position2D(i + 1,1),Color.GREEN));
-      expected.add(new Line(new Position2D(i,1),new Position2D(i + 1,1),Color.BLUE));
-      expected.add(new Line(new Position2D(i,1),new Position2D(i + 1,1),Color.BLACK));
+    for (int i = 0; i < 5; i++) {
+      expected.add(new Line(new Position2D(i, 1), new Position2D(i + 1, 1), Color.RED));
+      expected.add(new Line(new Position2D(i, 1), new Position2D(i + 1, 1), Color.GREEN));
+      expected.add(new Line(new Position2D(i, 1), new Position2D(i + 1, 1), Color.BLUE));
+      expected.add(new Line(new Position2D(i, 1), new Position2D(i + 1, 1), Color.BLACK));
     }
 
-
     List<Line> actual = graph.getLines();
-    for(int i = 0; i <5; i++) {
+    for (int i = 0; i < 5; i++) {
       assertEquals(expected.get(i).getStart(), actual.get(i).getStart());
       assertEquals(expected.get(i).getEnd(), actual.get(i).getEnd());
       assertEquals(expected.get(i).color, actual.get(i).color);

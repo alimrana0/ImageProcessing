@@ -1,30 +1,22 @@
-import controller.ImageProcessorControllerImpl;
-import controller.ImageProcessorGUIController;
-import controller.filereading.IMultiLayerReader;
-import controller.filereading.ImageIOFileReader;
-import controller.filereading.MultiLayerFileReader;
-import controller.filereading.PPMFileReader;
-import controller.filewriting.IImageFileWriter;
-import controller.filewriting.JPEGImageIOWriter;
-import controller.filewriting.MultiLayerImageWriter;
-import controller.filewriting.PNGImageIOWriter;
-import controller.filewriting.PPMFileWriter;
-import java.awt.image.BufferedImage;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import model.IImageProcessingSession;
-import model.imaging.ImageOfPixel;
-import view.IImageProcessingView;
-import view.ImageProcessorTextView;
 
+import controller.ImageProcessorGUIController;
+
+import model.IImageProcessingSession;
+
+/**
+ * A fake controller used to check that the controller is receiving the correct input from the
+ * view.
+ */
 public class MockController extends ImageProcessorGUIController {
 
-   StringBuilder log;
+  StringBuilder log;
 
-
+  /**
+   * Constructs a fake controller given a log to write to and a model.
+   *
+   * @param log   A stringbuilder that is used to write what method has been called.
+   * @param model A model that is not used.
+   */
   public MockController(StringBuilder log, IImageProcessingSession model) {
     super(model);
     this.log = log;
@@ -38,7 +30,6 @@ public class MockController extends ImageProcessorGUIController {
   public void handleSaveLayerEvent(String filename, String filetype) {
     log.append("\nsave " + filename + " " + filetype);
   }
-
 
 
   @Override

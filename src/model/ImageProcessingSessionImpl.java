@@ -12,10 +12,8 @@ import filters.colortransformation.greyscale.RedGreyscale;
 import filters.flippingtransformation.FlipHorizontal;
 import filters.flippingtransformation.FlipVertical;
 import filters.intensitytransformation.DarkenTransformation;
-import model.IImageProcessingSession;
 import model.imaging.ImageOfPixel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +21,10 @@ import java.util.Map;
 
 /**
  * Class representing the implementation of an image processing model for when we want to load
- * multiple images at once, and hide/show them in something like a GUI. One model contains
- * only one multi layer image, and can have as many layers as it wants. Layers are given names, and
- * the names are then assigned to images in the delegate. The ids of invisible layers are stored in
- * another list.
+ * multiple images at once, and hide/show them in something like a GUI. One model contains only one
+ * multi layer image, and can have as many layers as it wants. Layers are given names, and the names
+ * are then assigned to images in the delegate. The ids of invisible layers are stored in another
+ * list.
  */
 public class ImageProcessingSessionImpl implements IImageProcessingSession {
 
@@ -38,12 +36,12 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   /**
    * Creates an instance of the multi layer model.
    *
-   * @param layers   List of ids of the layers.
-   * @param hidden   List of ids of invisible layers.
+   * @param layers List of ids of the layers.
+   * @param hidden List of ids of invisible layers.
    * @throws IllegalArgumentException If any argument is null.
    */
   public ImageProcessingSessionImpl(List<String> layers,
-                                    List<String> hidden) throws IllegalArgumentException {
+      List<String> hidden) throws IllegalArgumentException {
     if (layers == null || hidden == null) {
       throw new IllegalArgumentException("Null parameter.");
     }
@@ -120,9 +118,9 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
    */
   private void sameDimensions(ImageOfPixel image) throws IllegalArgumentException {
     if (!this.layers.isEmpty() && (
-            image.getPixels().size() != this.images.get(this.layers.get(0)).getPixels().size() ||
-                    image.getPixels().get(0).size() != this.images.get(this.layers.get(0))
-                            .getPixels().get(0).size())) {
+        image.getPixels().size() != this.images.get(this.layers.get(0)).getPixels().size() ||
+            image.getPixels().get(0).size() != this.images.get(this.layers.get(0))
+                .getPixels().get(0).size())) {
       throw new IllegalArgumentException("Layers must all be the same dimensions.");
     }
   }
@@ -164,21 +162,24 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
     if (id == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
-    return new GreenGreyscale().applyColorTransformation(this.getImage(id));  }
+    return new GreenGreyscale().applyColorTransformation(this.getImage(id));
+  }
 
   @Override
   public ImageOfPixel valueComponent(String id) throws IllegalArgumentException {
     if (id == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
-    return new ValueChange().applyColorTransformation(this.getImage(id));  }
+    return new ValueChange().applyColorTransformation(this.getImage(id));
+  }
 
   @Override
   public ImageOfPixel intensityComponent(String id) throws IllegalArgumentException {
     if (id == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
-    return new IntensityChange().applyColorTransformation(this.getImage(id));  }
+    return new IntensityChange().applyColorTransformation(this.getImage(id));
+  }
 
 
   @Override
@@ -194,7 +195,8 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
     if (id == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
-    return new SepiaTransformation().transform(this.getImage(id));  }
+    return new SepiaTransformation().transform(this.getImage(id));
+  }
 
 
   @Override
@@ -226,7 +228,8 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
     if (id == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
-    return new FlipVertical().flipTransform(this.getImage(id));  }
+    return new FlipVertical().flipTransform(this.getImage(id));
+  }
 
 
   @Override
@@ -277,7 +280,7 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
 
   @Override
   public void addMultipleImages(Map<String, ImageOfPixel> images, List<String> invisibleLayers)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     if (images == null || invisibleLayers == null) {
       throw new IllegalArgumentException("Null parameters.");
     }

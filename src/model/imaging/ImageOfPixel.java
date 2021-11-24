@@ -36,11 +36,9 @@ public interface ImageOfPixel {
   void saveImageAs(String outputName) throws IOException;
 
   /**
-   * Returns a list of lines for the image. Lines alternate from red, green, blue to intensity
-   * until the end of the list.
+   * Returns a list of lines for the image.
    *
-   * @return A list of lines for the histogram to draw alternating from red, green, blue to
-   * intensity line segments.
+   * @return A list of lines used to draw on the GUI.
    */
   public List<Line> getLines();
-  }
+}

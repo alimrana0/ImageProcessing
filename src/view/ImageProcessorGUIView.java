@@ -19,7 +19,7 @@ public interface ImageProcessorGUIView extends IImageProcessingView {
   /**
    * Sets the viewable image in the GUI to the given buffered image.
    *
-   * @param image
+   * @param image An image to be viewed in the GUI.
    */
   void updateImage(BufferedImage image);
 

@@ -12,13 +12,7 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import model.graph.Histogram;
 import model.graph.Line;
-import model.imaging.IColor;
-import model.imaging.Posn;
-import model.imaging.pixel.IPixel;
-import model.imaging.pixel.Pixel;
 import view.graph.GraphPanel;
 
 
@@ -114,7 +108,6 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
     file = new JMenu("File");
     file.getAccessibleContext().setAccessibleDescription(
         "File Menu");
-
 
     save = new JMenu("Save...");
 
@@ -241,7 +234,6 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
     loadLayer.addActionListener(this);
     addImage.add(loadLayer);
 
-
     image.add(addImage);
 
     deleteImage = new JMenuItem("Delete Image");
@@ -250,7 +242,6 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
     deleteImage.addActionListener(this);
     deleteImage.setEnabled(false);
     image.add(deleteImage);
-
 
     JSeparator s2 = new JSeparator();
     s2.setOrientation(SwingConstants.HORIZONTAL);
@@ -310,8 +301,8 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
     histogram = new ScrollPane();
     histogram.add(graph);
 
-   // histogram.setBorder(BorderFactory.createTitledBorder("Image Histograms"));
-   // histogram.setPreferredSize(new Dimension(200, 200));
+    // histogram.setBorder(BorderFactory.createTitledBorder("Image Histograms"));
+    // histogram.setPreferredSize(new Dimension(200, 200));
     JScrollPane histogramScroll = new JScrollPane(histogram);
     mainPanel.add(histogramScroll, BorderLayout.EAST);
 
@@ -432,7 +423,7 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
     layerLabel.setEditable(false);
 
     this.images.add(layerLabel);
-   // selectImage.setEnabled(true);
+    // selectImage.setEnabled(true);
 
     layerLabel.addMouseListener(new MouseAdapter() {
       @Override
@@ -682,16 +673,16 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
   }
 
   /**
-   * Tells the listener to apply a darken transformation with the given val to the current
-   * layer in the image.
+   * Tells the listener to apply a darken transformation with the given val to the current layer in
+   * the image.
    */
   private void emitDarkenEvent(int val) {
     listener.handleDarkenEvent(val);
   }
 
   /**
-   * Tells the listener to apply a brighten transformation with the given val to the current
-   * layer in the image.
+   * Tells the listener to apply a brighten transformation with the given val to the current layer
+   * in the image.
    */
   private void emitBrightenEvent(int val) {
     listener.handleBrightenEvent(val);
@@ -711,7 +702,6 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
   private void emitHorizontalFlipEvent() {
     listener.handleHorizontalFlipEvent();
   }
-
 
 
   /**
@@ -811,6 +801,7 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
 
   /**
    * Given a list of lines this method updates the histogram with the given lines.
+   *
    * @param lines A list of lines that are drawn to make a histogram.
    */
   public void updateGraph(List<Line> lines) {
