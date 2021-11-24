@@ -1,3 +1,32 @@
+#######USING THE GUI############
+
+- Select Images -> add image -> load file -> Give a name to the file to be loaded -> select the file
+
+- Click on the name you gave the image in the far left pane to display its histogram and manipulate it
+- The image you are currently viewing will be highlighted in red after clicking on it in the images pane on the left.
+-Click any of the image Operation buttons to perform operations
+	- Blur
+	- Sharpen
+	- Grayscale
+	- Sepia
+	- RedComponent
+	- GreenComponent
+	- BlueComponent
+	- ValueComponent
+	- IntensityComponent
+	- Brighten
+	- Darken
+	- Vertical Flip
+	- Horizontal Flip
+-These commands can also be accessed through the edit drop down menu
+-Selecting hide image hides the currently selected image
+-Selecting show image shows the currently selected image
+
+-Selecting File Save or Save all allows you to save your image/images.
+	-Select the file type you would like to save it as
+	-Select the files save location, give it a name and hit save
+
+################Text based usage of Processor#########################
 The commands used to control the image processor are based off of the example given
 in the assignment with a slight variation on the get component command.
 - First load the image and give it a name:
