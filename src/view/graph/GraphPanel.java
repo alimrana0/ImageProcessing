@@ -102,30 +102,16 @@ public class GraphPanel extends JPanel {
     g2d.translate(0, this.getPreferredSize().getHeight());
     g2d.scale(1, -1);
 
-    List colors = new ArrayList();
-    colors.add(Color.RED);
-    colors.add(Color.GREEN);
-    colors.add(Color.BLUE);
-    colors.add(Color.BLACK);
-    int color = 0;
+
     for (Line l : lines) {
-      switch (color) {
-        case 0:
-          g2d.setColor((Color) colors.get(color));
-          color++;
-          break;
-        case 1:
-          g2d.setColor((Color) colors.get(color));
-          color++;
-          break;
-        case 2:
-          g2d.setColor((Color) colors.get(color));
-          color++;
-          break;
-        case 3:
-          g2d.setColor((Color) colors.get(color));
-          color = 0;
-          break;
+      if (Color.RED.equals(l.color)) {
+        g2d.setColor(Color.RED);
+      } else if (Color.GREEN.equals(l.color)) {
+        g2d.setColor(Color.GREEN);
+      } else if (Color.BLACK.equals(l.color)) {
+        g2d.setColor(Color.BLACK);
+      } else if (Color.BLUE.equals(l.color)) {
+        g2d.setColor(Color.BLUE);
       }
 
       Position2D start = l.start;

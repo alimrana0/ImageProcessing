@@ -55,16 +55,16 @@ public class Histogram {
     //create lines
     for (int i = 0; i < 255; i++) {
       Line redLine = new Line(new Position2D(i, red.get(i)),
-          new Position2D(i + 1, red.get(i + 1)));
+          new Position2D(i + 1, red.get(i + 1)), Color.RED);
 
       Line greenLine = new Line(new Position2D(i, green.get(i)),
-          new Position2D(i + 1, green.get(i + 1)));
+          new Position2D(i + 1, green.get(i + 1)), Color.GREEN);
 
       Line blueLine = new Line(new Position2D(i, blue.get(i)),
-          new Position2D(i + 1, blue.get(i + 1)));
+          new Position2D(i + 1, blue.get(i + 1)), Color.BLUE);
 
       Line intensityLine = new Line(new Position2D(i, intensity.get(i)),
-          new Position2D(i + 1, intensity.get(i + 1)));
+          new Position2D(i + 1, intensity.get(i + 1)), Color.BLACK);
       this.lines.add(redLine);
       this.lines.add(greenLine);
       this.lines.add(blueLine);

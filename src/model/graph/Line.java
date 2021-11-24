@@ -1,5 +1,6 @@
 package model.graph;
 
+import java.awt.Color;
 import java.util.Objects;
 
 /**
@@ -8,10 +9,12 @@ import java.util.Objects;
 public final class Line {
   public final Position2D start;
   public final Position2D end;
+  public final Color color;
 
-  public Line(Position2D start, Position2D end) {
+  public Line(Position2D start, Position2D end, Color color) {
     this.start = start;
     this.end = end;
+    this.color = color;
   }
 
   public Position2D getStart() {

@@ -308,9 +308,7 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
     //GRAPH PANEL CREATED
      graph = new GraphPanel();
     histogram = new JLayeredPane();
-
     histogram.add(graph);
-    histogram.setLayout(new FlowLayout());
     histogram.setBorder(BorderFactory.createTitledBorder("Image Histograms"));
     histogram.setPreferredSize(new Dimension(200, 200));
 
@@ -816,9 +814,9 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
    * @param lines A list of lines that are drawn to make a histogram.
    */
   public void updateGraph(List<Line> lines) {
-    this.graph.setLines(lines);
     this.repaint();
     this.graph.repaint();
+    this.graph.setLines(lines);
   }
 
 
