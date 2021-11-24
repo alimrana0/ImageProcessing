@@ -13,7 +13,12 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import model.graph.Histogram;
 import model.graph.Line;
+import model.imaging.IColor;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
 import view.graph.GraphPanel;
 
 
@@ -76,7 +81,7 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
   private final JPanel operationsPanel;
   private final JPanel ioPanel;
   private final JLayeredPane labels;
-  private final JLayeredPane histogram;
+  private  JLayeredPane histogram;
   private GraphPanel graph;
   private BufferedImage topImage;
   private int val;
@@ -298,19 +303,18 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
 
     mainPanel.add(labelScroll, BorderLayout.WEST);
 
+//////////////////////
 
     //GRAPH PANEL CREATED
-    graph = new GraphPanel();
-
+     graph = new GraphPanel();
     histogram = new JLayeredPane();
 
     histogram.add(graph);
-
     histogram.setLayout(new FlowLayout());
     histogram.setBorder(BorderFactory.createTitledBorder("Image Histograms"));
     histogram.setPreferredSize(new Dimension(200, 200));
 
-    JScrollPane histogramScroll = new JScrollPane(graph);
+    JScrollPane histogramScroll = new JScrollPane(histogram);
     mainPanel.add(histogramScroll, BorderLayout.EAST);
 
     //Buttons
@@ -813,6 +817,8 @@ public class ImageProcessorGUIViewImpl extends JFrame implements ImageProcessorG
    */
   public void updateGraph(List<Line> lines) {
     this.graph.setLines(lines);
+    this.repaint();
+    this.graph.repaint();
   }
 
 

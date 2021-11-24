@@ -27,7 +27,8 @@ public class GraphPanel extends JPanel {
     this.setBackground(Color.WHITE);
     minD = new Position2D(0, 0);
     maxD = new Position2D(0, 0);
-
+    this.setAutoscrolls(true);
+    this.setSize(300,500);
   }
 
 
@@ -64,6 +65,9 @@ public class GraphPanel extends JPanel {
         }
       }
     }
+
+
+
   }
 
 
@@ -129,6 +133,7 @@ public class GraphPanel extends JPanel {
       g2d.drawLine((int) start.getX(), (int) start.getY(),
           (int) end.getX(), (int) end.getY());
     }
+    g2d.setTransform(originalTransform);
   }
 }
 
