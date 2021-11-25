@@ -6,212 +6,203 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Interface to represent the model of an image program that can edit a multi layered image. Model
- * can hold exactly one multi layer image at a time, and can add, remove, or replace layers. Each
- * layer is represented with a string name and an image interface image. Layers can also be marked
- * as either invisible or visible.
+ * Interface representing the model session for an image processor that is dealing with multiple
+ * layered images. It can add/remove/replace and perform manipulations on the image contents as
+ * well as image visibility.
  */
 public interface IImageProcessingSession {
-
   /**
-   * Gets the image represented by the id and marks it as visible.
+   * Performs a blur transformation on the image associated with the given ID.
    *
-   * @param id String of image to mark.
-   * @throws IllegalArgumentException If the id is null, the id is already shown, or no layer with
-   *                                  the id exists.
-   */
-  void showImage(String id) throws IllegalArgumentException;
-
-  /**
-   * Gets the image represented by the given id and marks it as invisible.
-   *
-   * @param id String of image to mark.
-   * @throws IllegalArgumentException If the id is null, the id is already hidden,  or no layer with
-   *                                  the id exists.
-   */
-  void hideImage(String id) throws IllegalArgumentException;
-
-  /**
-   * Adds multiple images at the same time to this model.
-   *
-   * @param images          Strings and images to make up the layers of the image.
-   * @param invisibleLayers List containing the ids of invisible layers for this multi layer image.
-   * @throws IllegalArgumentException If any argument is null, if all layers do not have the same
-   *                                  dimensions, or layers share the same id.
-   */
-  void addMultipleImages(Map<String, ImageOfPixel> images, List<String> invisibleLayers)
-          throws IllegalArgumentException;
-
-  /**
-   * Returns the list of ids of invisible images for this multi layer image.
-   *
-   * @return The list of invisible image ids.
-   */
-  List<String> getVisibility();
-
-  /**
-   * Gets a map assigning the image ids to the image represented by it.
-   *
-   * @return Map of all ids and their respective images.
-   */
-  Map<String, ImageOfPixel> getLayers();
-
-
-  /**
-   * Replaces the image associated with the given id with the given image.
-   *
-   * @param id    Id of image to be replaced.
-   * @param image Image to replace with.
-   * @throws IllegalArgumentException If either argument is null or there is no such id in the map.
-   */
-  void replaceImage(String id, ImageOfPixel image) throws IllegalArgumentException;
-
-  /**
-   * Adds the given image to the map with the given id as the key.
-   *
-   * @param id    Key for the image.
-   * @param image Image to be added.
-   * @throws IllegalArgumentException If either argument is null or the id is already contained.
-   */
-  void addImage(String id, ImageOfPixel image) throws IllegalArgumentException;
-
-  /**
-   * Returns the image associated with the given id.
-   *
-   * @param id Key to grab the image.
-   * @return The image associated with the id.
-   * @throws IllegalArgumentException If the id is null, or there is no image associated with that
-   *                                  id.
-   */
-  ImageOfPixel getImage(String id) throws IllegalArgumentException;
-
-  /**
-   * Applies the blur filter to the image in the map associated with the given id.
-   *
-   * @param id Id for image to filter.
-   * @return The filtered image with blur applied.
-   * @throws IllegalArgumentException If any argument is null or the id is invalid.
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
   ImageOfPixel blur(String id) throws IllegalArgumentException;
 
   /**
-   * Applies the sharpen filter to the image in the map associated with the given id.
+   * Performs a sharpen transformation on the image associated with the given ID.
    *
-   * @param id Id for image to filter.
-   * @return The filtered image with sharpen applied.
-   * @throws IllegalArgumentException If any argument is null or the id is invalid.
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
   ImageOfPixel sharpen(String id) throws IllegalArgumentException;
 
   /**
-   * Applies the grayscale color transformation to the image associated with the id.
+   * Performs a grayscale transformation on the image associated with the given ID.
    *
-   * @param id Id for the image to be transformed.
-   * @return The transformed image in grayscale.
-   * @throws IllegalArgumentException If any argument is null or the id is not contained in the
-   *                                  map.
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-  ImageOfPixel grayscale(String id)
-          throws IllegalArgumentException;
+  ImageOfPixel grayscale(String id) throws IllegalArgumentException;
 
   /**
-   * Applies the sepia color transformation to the image associated with the id.
+   * Performs a sepia transformation on the image associated with the given ID.
    *
-   * @param id Id for the image to be transformed.
-   * @return The transformed image in sepia.
-   * @throws IllegalArgumentException If any argument is null or the id is not contained in the
-   *                                  map.
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-  ImageOfPixel sepia(String id)
-          throws IllegalArgumentException;
+  ImageOfPixel sepia(String id) throws IllegalArgumentException;
 
   /**
-   * Creates an image that visualizes the blue component of the image.
+   * Performs a red grayscale transformation on the image associated with the given ID.
    *
-   * @return the transformed greyscale image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-  ImageOfPixel blueComponent(String id) throws IllegalArgumentException;
+  ImageOfPixel redGrayscale(String id) throws IllegalArgumentException;
 
   /**
-   * Creates an image that visualizes the red component of the image.
+   * Performs a green grayscale transformation on the image associated with the given ID.
    *
-   * @return the transformed greyscale image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-  ImageOfPixel redComponent(String id) throws IllegalArgumentException;
+  ImageOfPixel greenGrayscale(String id) throws IllegalArgumentException;
 
   /**
-   * Creates an image that visualizes the green component of the image.
+   * Performs a blue grayscale transformation on the image associated with the given ID.
    *
-   * @return the transformed greyscale image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-
-  ImageOfPixel greenComponent(String id) throws IllegalArgumentException;
+  ImageOfPixel blueGrayscale(String id) throws IllegalArgumentException;
 
   /**
-   * Creates an image that visualizes the value component of the image.
+   * Performs a value transformation on the image associated with the given ID.
    *
-   * @return the transformed greyscale image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-
   ImageOfPixel valueComponent(String id) throws IllegalArgumentException;
 
   /**
-   * Creates an image that visualizes the intensity component of the image.
+   * Performs an instensity transformation on the image associated with the given ID.
    *
-   * @return the transformed greyscale image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-
   ImageOfPixel intensityComponent(String id) throws IllegalArgumentException;
 
 
   /**
-   * Creates an image that is darkened by the given value.
+   * Performs a darken transformation on the image associated with the given ID.
    *
-   * @return the transformed greyscale image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-
   ImageOfPixel darken(String id, int val) throws IllegalArgumentException;
 
   /**
-   * Creates an image that is brightened by the given value.
+   * Performs a brighten transformation on the image associated with the given ID.
    *
-   * @return the transformed greyscale image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
-
   ImageOfPixel brighten(String id, int val) throws IllegalArgumentException;
 
   /**
-   * Flips an image horizontally.
+   * Performs a horizontal flip transformation on the image associated with the given ID.
    *
-   * @return the flipped image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
   ImageOfPixel horizontalFlip(String id) throws IllegalArgumentException;
 
   /**
-   * Flips an image vertically.
+   * Performs a vertical flip transformation on the image associated with the given ID.
    *
-   * @return the flipped image.
-   * @throws IllegalArgumentException If the image is null
+   * @param id image's ID being filtered.
+   * @return The filtered image.
+   * @throws IllegalArgumentException If ID is null or session is invalid.
    */
   ImageOfPixel verticalFlip(String id) throws IllegalArgumentException;
 
-
+  /**
+   * Makes the given image specified by the ID visible.
+   *
+   * @param id image name.
+   * @throws IllegalArgumentException If id is null, visible, or nonexistent.
+   */
+  void showImage(String id) throws IllegalArgumentException;
 
   /**
-   * Removes the given image associated with the string id from the model.
+   * Makes the given image specified by the ID invisible.
    *
-   * @param id String of image to remove.
-   * @throws IllegalArgumentException If the string is null, or it is not contained in the model.
+   * @param id image name.
+   * @throws IllegalArgumentException If id is null, visible, or nonexistent.
+   */
+  void hideImage(String id) throws IllegalArgumentException;
+
+  /**
+   * Allows for the addition of several images to be added in the model.
+   *
+   * @param images    a map of images containing their corresponding names.
+   * @param invisible a list of invisible image's marked by their IDs.
+   * @throws IllegalArgumentException If the layers don't have same dimensions, arguments are null,
+   *                                  or IDs aren't unique.
+   */
+  void addMultipleImages(Map<String, ImageOfPixel> images, List<String> invisible)
+          throws IllegalArgumentException;
+
+  /**
+   * Gets the list of invisible images marked by their IDs.
+   *
+   * @return list of invisible image ids.
+   */
+  List<String> getInvisible();
+
+  /**
+   * Retrieves the images that are layered via a map that contains their IDs.
+   *
+   * @return map of images and their corresponding IDs.
+   */
+  Map<String, ImageOfPixel> getImages();
+
+  /**
+   * Adds the given image to the list of images using the given ID as its name.
+   *
+   * @param id    name of the image.
+   * @param image image being added.
+   * @throws IllegalArgumentException If arguments are null or ID is invalid/used.
+   */
+  void addImage(String id, ImageOfPixel image) throws IllegalArgumentException;
+
+  /**
+   * Removes the image by using the given corresponding ID.
+   *
+   * @param id image ID.
+   * @throws IllegalArgumentException If ID is null or invalid.
    */
   void removeImage(String id) throws IllegalArgumentException;
 
+  /**
+   * Replaces the image of given ID with the given image.
+   *
+   * @param id    image's ID being replaced.
+   * @param image image to replace the original.
+   * @throws IllegalArgumentException If arguments are null or ID is invalid.
+   */
+  void replaceImage(String id, ImageOfPixel image) throws IllegalArgumentException;
 
+
+  /**
+   * Gets the image that is associated with the given ID.
+   *
+   * @param id id of the desired image.
+   * @return the associated image.
+   * @throws IllegalArgumentException If ID is invalid or no such image can be found.
+   */
+  ImageOfPixel getImage(String id) throws IllegalArgumentException;
 }

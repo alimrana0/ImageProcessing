@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.util.HashMap;
+
 import model.imaging.Image;
 import util.ImageUtil;
 
@@ -31,10 +32,10 @@ public class ImageProcessingSession {
     String[] splitAtFormat = filepath.split("\\.", 2);
     if (splitAtFormat[1].equals("ppm")) {
       images.put(modelName,
-          new ImageProcessingModel(new Image(ImageUtil.getPixels(filepath))));
+              new ImageProcessingModel(new Image(ImageUtil.getPixels(filepath))));
     } else {
       images.put(modelName,
-          new ImageProcessingModel(new Image(ImageUtil.readImage(filepath))));
+              new ImageProcessingModel(new Image(ImageUtil.readImage(filepath))));
     }
   }
 
@@ -71,32 +72,32 @@ public class ImageProcessingSession {
       switch (component) {
         case "red":
           images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).redComponent()));
+                  new ImageProcessingModel(this.images.get(modelName).redComponent()));
           break;
 
         case "green":
           images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).greenComponent()));
+                  new ImageProcessingModel(this.images.get(modelName).greenComponent()));
           break;
 
         case "blue":
           images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).blueComponent()));
+                  new ImageProcessingModel(this.images.get(modelName).blueComponent()));
           break;
 
         case "value":
           images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).valueImage()));
+                  new ImageProcessingModel(this.images.get(modelName).valueImage()));
           break;
 
         case "luma":
           images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).luma()));
+                  new ImageProcessingModel(this.images.get(modelName).luma()));
           break;
 
         case "intensity":
           images.put(newName,
-              new ImageProcessingModel(this.images.get(modelName).intensity()));
+                  new ImageProcessingModel(this.images.get(modelName).intensity()));
           break;
         default:
           throw new IllegalArgumentException("invalid component");
@@ -120,7 +121,7 @@ public class ImageProcessingSession {
   public void horizontalFlip(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-          new ImageProcessingModel(this.images.get(modelName).horizontalFlip()));
+              new ImageProcessingModel(this.images.get(modelName).horizontalFlip()));
     } else {
       throw new IllegalArgumentException("invalid inputs");
 
@@ -137,7 +138,7 @@ public class ImageProcessingSession {
   public void verticalFlip(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-          new ImageProcessingModel(this.images.get(modelName).verticalFlip()));
+              new ImageProcessingModel(this.images.get(modelName).verticalFlip()));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }
@@ -154,7 +155,7 @@ public class ImageProcessingSession {
   public void brighten(int value, String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-          new ImageProcessingModel(this.images.get(modelName).brighten(value)));
+              new ImageProcessingModel(this.images.get(modelName).brighten(value)));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }
@@ -172,7 +173,7 @@ public class ImageProcessingSession {
   public void darken(int value, String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-          new ImageProcessingModel(this.images.get(modelName).darken(value)));
+              new ImageProcessingModel(this.images.get(modelName).darken(value)));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }
@@ -188,7 +189,7 @@ public class ImageProcessingSession {
   public void blur(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-          new ImageProcessingModel(this.images.get(modelName).blur()));
+              new ImageProcessingModel(this.images.get(modelName).blur()));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }
@@ -204,7 +205,7 @@ public class ImageProcessingSession {
   public void sharpen(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-          new ImageProcessingModel(this.images.get(modelName).sharpen()));
+              new ImageProcessingModel(this.images.get(modelName).sharpen()));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }
@@ -220,7 +221,7 @@ public class ImageProcessingSession {
   public void greyscale(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-          new ImageProcessingModel(this.images.get(modelName).greyscale()));
+              new ImageProcessingModel(this.images.get(modelName).greyscale()));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }
@@ -236,7 +237,7 @@ public class ImageProcessingSession {
   public void sepia(String modelName, String newName) {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
-          new ImageProcessingModel(this.images.get(modelName).sepia()));
+              new ImageProcessingModel(this.images.get(modelName).sepia()));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }

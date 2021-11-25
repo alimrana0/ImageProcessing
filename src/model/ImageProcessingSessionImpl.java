@@ -11,6 +11,7 @@ import filters.colortransformation.greyscale.GreenGreyscale;
 import filters.colortransformation.greyscale.RedGreyscale;
 import filters.flippingtransformation.FlipHorizontal;
 import filters.flippingtransformation.FlipVertical;
+import filters.intensitytransformation.BrightenTransformation;
 import filters.intensitytransformation.DarkenTransformation;
 import model.imaging.ImageOfPixel;
 
@@ -20,115 +21,47 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class representing the implementation of an image processing model for when we want to load
- * multiple images at once, and hide/show them in something like a GUI. One model contains only one
- * multi layer image, and can have as many layers as it wants. Layers are given names, and the names
- * are then assigned to images in the delegate. The ids of invisible layers are stored in another
- * list.
+ * Class to represent and image processor session model that is able to load several images at the
+ * same time, as well as change their visibility. Each instance may only have one multilayer, which
+ * may contain multiple images.
  */
 public class ImageProcessingSessionImpl implements IImageProcessingSession {
 
-  // private final ImageProcessorModel delegate;
-  private final List<String> layers;
-  private final List<String> hidden;
   private final Map<String, ImageOfPixel> images;
+  private final List<String> ids;
+  private final List<String> invisible;
 
   /**
-   * Creates an instance of the multi layer model.
+   * Constructs a multilayered image processor model.
    *
-   * @param layers List of ids of the layers.
-   * @param hidden List of ids of invisible layers.
-   * @throws IllegalArgumentException If any argument is null.
+   * @param ids       list of image ids.
+   * @param invisible list of ids corresponding to the current invisible images.
+   * @throws IllegalArgumentException If given null arguments.
    */
-  public ImageProcessingSessionImpl(List<String> layers,
-      List<String> hidden) throws IllegalArgumentException {
-    if (layers == null || hidden == null) {
-      throw new IllegalArgumentException("Null parameter.");
+  public ImageProcessingSessionImpl(List<String> ids,
+                                    List<String> invisible) throws IllegalArgumentException {
+    if (ids == null || invisible == null) {
+      throw new IllegalArgumentException("Arguments can't be null.");
     }
-    //  this.delegate = delegate;
-    this.layers = layers;
-    this.hidden = hidden;
     this.images = new HashMap<>();
+    this.ids = ids;
+    this.invisible = invisible;
   }
 
   /**
-   * Convenience constructor for the model.
+   * Constructs a multilayered image processor model without any given information
    */
   public ImageProcessingSessionImpl() {
-    // this.delegate = new ImageProcessorModelImpl();
-    this.layers = new ArrayList<>();
-    this.hidden = new ArrayList<>();
     this.images = new HashMap<>();
-  }
+    this.ids = new ArrayList<>();
+    this.invisible = new ArrayList<>();
 
-  @Override
-  public void addImage(String id, ImageOfPixel image) throws IllegalArgumentException {
-    if (id == null || image == null) {
-      throw new IllegalArgumentException("Arguments cannot be null.");
-    }
-    if (this.layers.contains(id)) {
-      throw new IllegalArgumentException("Id is already contained.");
-    }
-    // this.sameDimensions(image);
-    this.layers.add(id);
-    //  this.delegate.addImage(id, image);
-    if (this.images.containsKey(id)) {
-      throw new IllegalArgumentException("Image with id already exits.");
-    }
-
-    this.images.putIfAbsent(id, image);
-  }
-
-  @Override
-  public ImageOfPixel getImage(String id) throws IllegalArgumentException {
-    if (id == null) {
-      throw new IllegalArgumentException("Arguments cannot be null.");
-    }
-    // return this.delegate.getImage(id);
-    if (!this.images.containsKey(id)) {
-      throw new IllegalArgumentException("Image with id does not exist.");
-    }
-
-    return this.images.get(id);
-  }
-
-  @Override
-  public void replaceImage(String id, ImageOfPixel image) throws IllegalArgumentException {
-    if (id == null || image == null) {
-      throw new IllegalArgumentException("Arguments cannot be null.");
-    }
-    if (!this.layers.contains(id)) {
-      throw new IllegalArgumentException("Id is not contained.");
-    }
-    // this.sameDimensions(image);
-    // this.delegate.replaceImage(id, image);
-    if (!this.images.containsKey(id)) {
-      throw new IllegalArgumentException("No such image is contained");
-    }
-
-    this.images.replace(id, image);
-
-  }
-
-  /**
-   * Checks if the given image has the same dimensions as the first added layer.
-   *
-   * @param image Image to check.
-   * @throws IllegalArgumentException If the image does not have the same dimensions.
-   */
-  private void sameDimensions(ImageOfPixel image) throws IllegalArgumentException {
-    if (!this.layers.isEmpty() && (
-        image.getPixels().size() != this.images.get(this.layers.get(0)).getPixels().size() ||
-            image.getPixels().get(0).size() != this.images.get(this.layers.get(0))
-                .getPixels().get(0).size())) {
-      throw new IllegalArgumentException("Layers must all be the same dimensions.");
-    }
   }
 
   @Override
   public ImageOfPixel blur(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Arguments cannot be null.");
+      throw new IllegalArgumentException("Arguments can't be null.");
     }
     return new BlurFilter().transform(this.getImage(id));
   }
@@ -136,39 +69,39 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   @Override
   public ImageOfPixel sharpen(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Arguments cannot be null.");
+      throw new IllegalArgumentException("Arguments can't be null.");
     }
     return new SharpenFilter().transform(this.getImage(id));
   }
 
   @Override
-  public ImageOfPixel blueComponent(String id) throws IllegalArgumentException {
+  public ImageOfPixel redGrayscale(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
-    }
-    return new BlueGreyscale().applyColorTransformation(this.getImage(id));
-  }
-
-  @Override
-  public ImageOfPixel redComponent(String id) throws IllegalArgumentException {
-    if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new RedGreyscale().applyColorTransformation(this.getImage(id));
   }
 
   @Override
-  public ImageOfPixel greenComponent(String id) throws IllegalArgumentException {
+  public ImageOfPixel greenGrayscale(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new GreenGreyscale().applyColorTransformation(this.getImage(id));
   }
 
   @Override
+  public ImageOfPixel blueGrayscale(String id) throws IllegalArgumentException {
+    if (id == null) {
+      throw new IllegalArgumentException("Image can't be null");
+    }
+    return new BlueGreyscale().applyColorTransformation(this.getImage(id));
+  }
+
+  @Override
   public ImageOfPixel valueComponent(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new ValueChange().applyColorTransformation(this.getImage(id));
   }
@@ -176,7 +109,7 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   @Override
   public ImageOfPixel intensityComponent(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new IntensityChange().applyColorTransformation(this.getImage(id));
   }
@@ -185,7 +118,7 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   @Override
   public ImageOfPixel grayscale(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new GreyscaleTransformation().transform(this.getImage(id));
   }
@@ -193,7 +126,7 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   @Override
   public ImageOfPixel sepia(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new SepiaTransformation().transform(this.getImage(id));
   }
@@ -202,7 +135,7 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   @Override
   public ImageOfPixel darken(String id, int val) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new DarkenTransformation().applyTransformation(this.getImage(id), val);
   }
@@ -210,15 +143,15 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   @Override
   public ImageOfPixel brighten(String id, int val) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
-    return new DarkenTransformation().applyTransformation(this.getImage(id), val);
+    return new BrightenTransformation().applyTransformation(this.getImage(id), val);
   }
 
   @Override
   public ImageOfPixel horizontalFlip(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new FlipHorizontal().flipTransform(this.getImage(id));
   }
@@ -226,94 +159,130 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   @Override
   public ImageOfPixel verticalFlip(String id) throws IllegalArgumentException {
     if (id == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
     return new FlipVertical().flipTransform(this.getImage(id));
   }
 
-
   @Override
-  public void removeImage(String id) throws IllegalArgumentException {
-    if (id == null) {
-      throw new IllegalArgumentException("String cannot be null.");
+  public void addMultipleImages(Map<String, ImageOfPixel> images, List<String> invisible)
+          throws IllegalArgumentException {
+    if (images == null || invisible == null) {
+      throw new IllegalArgumentException("Arguments can't be null.");
     }
-    if (!this.layers.contains(id)) {
-      throw new IllegalArgumentException("Layer with id does not exist.");
-    }
-    if (!this.images.containsKey(id)) {
-      throw new IllegalArgumentException("No such image is contained");
-    }
-    this.layers.remove(id);
-    this.hidden.remove(id);
-    this.images.remove(id);
-  }
-
-
-  @Override
-  public void showImage(String id) {
-    if (id == null) {
-      throw new IllegalArgumentException("String cannot be null.");
-    }
-    if (!this.hidden.contains(id)) {
-      throw new IllegalArgumentException("Image with id is already visible.");
-    }
-    if (!this.layers.contains(id)) {
-      throw new IllegalArgumentException("Id does not exist.");
-    }
-    this.hidden.remove(id);
-  }
-
-  @Override
-  public void hideImage(String id) {
-    if (id == null) {
-      throw new IllegalArgumentException("String cannot be null.");
-    }
-    if (this.hidden.contains(id)) {
-      throw new IllegalArgumentException("Image with id is already hidden.");
-    }
-    if (!this.layers.contains(id)) {
-      throw new IllegalArgumentException("Id does not exist.");
-    }
-    this.hidden.add(id);
-  }
-
-
-  @Override
-  public void addMultipleImages(Map<String, ImageOfPixel> images, List<String> invisibleLayers)
-      throws IllegalArgumentException {
-    if (images == null || invisibleLayers == null) {
-      throw new IllegalArgumentException("Null parameters.");
-    }
-    for (String id : this.layers) {
+    for (String id : this.ids) {
       if (id == null) {
-        throw new IllegalArgumentException("Arguments cannot be null.");
+        throw new IllegalArgumentException("Arguments can't be null.");
       }
       if (!this.images.containsKey(id)) {
         throw new IllegalArgumentException("No such image is contained");
       }
       this.images.remove(id);
     }
-    this.layers.clear();
-    this.hidden.clear();
-    for (Map.Entry<String, ImageOfPixel> item : images.entrySet()) {
-      this.addImage(item.getKey(), item.getValue());
+    this.ids.clear();
+    this.invisible.clear();
+    for (Map.Entry<String, ImageOfPixel> image : images.entrySet()) {
+      this.addImage(image.getKey(), image.getValue());
     }
-    this.hidden.addAll(invisibleLayers);
-
+    this.invisible.addAll(invisible);
   }
 
   @Override
-  public List<String> getVisibility() {
-    return new ArrayList<>(this.hidden);
+  public void addImage(String id, ImageOfPixel image) throws IllegalArgumentException {
+    if (id == null || image == null) {
+      throw new IllegalArgumentException("Arguments can't be null.");
+    }
+    if (this.ids.contains(id)) {
+      throw new IllegalArgumentException("This ID is already in use.");
+    }
+    this.ids.add(id);
+    if (this.images.containsKey(id)) {
+      throw new IllegalArgumentException("An image exists with this ID.");
+    }
+
+    this.images.putIfAbsent(id, image);
   }
 
   @Override
-  public Map<String, ImageOfPixel> getLayers() throws IllegalArgumentException {
-    Map<String, ImageOfPixel> layersMap = new HashMap<>();
-    for (String id : this.layers) {
-      layersMap.put(id, this.getImage(id));
+  public void removeImage(String id) throws IllegalArgumentException {
+    if (id == null) {
+      throw new IllegalArgumentException("String can't be null.");
     }
-    return layersMap;
+    if (!this.ids.contains(id)) {
+      throw new IllegalArgumentException("No such ID.");
+    }
+    if (!this.images.containsKey(id)) {
+      throw new IllegalArgumentException("No image is contained under this ID.");
+    }
+    this.images.remove(id);
+    this.ids.remove(id);
+    this.invisible.remove(id);
   }
 
+  @Override
+  public void replaceImage(String id, ImageOfPixel image) throws IllegalArgumentException {
+    if (id == null || image == null) {
+      throw new IllegalArgumentException("Arguments can't be null.");
+    }
+    if (!this.ids.contains(id)) {
+      throw new IllegalArgumentException("This ID is not already in use.");
+    }
+    if (!this.images.containsKey(id)) {
+      throw new IllegalArgumentException("No image is contained under this ID.");
+    }
+    this.images.replace(id, image);
+  }
+
+  @Override
+  public ImageOfPixel getImage(String id) throws IllegalArgumentException {
+    if (id == null) {
+      throw new IllegalArgumentException("Arguments can't be null.");
+    }
+    if (!this.images.containsKey(id)) {
+      throw new IllegalArgumentException("No image is contained under this ID.");
+    }
+    return this.images.get(id);
+  }
+
+  @Override
+  public Map<String, ImageOfPixel> getImages() throws IllegalArgumentException {
+    Map<String, ImageOfPixel> layers = new HashMap<>();
+    for (String id : this.ids) {
+      layers.put(id, this.getImage(id));
+    }
+    return layers;
+  }
+
+  @Override
+  public void showImage(String id) {
+    if (id == null) {
+      throw new IllegalArgumentException("String can't be null.");
+    }
+    if (!this.invisible.contains(id)) {
+      throw new IllegalArgumentException("Image with id is already visible.");
+    }
+    if (!this.ids.contains(id)) {
+      throw new IllegalArgumentException("No such ID.");
+    }
+    this.invisible.remove(id);
+  }
+
+  @Override
+  public void hideImage(String id) {
+    if (id == null) {
+      throw new IllegalArgumentException("String can't be null.");
+    }
+    if (this.invisible.contains(id)) {
+      throw new IllegalArgumentException("This image is already invisible.");
+    }
+    if (!this.ids.contains(id)) {
+      throw new IllegalArgumentException("No such ID.");
+    }
+    this.invisible.add(id);
+  }
+
+  @Override
+  public List<String> getInvisible() {
+    return new ArrayList<>(this.invisible);
+  }
 }

@@ -2,13 +2,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import view.IViewListener;
-import view.ImageProcessorGUIViewImpl;
+import view.ImageProcessingGUIView;
 
 /**
  * A fake window that is used to "Fire" button commands to the controller to ensure the controller
  * is receiving commands correctly.
  */
-public class MockWindow extends ImageProcessorGUIViewImpl {
+public class MockWindow extends ImageProcessingGUIView {
 
   IViewListener listener;
 
@@ -23,9 +23,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
   }
 
   @Override
-  public void runGUI() {
-    ImageProcessorGUIViewImpl.setDefaultLookAndFeelDecorated(false);
-
+  public void run() {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setVisible(true);
   }
@@ -36,8 +34,8 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
   }
 
   @Override
-  public void actionPerformed(ActionEvent e) {
-    switch (e.getActionCommand()) {
+  public void actionPerformed(ActionEvent a) {
+    switch (a.getActionCommand()) {
       case "Save":
         emitSaveEvent();
         break;
@@ -86,9 +84,6 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
       case "Delete Image":
         emitDeleteLayerEvent();
         break;
-    /*  case "Select Image":
-        emitSelectLayerEvent();
-        break;*/
       case "Show Image":
         emitShowLayerEvent();
         break;
@@ -111,7 +106,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * file path.
    */
   private void emitLoadAllEvent() {
-    listener.handleLoadAllLayerEvent("f.getAbsolutePath()");
+    listener.loadAllHandler("f.getAbsolutePath()");
 
   }
 
@@ -120,7 +115,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * selected file path.
    */
   private void emitSaveEvent() {
-    listener.handleSaveLayerEvent("f.getAbsolutePath()",
+    listener.saveLayerHandler("f.getAbsolutePath()",
         "optionsFileType[filetypeValue]");
 
   }
@@ -130,56 +125,56 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * selected path from the user.
    */
   private void emitSaveAllEvent() {
-    listener.handleSaveAllLayerEvent("name", "type");
+    listener.saveAllHandler("name", "type");
   }
 
   /**
    * Tells the listener to blur the current layer in the image.
    */
   private void emitBlurLayerEvent() {
-    listener.handleBlurEvent();
+    listener.blurHandler();
   }
 
   /**
    * Tells the listener to sharpen the current layer in the image.
    */
   private void emitSharpenLayerEvent() {
-    listener.handleSharpenEvent();
+    listener.sharpenHandler();
   }
 
   /**
    * Tells the listener to grayscale the current layer in the image.
    */
   private void emitGrayscaleLayerEvent() {
-    listener.handleGrayscaleEvent();
+    listener.grayscaleHandler();
   }
 
   /**
    * Tells the listener to sepia the current layer in the image.
    */
   private void emitSepiaLayerEvent() {
-    listener.handleSepiaEvent();
+    listener.sepiaHandler();
   }
 
   /**
    * Tells the listener to apply the red component to the current image.
    */
   private void emitRedComponentLayerEvent() {
-    listener.handleRedEvent();
+    listener.redComponentHandler();
   }
 
   /**
    * Tells the listener to apply the green component to the current layer in the image.
    */
   private void emitGreenComponentLayerEvent() {
-    listener.handleGreenEvent();
+    listener.greenComponentHandler();
   }
 
   /**
    * Tells the listener to apply the blue component to the current layer in the image.
    */
   private void emitBlueComponentLayerEvent() {
-    listener.handleBlueEvent();
+    listener.blueComponentHandler();
   }
 
 
@@ -187,14 +182,14 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * Tells the listener to apply the value component to the current layer in the image.
    */
   private void emitValueComponentLayerEvent() {
-    listener.handleValueEvent();
+    listener.valueHandler();
   }
 
   /**
    * Tells the listener to apply the intensity component to the current layer in the image.
    */
   private void emitIntensityComponentLayerEvent() {
-    listener.handleIntensityEvent();
+    listener.intensityHandler();
   }
 
   /**
@@ -202,7 +197,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * the image.
    */
   private void emitDarkenEvent(int val) {
-    listener.handleDarkenEvent(val);
+    listener.darkenHandler(val);
   }
 
   /**
@@ -210,7 +205,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * in the image.
    */
   private void emitBrightenEvent(int val) {
-    listener.handleBrightenEvent(val);
+    listener.brightenHandler(val);
   }
 
 
@@ -218,14 +213,14 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * Tells the listener to apply a vertical flip to the current layer in the image.
    */
   private void emitVerticalFlipEvent() {
-    listener.handleVerticalFlipEvent();
+    listener.handleFlipVertical();
   }
 
   /**
    * Tells the listener to apply a horizontal flip to the current layer in the image.
    */
   private void emitHorizontalFlipEvent() {
-    listener.handleHorizontalFlipEvent();
+    listener.handleFlipHorizontal();
   }
 
 
@@ -234,7 +229,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * with the new list of layers.
    */
   private void emitDeleteLayerEvent() {
-    listener.removeLayerEvent();
+    listener.removeLayer();
   }
 
   /**
@@ -243,21 +238,21 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    */
   private void emitSelectLayerEvent() {
     String layerName = JOptionPane.showInputDialog("Layer Name");
-    listener.setCurrentLayerEvent(layerName);
+    listener.selectLayer(layerName);
   }
 
   /**
    * Tells the listener to set the current layer to visible.
    */
   private void emitShowLayerEvent() {
-    listener.showEvent();
+    listener.show();
   }
 
   /**
    * Tells the listener to make the current layer invisible.
    */
   private void emitHideLayerEvent() {
-    listener.hideEvent();
+    listener.hide();
   }
 
   /**
@@ -265,7 +260,7 @@ public class MockWindow extends ImageProcessorGUIViewImpl {
    * file path as a layer in the program. The name of the layer is also taken from the user.
    */
   private void emitLoadImageEvent() {
-    listener.handleLoadLayerEvent("name", "type", "name");
+    listener.loadLayerHandler("name", "type", "name");
 
   }
 

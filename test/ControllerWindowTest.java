@@ -5,7 +5,7 @@ import model.IImageProcessingSession;
 import model.ImageProcessingSessionImpl;
 
 import org.junit.Test;
-import view.ImageProcessorGUIViewImpl;
+import view.ImageProcessingGUIView;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +22,7 @@ public class ControllerWindowTest {
     StringBuilder sB = new StringBuilder();
     IImageProcessingSession session = new ImageProcessingSessionImpl();
     MockController mockController = new MockController(sB,session);
-    ImageProcessorGUIViewImpl mockView = new MockWindow(mockController);
+    ImageProcessingGUIView mockView = new MockWindow(mockController);
 
 
     ActionEvent save = new ActionEvent(this, 1, "save");

@@ -1,5 +1,5 @@
 
-import controller.ImageProcessorGUIController;
+import controller.ImageProcessingControllerGUI;
 
 import model.IImageProcessingSession;
 
@@ -7,7 +7,7 @@ import model.IImageProcessingSession;
  * A fake controller used to check that the controller is receiving the correct input from the
  * view.
  */
-public class MockController extends ImageProcessorGUIController {
+public class MockController extends ImageProcessingControllerGUI {
 
   StringBuilder log;
 
@@ -27,117 +27,117 @@ public class MockController extends ImageProcessorGUIController {
   }
 
   @Override
-  public void handleSaveLayerEvent(String filename, String filetype) {
+  public void saveLayerHandler(String filename, String filetype) {
     log.append("\nsave " + filename + " " + filetype);
   }
 
 
   @Override
-  public void handleLoadLayerEvent(String filename, String filetype, String layerName) {
+  public void loadLayerHandler(String filename, String filetype, String layerName) {
     log.append("\nsave " + filename + " " + filetype + " " + layerName);
   }
 
   @Override
-  public void handleSaveAllLayerEvent(String fileName, String fileType)
+  public void saveAllHandler(String fileName, String fileType)
       throws IllegalStateException {
     log.append("\nsaveALL " + fileName + " " + fileType);
 
   }
 
   @Override
-  public void handleLoadAllLayerEvent(String filename) {
+  public void loadAllHandler(String filename) {
     log.append("\nhandle load all layer");
   }
 
   @Override
-  public void handleBlurEvent() {
+  public void blurHandler() {
     log.append("\nblur");
   }
 
   @Override
-  public void handleSharpenEvent() {
+  public void sharpenHandler() {
 
     log.append("\nsharpen");
   }
 
   @Override
-  public void handleVerticalFlipEvent() {
+  public void handleFlipVertical() {
     log.append("\nvertical");
   }
 
   @Override
-  public void handleHorizontalFlipEvent() {
+  public void handleFlipHorizontal() {
     log.append("\nhorizontal");
   }
 
   @Override
-  public void handleGrayscaleEvent() {
+  public void grayscaleHandler() {
     log.append("\ngrayscale");
   }
 
   @Override
-  public void handleSepiaEvent() {
+  public void sepiaHandler() {
     log.append("\nsepia");
   }
 
   @Override
-  public void handleRedEvent() {
+  public void redComponentHandler() {
     log.append("\nred");
   }
 
   @Override
-  public void handleGreenEvent() {
+  public void greenComponentHandler() {
     log.append("\ngreen");
   }
 
   @Override
-  public void handleBlueEvent() {
+  public void blueComponentHandler() {
     log.append("\nblue");
   }
 
   @Override
-  public void handleValueEvent() {
+  public void valueHandler() {
     log.append("\nvalue");
   }
 
   @Override
-  public void handleIntensityEvent() {
+  public void intensityHandler() {
 
     log.append("\nintensity");
   }
 
   @Override
-  public void handleDarkenEvent(int val) {
+  public void darkenHandler(int val) {
     log.append("\ndarken" + val);
   }
 
   @Override
-  public void handleBrightenEvent(int val) {
+  public void brightenHandler(int val) {
     log.append("\nbrighten" + val);
   }
 
   @Override
-  public void showEvent() {
+  public void show() {
     log.append("\nshowEvent");
   }
 
   @Override
-  public void hideEvent() {
+  public void hide() {
     log.append("\nhideEvent");
   }
 
   @Override
-  public void removeLayerEvent() {
+  public void removeLayer() {
     log.append("\nremoveLayer");
   }
 
   @Override
-  public void setCurrentLayerEvent(String layerID) {
+  public void selectLayer(String layerID) {
     log.append("\nset layer" + layerID);
   }
 
   @Override
-  public void runScriptEvent(String filename) {
+  public void useScript(String filename) {
     log.append("\nScript" + filename);
   }
 

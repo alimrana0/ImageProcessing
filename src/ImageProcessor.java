@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.ImageProcessorControllerImpl;
-import controller.ImageProcessorGUIController;
+import controller.ImageProcessingController;
+import controller.ImageProcessingControllerGUI;
 import model.IImageProcessingSession;
 import model.ImageProcessingModel;
 import model.ImageProcessingSession;
@@ -32,57 +32,33 @@ public final class ImageProcessor {
    * @throws IOException if the client gives inputs invalid to the ImageProcessor.
    */
   public static void main(String[] args) throws IOException {
-//    Readable rd = new InputStreamReader(System.in);
-//
-//    ArrayList<IPixel> pixelArray = new ArrayList<>();
-//    pixelArray.add(new Pixel(new Posn(0, 0), new Color(0, 0, 0)));
-//    List<ArrayList<IPixel>> basicArray = new ArrayList<>();
-//    basicArray.add(pixelArray);
-//    Image emptyImage = new Image(basicArray);
-//
-//    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
-//        System.out);
-//    ImageProcessingSession session = new ImageProcessingSession();
-//
-//    ImageController controller = new ImageControllerImpl(session, view, rd);
-//    controller.run();
-//
 
     if (args.length == 2) {
       if (args[0].equals("-script")) {
-        new ImageProcessorControllerImpl(new ImageProcessingSessionImpl(),
-            new FileReader(args[1]), System.out).run();
+        new ImageProcessingController(new ImageProcessingSessionImpl(),
+                new FileReader(args[1]), System.out).run();
       }
     } else if (args.length == 1 && args[0].equals("-text")) {
       Readable rd = new InputStreamReader(System.in);
 
       ArrayList<IPixel> pixelArray = new ArrayList<>();
       pixelArray.add(new Pixel(new Posn(0, 0), new Color(0, 0, 0)));
-      List<ArrayList<IPixel>> list = new ArrayList<>();
-      list.add(pixelArray);
+      List<ArrayList<IPixel>> basicArray = new ArrayList<>();
+      basicArray.add(pixelArray);
+      Image emptyImage = new Image(basicArray);
 
-      Image startingImage = new Image(list);
-      ImageProcessingSession instance = new ImageProcessingSession();
-      ImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(startingImage),
-          System.out);
+      ImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+              System.out);
+      ImageProcessingSession session = new ImageProcessingSession();
 
-      ImageController controller = new ImageControllerImpl(instance, view, rd);
+      ImageController controller = new ImageControllerImpl(session, view, rd);
       controller.run();
-    }
-
-
-    /*else if (args.length == 1 && args[0].equals("-text")) {
-      new ImageProcessorControllerImpl(new ImageProcessorInstanceImpl(),
-          new InputStreamReader(System.in), System.out).start();
-    }*/
-    else if (args.length == 0) {
+    } else if (args.length == 0) {
       IImageProcessingSession testModel = new ImageProcessingSessionImpl();
-      ImageController controller = new ImageProcessorGUIController(testModel);
+      ImageController controller = new ImageProcessingControllerGUI(testModel);
       controller.run();
     } else {
-      System.out.println("Bad arguments for program.");
+      System.out.println("Arguments are not valid.");
     }
-
   }
-
 }

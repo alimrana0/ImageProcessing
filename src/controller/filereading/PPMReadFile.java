@@ -17,20 +17,20 @@ import model.imaging.pixel.Pixel;
  * This class contains utility methods to read a PPM image from file and simply print its contents.
  * Feel free to change this method as required.
  */
-public class PPMFileReader implements IFileReader {
+public class PPMReadFile implements IReadFile {
 
   @Override
-  public ImageOfPixel readImageFromFile(String filename) throws IllegalArgumentException {
+  public ImageOfPixel readImage(String name) throws IllegalArgumentException {
     Scanner sc;
 
-    if (filename == null) {
-      throw new IllegalArgumentException("Name cannot be null");
+    if (name == null) {
+      throw new IllegalArgumentException("Name can't' be null");
     }
 
     try {
-      sc = new Scanner(new FileInputStream(filename));
-    } catch (FileNotFoundException e) {
-      throw new IllegalArgumentException("File could not be found");
+      sc = new Scanner(new FileInputStream(name));
+    } catch (FileNotFoundException exception) {
+      throw new IllegalArgumentException("File couldn't be found");
     }
     StringBuilder builder = new StringBuilder();
     //read the file line by line, and populate a string. This will throw away any comment lines

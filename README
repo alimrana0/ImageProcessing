@@ -21,13 +21,22 @@ and converted into the correct ppm format using ImageMagick.
 The main processor that executes the runtime of an ImageProcessor.
 #model
 **-- IImageProcessorModel**
-The IImageProcessingModel interface is our primary model interface. It contains all current image processing methods for our model, which are the transformations on an Image that the processor supports.
+The IImageProcessingModel interface is the primary model interface for a single layered image. It contains all current image processing methods for our model, which are the transformations on an Image that the processor supports.
+**-- IImageProcessingSession**
+The IImageProcessingModel interface is our primary model interface for a multilayered image. It contains all current image processing methods for our model, which are the transformations on an Image that the processor supports. It also allows for the manipulation of the layers in the image, such as getting, adding, removing, and hiding the images.
 **-- ImageProcessingModel**
 The ImageProcessingModelImpl is the primary model class, which functions as a caller on transformations on an image.
 **-- ImageProcessingSession**
 The ImageProcessingSession is a class that handles the saving/loading of files. It acts as a transient holder for images being processed in the controller.
-**-- ImageUtil**
-The ImageUtil is a class that deals with reading and loading an image from its file and getting the image's pixels.
+**-- ImageProcessingSessionImpl**
+The ImageProcessingSession is a class that handles the saving/loading of files of a multilayered image model and the transformations/filtering on these image layers. It acts as a transient holder for images being processed in the controller.
+##graph
+**-- Histogram**
+The Histogram class is a class that represents the mapping of lines on a graph represented as red, green, blue, and intensity values.
+**-- Line**
+The Line class is a class that represents a connection of multiple Position2Ds in a specified color.
+**-- Position2D**
+The Position2D class is a class that represented a 2D positional coordinate.
 ##Imaging
 **-- IColor**.
 The color interface contains methods to retrieve red,green, and blue color values from wherever they are stored.
@@ -104,9 +113,47 @@ The VerticalFlip class represents an image being flipped over the horizontal mid
 The ImageController interface is the primary controller interface for the Image Processor. It contains a single method called run(), which runs the Image Processor based off user input.
 **-- ImageControllerImpl**.
 The ImageControllerImpl class implements the ImageController interface. It is the primary controller for an Image Processor. This class takes in user input and delegates processing to the model depending on the given commands. It also allows for transformed images to be read and saved.
+**-- ImageProcessingController**.
+The ImageProcessingController class implements the ImageController interface. It is the primary controller for an Image Processor that deals with multilayered images. This class takes in user input and delegates processing to the model depending on the given commands. It also allows for transformed images to be read,saved, and hidden.
+**-- ImageProcessingControllerGUI**.
+The ImageProcessingController class implements the ImageController and IViewListener interface. It is the primary controller for an Image Processor that deals with multilayered images and is represented by a GUI. This class takes in user input through a GUI and delegates processing to the model depending on the given commands. It also allows for transformed images to be read,saved, and hidden.
+##filereading
+**-- ImageReadFile**
+The ImageReadFile class is a class that reads in a general image and loads its contents
+**-- IReadFile**
+The IReadFile interface is an interface that contains one method that operates on an image to read its contents
+**-- IReadMultiLayered**
+The IReadMultiLayered interface is an interface that reads in a multilayered image and loads its contents
+**-- PPMReadFile**
+The PPMReadFile class is a class that contains methods to read in a PPM image and return its contents.
+**-- ReadMultiLayered**
+The ReadMultiLayered class is a class that contains methods to read in a multilayered image by using its contents and visibility to set the file paths and layer IDs.
+##filereading
+**-- AbstractImageWriteFile**
+The AbstractImageWriteFile class is a class that creates an abstraction for an object that would write to a text file given an image's contents.
+**-- IImageWriteFile**
+The IImageWriteFile interface is an interface that contains one method that will be used to write to a file using an image's contents.
+**-- IWriteMultiLayered**
+The IWriteMultiLayered interface is an interface that contains one method that will be used to write to a file using a multilayered image's contents using the layer visibilities and IDs.
+**-- PPMWriteFile**
+The PPMWriteFile class is a class that contains methods to use an image's information to write to a PPM file representation of that image.
+*-- PNGWriteFile**
+The PNGWriteFile class is a class that contains methods to use an image's information to write to a PNG file representation of that image.
+*-- JPEGWriteFile**
+The JPEGWriteFile class is a class that contains methods to use an image's information to write to a JPEG file representation of that image.
+**-- WriteMultiLayered**
+The WriteMultiLayered class is a class that contains methods to use a multilayered image's information to write to a folder that contains the image file representing the image and a text file of its general contents.
 #view
 **-- IImageProcessingView**
 The IImageProcessingView interface contains two methods to display. One renders a given message to the System, and the other shows the client options for commands.
 **-- ImageProcessingView**
 The ImageProcessingView class implements the IImageProcessingView interface. It performs transformations on the given image based on user inputs. The user may use current files or transform previously saved files.
-
+**-- IImageProcessingGUIView**
+The IImageProcessingGUIView interface contains methods to display a GUI that can add and set images.
+**-- IViewListener**
+The IViewListener interface contains most of the methods that would be required of a GUI representing a multilayered image.
+**-- ImageProcessingGUIView**
+The ImageProcessingGUIView class extends JFrame implements IImageProcessingGUIView, ActionListener and contains the main code for the GUI display of a multilayered image. It contains every possible action possible by the user, and allows the actions to be interactive by allowing user input to change the view.
+##graph
+**-- GraphPanel**
+The GraphPanel class is a class that creates a JLayeredPanel that constructs a graph of given RGB and intensity values based on the image's pixel information.

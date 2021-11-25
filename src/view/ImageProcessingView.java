@@ -2,6 +2,8 @@ package view;
 
 import java.io.IOException;
 
+import model.IImageProcessingModel;
+import model.IImageProcessingSession;
 import model.ImageProcessingModel;
 
 /**
@@ -25,6 +27,7 @@ public class ImageProcessingView implements IImageProcessingView {
 
   }
 
+
   /**
    * Constructor that takes in both a model and an output source.
    *
@@ -33,10 +36,22 @@ public class ImageProcessingView implements IImageProcessingView {
    */
   public ImageProcessingView(ImageProcessingModel model, Appendable out) {
     if (model == null || out == null) {
-      throw new IllegalArgumentException("Arguments cannot be null");
+      throw new IllegalArgumentException("Arguments can't be null");
     }
 
     this.model = model;
+    this.out = out;
+  }
+
+  /**
+   * Constructor for an ImageProcessingView that takes in an output source.
+   *
+   * @param out Output source
+   */
+  public ImageProcessingView(Appendable out) {
+    if (model == null || out == null) {
+      throw new IllegalArgumentException("Arguments can't be null");
+    }
     this.out = out;
   }
 
@@ -56,6 +71,7 @@ public class ImageProcessingView implements IImageProcessingView {
 
   /**
    * Shows the options that a client has for use.
+   *
    * @throws IOException if the option menu message fails to transmit to the data destination.
    */
   public void showOptions() throws IOException {
