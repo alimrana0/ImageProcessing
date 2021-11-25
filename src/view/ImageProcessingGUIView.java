@@ -119,7 +119,8 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     edit.getAccessibleContext().setAccessibleDescription("Menu for editing");
 
     transformations = new JMenu("Transform");
-    transformations.getAccessibleContext().setAccessibleDescription("Menu for color transformations");
+    transformations.getAccessibleContext()
+            .setAccessibleDescription("Menu for color transformations");
     transformations.setEnabled(false);
 
     filters = new JMenu("Filter");
@@ -134,7 +135,8 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     transformations.add(redComponent);
 
     JMenuItem greenComponent = new JMenuItem("Green Grayscale");
-    greenComponent.getAccessibleContext().setAccessibleDescription("Green Grayscale transformation");
+    greenComponent.getAccessibleContext().
+            setAccessibleDescription("Green Grayscale transformation");
     greenComponent.setActionCommand("Green Grayscale\"");
     greenComponent.addActionListener(this);
     transformations.add(greenComponent);
@@ -152,13 +154,15 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     transformations.add(grayscale);
 
     JMenuItem valueComponent = new JMenuItem("Value Component");
-    valueComponent.getAccessibleContext().setAccessibleDescription("Value Component transformation");
+    valueComponent.getAccessibleContext().
+            setAccessibleDescription("Value Component transformation");
     valueComponent.setActionCommand("Value Component\"");
     valueComponent.addActionListener(this);
     transformations.add(valueComponent);
 
     JMenuItem intensityComponent = new JMenuItem("Intensity Component");
-    intensityComponent.getAccessibleContext().setAccessibleDescription("Intensity Component transformation");
+    intensityComponent.getAccessibleContext().
+            setAccessibleDescription("Intensity Component transformation");
     intensityComponent.setActionCommand("Intensity Component");
     intensityComponent.addActionListener(this);
     transformations.add(intensityComponent);
@@ -170,7 +174,8 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     transformations.add(flipVertical);
 
     JMenuItem flipHorizontal = new JMenuItem("Horizontal Flip");
-    flipHorizontal.getAccessibleContext().setAccessibleDescription("Horizontal Flip transformation");
+    flipHorizontal.getAccessibleContext().
+            setAccessibleDescription("Horizontal Flip transformation");
     flipHorizontal.setActionCommand("Horizontal Flip");
     flipHorizontal.addActionListener(this);
     transformations.add(flipHorizontal);
@@ -475,6 +480,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
         break;
       case "Load Multi":
         sendLoadAllInstructions();
+        break;
       case "Add Image":
         sendLoadImageInstruction();
         break;
@@ -493,7 +499,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
       case "Hide Image":
         sendHideInstruction();
         break;
-      case "default":
+      default:
         break;
     }
   }

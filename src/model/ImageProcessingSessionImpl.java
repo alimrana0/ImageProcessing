@@ -49,7 +49,7 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   }
 
   /**
-   * Constructs a multilayered image processor model without any given information
+   * Constructs a multilayered image processor model without any given information.
    */
   public ImageProcessingSessionImpl() {
     this.images = new HashMap<>();

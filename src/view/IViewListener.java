@@ -57,9 +57,9 @@ public interface IViewListener {
   /**
    * Handles the select layer event on the selected image by using the given ID as the selection.
    *
-   * @param ID current layer's ID.
+   * @param id current layer's ID.
    */
-  void selectLayer(String ID);
+  void selectLayer(String id);
 
   /**
    * Handles the blurring of the selected image.

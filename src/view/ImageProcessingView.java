@@ -2,8 +2,6 @@ package view;
 
 import java.io.IOException;
 
-import model.IImageProcessingModel;
-import model.IImageProcessingSession;
 import model.ImageProcessingModel;
 
 /**

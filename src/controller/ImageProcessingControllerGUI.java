@@ -99,8 +99,8 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
         } catch (IOException e) {
           throw new IllegalStateException();
         }
-      case "default":
-        break;
+      default:
+        handleRender("The file type is invalid");
     }
   }
 
@@ -122,8 +122,8 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
           handleRender(e.getMessage());
         }
         break;
-      case "default":
-        break;
+      default:
+        handleRender("The file type is invalid");
     }
   }
 
@@ -396,9 +396,9 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
   }
 
   @Override
-  public void selectLayer(String layerID) {
-    if (this.model.getImages().containsKey(layerID)) {
-      this.selected = layerID;
+  public void selectLayer(String id) {
+    if (this.model.getImages().containsKey(id)) {
+      this.selected = id;
       this.updateHistogram();
     } else {
       handleRender("This image does not exist");

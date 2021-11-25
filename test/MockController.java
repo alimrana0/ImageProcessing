@@ -132,8 +132,8 @@ public class MockController extends ImageProcessingControllerGUI {
   }
 
   @Override
-  public void selectLayer(String layerID) {
-    log.append("\nset layer" + layerID);
+  public void selectLayer(String id) {
+    log.append("\nset layer" + id);
   }
 
   @Override
