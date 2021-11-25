@@ -99,6 +99,7 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
         } catch (IOException e) {
           throw new IllegalStateException();
         }
+        break;
       default:
         handleRender("The file type is invalid");
     }
