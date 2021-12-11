@@ -17,6 +17,8 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel brighten(int val) throws IllegalArgumentException;
 
+  ImageOfPixel brighten(int val, ImageOfPixel maskedImage) throws IllegalArgumentException;
+
   /**
    * Darkens a given image.
    * @param val value that the image will be darkened by.
@@ -25,12 +27,16 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel darken(int val) throws IllegalArgumentException;
 
+  ImageOfPixel darken(int val, ImageOfPixel maskedImage) throws IllegalArgumentException;
+
   /**
    * Greyscale an image based on the blue component.
    * @return the greyscale image.
    * @throws IllegalArgumentException if the image is null
    */
   ImageOfPixel blueComponent() throws IllegalArgumentException;
+
+
 
   /**
    * Greyscale an image based on the red component.
@@ -87,11 +93,15 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel blur();
 
+  ImageOfPixel blur(ImageOfPixel maskedImage);
+
   /**
    * Filters the image by sharpening the image.
    * @return The sharpened image.
    */
   ImageOfPixel sharpen();
+
+  ImageOfPixel sharpen(ImageOfPixel maskedImage);
 
   /**
    * Transforms the image into a sepia colored image.
@@ -114,5 +124,7 @@ public interface IImageProcessingModel {
   void saveImageAsPPM(String filename) throws IOException;
 
   void saveImageAs(String outputName) throws IOException;
+
+  ImageOfPixel returnMaskedImage();
 
 }

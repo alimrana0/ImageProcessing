@@ -5,28 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.imaging.Color;
+import model.imaging.IColor;
 import model.imaging.Image;
 import model.imaging.ImageOfPixel;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
 
-/**
- * An abstract class to allow for a filter to be used on an image using a given kernel (must be
- * of odd dimensions).
- */
-public abstract class AbstractImageProcessing extends AbstractImageProcessingMaskTransform implements IFilter {
+public class AbstractImageProcessingMaskTransform {
 
   protected final IKernel kernel;
 
-  /**
-   * Constructs an abstract filter with a given kernel.
-   *
-   * @param kernel kernel being used for filtering.
-   * @throws IllegalArgumentException If kernel is null, not square, or not of odd dimensions.
-   */
-  protected AbstractImageProcessing(IKernel kernel) throws IllegalArgumentException {
-    super(kernel);
+  protected AbstractImageProcessingMaskTransform(IKernel kernel) throws IllegalArgumentException {
     if (kernel == null) {
       throw new IllegalArgumentException("Argument can't be null.");
     }
@@ -36,14 +26,39 @@ public abstract class AbstractImageProcessing extends AbstractImageProcessingMas
     this.kernel = kernel;
   }
 
-  @Override
-  public ImageOfPixel transform(ImageOfPixel image) throws IllegalArgumentException {
+  public ImageOfPixel maskTransform(ImageOfPixel image, ImageOfPixel maskedImage) throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image can't be null.");
     }
     List<List<IPixel>> imagePixels = image.getPixels();
+    List<Posn> maskedPixelsPosns = storeBlack(maskedImage.getPixels());
 
-    return new Image(filtered(imagePixels, image));
+    return new Image(filtered(imagePixels, image, maskedPixelsPosns));
+  }
+
+  /**
+   * Stores the black pixels of the mask image in a list.
+   * @param maskedPixels the 2D list of pixels of the mask image
+   * @return a list of Posns for the black pixels in the mask
+   */
+  protected List<Posn> storeBlack(List<List<IPixel>> maskedPixels)  {
+    List<Posn> blackPixels = new ArrayList();
+    for (int i = 0; i < maskedPixels.size(); i++) {
+      for (int j = 0; j < maskedPixels.get(0).size(); j++) {
+        if (maskedPixels.get(i).get(j).getColor().getRed() == 0
+                && maskedPixels.get(i).get(j).getColor().getBlue() == 0
+                && maskedPixels.get(i).get(j).getColor().getGreen() == 0) {
+          blackPixels.add(maskedPixels.get(i).get(j).getPosn());
+        } // Decided not to error handle a non-black-and-white image so that the black pixels of
+        //any image can be transferred onto an image
+//        else if ((maskedPixels.get(i).get(j).getColor().getRed() != 255)
+//                || (maskedPixels.get(i).get(j).getColor().getGreen() != 255)
+//        || (maskedPixels.get(i).get(j).getColor().getBlue() != 255)){
+//          throw new IllegalArgumentException("Image is not black and white");
+//        }
+      }
+    }
+    return blackPixels;
   }
 
   /**
@@ -54,12 +69,17 @@ public abstract class AbstractImageProcessing extends AbstractImageProcessingMas
    * @return The filtered 2D pixel array.
    */
   protected List<ArrayList<IPixel>> filtered(List<List<IPixel>> pixels,
-                                             ImageOfPixel image) {
+                                             ImageOfPixel image, List<Posn> maskedPixelsPosns) {
     List<ArrayList<IPixel>> newPixels = new ArrayList<>();
     for (int i = 0; i < pixels.size(); i++) {
       ArrayList<IPixel> r = new ArrayList<>();
       for (int j = 0; j < pixels.get(0).size(); j++) {
-        r.add(filter(pixels.get(i).get(j), image));
+        if(maskedPixelsPosns.contains(pixels.get(i).get(j).getPosn())) {
+          r.add(filter(pixels.get(i).get(j), image));
+        }
+        else {
+          r.add(pixels.get(i).get(j));
+        }
       }
       newPixels.add(r);
     }

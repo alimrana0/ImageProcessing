@@ -3,7 +3,6 @@ package filters.intensitytransformation;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import model.imaging.Image;
 import model.imaging.ImageOfPixel;
 import model.imaging.pixel.IPixel;
@@ -11,12 +10,13 @@ import model.imaging.pixel.IPixel;
 /**
  * Abstract class for an intensity transformation on an image.
  */
-public abstract class AbstractIntensityTransformation implements IIntensityTransform {
+public abstract class AbstractIntensityTransformation extends AbstractIntensityMaskTransform implements IIntensityTransform {
 
   /**
    * Empty constructor for an abstract intensity transformation.
    */
   protected AbstractIntensityTransformation() {
+    super();
     //Doesn't need any initializations.
   }
 

@@ -1,9 +1,13 @@
 package model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import model.imaging.Image;
+import model.imaging.ImageOfPixel;
+import model.imaging.pixel.IPixel;
 import util.ImageUtil;
 
 /**
@@ -37,6 +41,10 @@ public class ImageProcessingSession {
       images.put(modelName,
               new ImageProcessingModel(new Image(ImageUtil.readImage(filepath))));
     }
+  }
+
+  public ImageOfPixel getPixels(String modelName) {
+    return this.images.get(modelName).darken(0);
   }
 
   /**
@@ -161,6 +169,16 @@ public class ImageProcessingSession {
     }
   }
 
+  public void brighten(int value, String modelName, String maskedName, String newName) {
+
+    if (this.images.containsKey(modelName) && this.images.containsKey(maskedName)) {
+      ImageOfPixel maskedImage = this.images.get(maskedName).returnMaskedImage();
+      images.put(newName,
+              new ImageProcessingModel(this.images.get(modelName).brighten(value, maskedImage)));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
 
   /**
    * Given a value, a name of a stored image, and the name to store the manipulated image under this
@@ -174,6 +192,18 @@ public class ImageProcessingSession {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
               new ImageProcessingModel(this.images.get(modelName).darken(value)));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
+
+
+  public void darken(int value, String modelName, String maskedName, String newName) {
+
+    if (this.images.containsKey(modelName) && this.images.containsKey(maskedName)) {
+      ImageOfPixel maskedImage = this.images.get(maskedName).returnMaskedImage();
+      images.put(newName,
+              new ImageProcessingModel(this.images.get(modelName).darken(value, maskedImage)));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }
@@ -195,6 +225,16 @@ public class ImageProcessingSession {
     }
   }
 
+  public void blur(String modelName, String maskedName, String newName) {
+    ImageOfPixel maskedImage = this.images.get(maskedName).returnMaskedImage();
+    if (this.images.containsKey(modelName) && this.images.containsKey(maskedName)) {
+      images.put(newName,
+              new ImageProcessingModel(this.images.get(modelName).blur(maskedImage)));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
+
   /**
    * Given the name of the stored image and a name to save the manipulation this method makes a
    * sharpened image.
@@ -206,6 +246,16 @@ public class ImageProcessingSession {
     if (this.images.containsKey(modelName)) {
       images.put(newName,
               new ImageProcessingModel(this.images.get(modelName).sharpen()));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
+
+  public void sharpen(String modelName, String maskedName, String newName) {
+    if (this.images.containsKey(modelName) && this.images.containsKey(maskedName)) {
+      images.put(newName,
+              new ImageProcessingModel(this.images.get(modelName)
+                      .sharpen(this.images.get(maskedName).returnMaskedImage())));
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }

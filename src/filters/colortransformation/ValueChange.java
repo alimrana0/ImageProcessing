@@ -42,4 +42,9 @@ public class ValueChange extends AbstractColorTransformation {
   private int getMaxColor(int r, int g, int b) {
     return Math.max(r, Math.max(g, b));
   }
+
+//  @Override
+//  protected IPixel maskedColorTransform(IPixel p) {
+//    return null;
+//  }
 }

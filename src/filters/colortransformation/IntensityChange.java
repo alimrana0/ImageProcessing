@@ -35,4 +35,9 @@ public class IntensityChange extends AbstractColorTransformation {
     return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(avg,
             avg, avg));
   }
+
+//  @Override
+//  protected IPixel maskedColorTransform(IPixel p) {
+//    return null;
+//  }
 }
