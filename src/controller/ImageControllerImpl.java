@@ -100,6 +100,7 @@ public class ImageControllerImpl implements ImageController {
                 this.view.renderMessage("\n" + e.getMessage());
 
             }
+              break;
           }
           this.thirdImgName = in.next();
           try {
@@ -121,7 +122,7 @@ public class ImageControllerImpl implements ImageController {
               } catch (IllegalArgumentException e) {
                 this.view.renderMessage("\n" + e.getMessage());
               }
-
+              break;
           }
           this.thirdImgName = in.next();
           try {
@@ -143,7 +144,7 @@ public class ImageControllerImpl implements ImageController {
               } catch (IllegalArgumentException e) {
                 this.view.renderMessage("\n" + e.getMessage());
               }
-
+              break;
           }
           this.thirdImgName = in.next();
           try {
@@ -165,6 +166,7 @@ public class ImageControllerImpl implements ImageController {
               } catch (IllegalArgumentException e) {
                 this.view.renderMessage("\n" + e.getMessage());
               }
+              break;
             }
           this.thirdImgName = in.next();
           try {
@@ -186,7 +188,7 @@ public class ImageControllerImpl implements ImageController {
               } catch (IllegalArgumentException e) {
                 this.view.renderMessage("\n" + e.getMessage());
               }
-
+              break;
           }
             this.thirdImgName = in.next();
             try {
@@ -239,7 +241,7 @@ public class ImageControllerImpl implements ImageController {
               } catch (IllegalArgumentException e) {
                 this.view.renderMessage("\n" + e.getMessage());
               }
-
+              break;
           }
           this.thirdImgName = in.next();
           try {
@@ -269,7 +271,7 @@ public class ImageControllerImpl implements ImageController {
               } catch (IllegalArgumentException e) {
                 this.view.renderMessage("\n" + e.getMessage());
               }
-
+              break;
           }
           this.thirdImgName = in.next();
           try {
