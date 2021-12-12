@@ -394,21 +394,15 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     previewGUI = new ImagePreviewGUI(this.topImg);
     JScrollPane previewScroll = new JScrollPane(previewGUI);
 
-    //previewScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    //previewScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     previewScroll.setPreferredSize(new Dimension(200,200));
-    previewScroll.setBounds(0,0,200,200);
     //create and set frame parameters
     JFrame previewFrame = new JFrame("Operation Preview");
     previewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     previewFrame.setPreferredSize(new Dimension(200, 200));
     previewFrame.setResizable(false);
 
-    previewFrame.add(previewScroll);
-
+    previewFrame.setContentPane(previewScroll);
     previewFrame.pack();
-
-
     previewFrame.setVisible(true);
 
   }
@@ -466,6 +460,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     previewGUI.setImageToShow(img);
     previewGUI.repaint();
+    previewGUI.revalidate();
 
     repaint();
     revalidate();
