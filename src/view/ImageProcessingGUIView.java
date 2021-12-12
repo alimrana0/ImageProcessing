@@ -2,6 +2,7 @@ package view;
 
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.ScrollPane;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
@@ -65,6 +66,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
 
   private final GraphPanel graph;
+  private final ImagePreviewGUI previewGUI;
 
   /**
    * Constructor for the foundation GUI that will be manipulated in the future by the user.
@@ -377,6 +379,29 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     streamPanel.add(showButton);
     streamPanel.add(hideButton);
+
+
+
+    //preview JPanel made
+    previewGUI = new ImagePreviewGUI(this.topImg);
+    JScrollPane previewScroll = new JScrollPane(previewGUI);
+
+    //previewScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    //previewScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    previewScroll.setPreferredSize(new Dimension(200,200));
+    previewScroll.setBounds(0,0,200,200);
+    //create and set frame parameters
+    JFrame previewFrame = new JFrame("Operation Preview");
+    previewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    previewFrame.setPreferredSize(new Dimension(200, 200));
+    previewFrame.setResizable(false);
+
+    previewFrame.add(previewScroll);
+
+    previewFrame.pack();
+
+    previewFrame.setVisible(true);
+
   }
 
   @Override
@@ -429,6 +454,10 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     this.topImg = img;
     this.imgName.setIcon(new ImageIcon(this.topImg));
     save.setEnabled(true);
+
+    previewGUI.setImageToShow(img);
+    previewGUI.repaint();
+
     repaint();
     revalidate();
   }
@@ -503,6 +532,12 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
         break;
     }
   }
+
+  /**
+   * Sends a preview instruction for the specific command.
+   * private void send previewInstruction
+   */
+
 
   /**
    * Sends a red grayscale Instruction, which instructs the listener to grayscale the selected
