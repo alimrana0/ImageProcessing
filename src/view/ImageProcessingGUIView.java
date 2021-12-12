@@ -66,6 +66,9 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
   private final GraphPanel graph;
 
+  private int newHeight;
+  private int newWidth;
+
   /**
    * Constructor for the foundation GUI that will be manipulated in the future by the user.
    *
@@ -211,6 +214,10 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     darken.setActionCommand("Darken");
     darken.addActionListener(this);
     transformations.add(darken);
+
+    JButton downscaleButton = new JButton("Downscale");
+    downscaleButton.setActionCommand("Downscale");
+    downscaleButton.addActionListener(evt -> getNewImageDimensions());
 
     menu.add(edit);
 
@@ -374,6 +381,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     streamPanel.add(sepiaButton);
     streamPanel.add(brightenButton);
     streamPanel.add(darkenButton);
+    streamPanel.add(downscaleButton);
 
     streamPanel.add(showButton);
     streamPanel.add(hideButton);
@@ -477,6 +485,9 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
         break;
       case "Darken":
         sendDarkenInstruction(increment);
+        break;
+      case "Downscale":
+        emitDownscaleEvent(600, 500);
         break;
       case "Load Multi":
         sendLoadAllInstructions();
@@ -610,6 +621,9 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     vl.darkenHandler(val);
   }
 
+  private void emitDownscaleEvent(int newHeight, int newWidth) {
+    vl.handleDownscale(newHeight, newWidth);
+  }
   /**
    * Sends a load Instruction, which instructs the listener to load a selected image
    * in the multilayered image using the path of the file, and a user-input name for the layer.
@@ -781,6 +795,17 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     this.repaint();
     this.graph.repaint();
     this.graph.setLines(lines);
+  }
+
+  private void getNewImageDimensions() {
+    String newDimensions = JOptionPane.showInputDialog("Enter the new dimensions of the image " +
+            "as HeightxWidth with no spaces Ex: 600x500");
+
+    String[] dim = newDimensions.split("x", 3);
+    newHeight = Integer.parseInt(dim[0]);
+    newWidth = Integer.parseInt(dim[1]);
+    emitDownscaleEvent(newHeight, newWidth);
+
   }
 
 

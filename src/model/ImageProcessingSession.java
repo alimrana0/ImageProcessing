@@ -361,4 +361,13 @@ public class ImageProcessingSession {
   public boolean locateImage(String modelName) {
     return this.images.containsKey(modelName);
   }
+
+  public void downscale(int newWidth, int newHeight, String modelName, String newName) {
+    if (this.images.containsKey(modelName)) {
+      images.put(newName,
+              new ImageProcessingModel(this.images.get(modelName).downscale(newWidth, newHeight)));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
 }

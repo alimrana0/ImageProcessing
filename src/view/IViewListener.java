@@ -126,6 +126,9 @@ public interface IViewListener {
    */
   void handleFlipHorizontal();
 
+
+  void handleDownscale(int newHeight, int newWidth);
+
   /**
    * Handles the show event on the selected image.
    */

@@ -1,6 +1,7 @@
 package model;
 
 import filters.BlurFilter;
+import filters.DownscaleTransform;
 import filters.SharpenFilter;
 import filters.colortransformation.GreyscaleTransformation;
 import filters.colortransformation.IntensityChange;
@@ -164,6 +165,13 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
     return new FlipVertical().flipTransform(this.getImage(id));
   }
 
+  @Override
+  public ImageOfPixel downscale(String id, int newWidth, int newHeight) throws IllegalArgumentException {
+    if (id == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    return new DownscaleTransform().apply(this.getImage(id), newWidth, newHeight);
+  }
   @Override
   public void addMultipleImages(Map<String, ImageOfPixel> images, List<String> invisible)
           throws IllegalArgumentException {

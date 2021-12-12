@@ -129,6 +129,9 @@ public interface IImageProcessingSession {
    */
   ImageOfPixel verticalFlip(String id) throws IllegalArgumentException;
 
+  ImageOfPixel downscale(String id, int newWidth, int newHeight) throws IllegalArgumentException;
+
+
   /**
    * Makes the given image specified by the ID visible.
    *

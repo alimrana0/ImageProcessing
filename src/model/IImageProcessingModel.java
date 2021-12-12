@@ -144,4 +144,6 @@ public interface IImageProcessingModel {
 
   ImageOfPixel returnMaskedImage() throws IllegalArgumentException;
 
+  ImageOfPixel downscale(int newWidth, int newHeight) throws IllegalArgumentException;
+
 }

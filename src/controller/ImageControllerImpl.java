@@ -281,6 +281,25 @@ public class ImageControllerImpl implements ImageController {
             this.view.renderMessage("\n" + e.getMessage());
           }
           break;
+        case "downscale":
+          int newWidth;
+          int newHeight;
+          try {
+            newWidth = Integer.parseInt(in.next());
+            newHeight = Integer.parseInt(in.next());
+          }
+          catch (NumberFormatException e) {
+            this.view.renderMessage("\nMust enter an integer");
+            break;
+          }
+          this.readModelNameAndNewName();
+          try {
+            this.model.downscale(newWidth, newHeight, this.firstImgName, this.secondImgName);
+            this.view.renderMessage("\nImage made from downscale");
+          } catch (IllegalArgumentException e) {
+            this.view.renderMessage("\n" + e.getMessage());
+          }
+          break;
 
         //runs the controller based off of a script
         case "-file":
@@ -288,6 +307,7 @@ public class ImageControllerImpl implements ImageController {
           File file = new File(fileName);
           this.in = new Scanner(file);
           break;
+
 
 
         case "Q":

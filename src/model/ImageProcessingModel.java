@@ -1,6 +1,7 @@
 package model;
 
 import filters.BlurFilter;
+import filters.DownscaleTransform;
 import filters.Replicator;
 import filters.SharpenFilter;
 import filters.colortransformation.GreyscaleTransformation;
@@ -414,6 +415,14 @@ public class ImageProcessingModel implements IImageProcessingModel {
    */
   public void saveImageAs(String outputName) throws IOException {
     this.image.saveImageAs(outputName);
+  }
+
+  @Override
+  public ImageOfPixel downscale(int newWidth, int newHeight) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    return new DownscaleTransform().apply(this.image, newWidth, newHeight);
   }
 
 
