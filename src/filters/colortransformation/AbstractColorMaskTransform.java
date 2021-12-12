@@ -27,22 +27,31 @@ public abstract class AbstractColorMaskTransform {
     return new Image(transform(imagePixels, maskedPixelsPosns));
   }
 
-  protected List<Posn> storeBlack(List<List<IPixel>> maskedPixels) throws IllegalArgumentException {
-    IColor black = new Color(255, 255, 255);
-    IColor white = new Color(0, 0, 0);
-    List<Posn> blackPixels = null;
+  /**
+   * Stores the black pixels of the mask image in a list.
+   * @param maskedPixels the 2D list of pixels of the mask image
+   * @return a list of Posns for the black pixels in the mask
+   */
+  protected List<Posn> storeBlack(List<List<IPixel>> maskedPixels)  {
+    List<Posn> blackPixels = new ArrayList();
     for (int i = 0; i < maskedPixels.size(); i++) {
       for (int j = 0; j < maskedPixels.get(0).size(); j++) {
-        if (maskedPixels.get(i).get(j).getColor() == black) {
+        if (maskedPixels.get(i).get(j).getColor().getRed() == 0
+                && maskedPixels.get(i).get(j).getColor().getBlue() == 0
+                && maskedPixels.get(i).get(j).getColor().getGreen() == 0) {
           blackPixels.add(maskedPixels.get(i).get(j).getPosn());
-        }
-        if (maskedPixels.get(i).get(j).getColor() == white) {
-          throw new IllegalArgumentException("Image is not black and white");
-        }
+        } // Decided not to error handle a non-black-and-white image so that the black pixels of
+        //any image can be transferred onto an image
+//        else if ((maskedPixels.get(i).get(j).getColor().getRed() != 255)
+//                || (maskedPixels.get(i).get(j).getColor().getGreen() != 255)
+//        || (maskedPixels.get(i).get(j).getColor().getBlue() != 255)){
+//          throw new IllegalArgumentException("Image is not black and white");
+//        }
       }
     }
     return blackPixels;
   }
+
 
   /**
    * Applies the given transformation to each pixel in the given image.
@@ -55,16 +64,14 @@ public abstract class AbstractColorMaskTransform {
     for (List<IPixel> l : imagePixels) {
       ArrayList<IPixel> row = new ArrayList<>();
       for (IPixel p : l) {
-        if (maskedPixelPosns.contains(p.getPosn())) {
-          row.add(maskedColorTransform(p));
-        }
+        row.add(colorTransform(p,maskedPixelPosns));
       }
       updatedPixels.add(row);
     }
     return updatedPixels;
   }
 
-  protected abstract IPixel maskedColorTransform(IPixel p);
+  protected abstract IPixel colorTransform(IPixel p, List<Posn> maskedPixelPosns);
 
 
 

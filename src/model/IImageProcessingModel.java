@@ -1,6 +1,8 @@
 package model;
 
 import java.io.IOException;
+
+import model.imaging.Image;
 import model.imaging.ImageOfPixel;
 
 /**
@@ -36,6 +38,7 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel blueComponent() throws IllegalArgumentException;
 
+  ImageOfPixel blueComponent(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
 
   /**
@@ -45,12 +48,16 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel redComponent() throws IllegalArgumentException;
 
+  ImageOfPixel redComponent(ImageOfPixel maskedImage) throws IllegalArgumentException;
+
   /**
    * Greyscale an image based on the green component.
    * @return the greyscale image.
    * @throws IllegalArgumentException if the image is null
    */
   ImageOfPixel greenComponent() throws IllegalArgumentException;
+
+  ImageOfPixel greenComponent(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
    * Alters an image's intensity.
@@ -59,6 +66,8 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel intensity() throws IllegalArgumentException;
 
+  ImageOfPixel intensity(ImageOfPixel maskedImage) throws IllegalArgumentException;
+
   /**
    * Alters an image's pixels' value.
    * @return The image with changed values.
@@ -66,12 +75,16 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel valueImage() throws IllegalArgumentException;
 
+  ImageOfPixel valueImage(ImageOfPixel maskedImage) throws IllegalArgumentException;
+
   /**
    * Greyscale an image based on the luma of the components.
    * @return the greyscale image.
    * @throws IllegalArgumentException if the image is null
    */
   ImageOfPixel luma() throws IllegalArgumentException;
+
+  ImageOfPixel luma(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
    * Flips the image horizontally.
@@ -91,30 +104,34 @@ public interface IImageProcessingModel {
    * Filters the image by blurring the image.
    * @return The blurred image.
    */
-  ImageOfPixel blur();
+  ImageOfPixel blur() throws IllegalArgumentException;
 
-  ImageOfPixel blur(ImageOfPixel maskedImage);
+  ImageOfPixel blur(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
    * Filters the image by sharpening the image.
    * @return The sharpened image.
    */
-  ImageOfPixel sharpen();
+  ImageOfPixel sharpen() throws IllegalArgumentException;
 
-  ImageOfPixel sharpen(ImageOfPixel maskedImage);
+  ImageOfPixel sharpen(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
    * Transforms the image into a sepia colored image.
    * @return The transformed image.
    */
-  ImageOfPixel sepia();
+  ImageOfPixel sepia() throws IllegalArgumentException;
+
+  ImageOfPixel sepia(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
    * Greyscale an image by using a matrix for component conversion.
    *
    * @return the greyscale image.
    */
-  ImageOfPixel greyscale();
+  ImageOfPixel greyscale() throws IllegalArgumentException;
+
+  ImageOfPixel greyscale(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
    * Saves a file of the given filename as a PPM file.
@@ -125,6 +142,6 @@ public interface IImageProcessingModel {
 
   void saveImageAs(String outputName) throws IOException;
 
-  ImageOfPixel returnMaskedImage();
+  ImageOfPixel returnMaskedImage() throws IllegalArgumentException;
 
 }

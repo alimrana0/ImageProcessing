@@ -1,5 +1,7 @@
 package filters.colortransformation;
 
+import java.util.List;
+
 import model.imaging.Color;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
@@ -34,6 +36,12 @@ public class ValueChange extends AbstractColorTransformation {
             largest, largest));
 
   }
+  protected IPixel colorTransform(IPixel pixel, List<Posn> maskedPixelPosns) {
+    if (maskedPixelPosns.contains(pixel.getPosn())) {
+      return colorTransform(pixel);
+    }
+    return pixel;
+  }
 
   /**
    * Determines the max rgb value in the pixel.
@@ -42,9 +50,4 @@ public class ValueChange extends AbstractColorTransformation {
   private int getMaxColor(int r, int g, int b) {
     return Math.max(r, Math.max(g, b));
   }
-
-//  @Override
-//  protected IPixel maskedColorTransform(IPixel p) {
-//    return null;
-//  }
 }

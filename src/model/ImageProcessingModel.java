@@ -54,7 +54,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     this.maskedImage = maskedImage;
   }
 
-  public ImageOfPixel returnMaskedImage() {
+  public ImageOfPixel returnMaskedImage() throws IllegalArgumentException {
 
     if (this.image == null) {
       throw new IllegalArgumentException("No Masked image");
@@ -131,6 +131,17 @@ public class ImageProcessingModel implements IImageProcessingModel {
     return new RedGreyscale().applyColorTransformation(this.image);
   }
 
+  @Override
+  public ImageOfPixel redComponent(ImageOfPixel maskedImage) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    if (maskedImage == null) {
+      throw new IllegalArgumentException("Mask cannot be null");
+    }
+    return new RedGreyscale().applyColorTransformation(this.image, maskedImage);
+  }
+
 
   /**
    * Greyscale an image based on the green component.
@@ -144,6 +155,17 @@ public class ImageProcessingModel implements IImageProcessingModel {
       throw new IllegalArgumentException("Image cannot be null");
     }
     return new GreenGreyscale().applyColorTransformation(this.image);
+  }
+
+  @Override
+  public ImageOfPixel greenComponent(ImageOfPixel maskedImage) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    if (maskedImage == null) {
+      throw new IllegalArgumentException("Mask cannot be null");
+    }
+    return new GreenGreyscale().applyColorTransformation(this.image, maskedImage);
   }
 
   /**
@@ -160,6 +182,17 @@ public class ImageProcessingModel implements IImageProcessingModel {
     return new BlueGreyscale().applyColorTransformation(this.image);
   }
 
+  @Override
+  public ImageOfPixel blueComponent(ImageOfPixel maskedImage) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    if (maskedImage == null) {
+      throw new IllegalArgumentException("Mask cannot be null");
+    }
+    return new BlueGreyscale().applyColorTransformation(this.image, maskedImage);
+  }
+
   /**
    * Alters an image's intensity.
    *
@@ -172,6 +205,17 @@ public class ImageProcessingModel implements IImageProcessingModel {
       throw new IllegalArgumentException("Image cannot be null");
     }
     return new IntensityChange().applyColorTransformation(this.image);
+  }
+
+  @Override
+  public ImageOfPixel intensity(ImageOfPixel maskedImage) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    if (maskedImage == null) {
+      throw new IllegalArgumentException("Mask cannot be null");
+    }
+    return new IntensityChange().applyColorTransformation(this.image, maskedImage);
   }
 
   /**
@@ -188,6 +232,17 @@ public class ImageProcessingModel implements IImageProcessingModel {
     return new ValueChange().applyColorTransformation(this.image);
   }
 
+  @Override
+  public ImageOfPixel valueImage(ImageOfPixel maskedImage) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    if (maskedImage == null) {
+      throw new IllegalArgumentException("Mask cannot be null");
+    }
+    return new ValueChange().applyColorTransformation(this.image, maskedImage);
+  }
+
   /**
    * Greyscale an image based on the luma of the components.
    *
@@ -200,6 +255,17 @@ public class ImageProcessingModel implements IImageProcessingModel {
       throw new IllegalArgumentException("Image cannot be null");
     }
     return new LumaGreyscale().applyColorTransformation(this.image);
+  }
+
+  @Override
+  public ImageOfPixel luma(ImageOfPixel maskedImage) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image cannot be null");
+    }
+    if (maskedImage == null) {
+      throw new IllegalArgumentException("Mask cannot be null");
+    }
+    return new LumaGreyscale().applyColorTransformation(this.image, maskedImage);
   }
 
 
@@ -239,7 +305,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
    * @return The blurred image.
    */
   @Override
-  public ImageOfPixel blur() {
+  public ImageOfPixel blur() throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
@@ -249,7 +315,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
   }
 
 
-  public ImageOfPixel blur(ImageOfPixel maskedImage) {
+  public ImageOfPixel blur(ImageOfPixel maskedImage) throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
@@ -265,7 +331,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
    * @return The sharpened image.
    */
   @Override
-  public ImageOfPixel sharpen() {
+  public ImageOfPixel sharpen() throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
@@ -273,7 +339,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
   }
 
   @Override
-  public ImageOfPixel sharpen(ImageOfPixel maskedImage) {
+  public ImageOfPixel sharpen(ImageOfPixel maskedImage) throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
@@ -290,8 +356,19 @@ public class ImageProcessingModel implements IImageProcessingModel {
    * @return The transformed image.
    */
   @Override
-  public ImageOfPixel sepia() {
+  public ImageOfPixel sepia() throws IllegalArgumentException {
     return new SepiaTransformation().transform(this.image);
+  }
+
+  @Override
+  public ImageOfPixel sepia(ImageOfPixel maskedImage) throws IllegalArgumentException {
+    if (image == null) {
+      throw new IllegalArgumentException("Image can't be null");
+    }
+    if(maskedImage == null) {
+      throw new IllegalArgumentException("Mask cannot be null");
+    }
+    return new SepiaTransformation().transform(this.image, maskedImage);
   }
 
   /**
@@ -300,11 +377,22 @@ public class ImageProcessingModel implements IImageProcessingModel {
    * @return the greyscale image.
    */
   @Override
-  public ImageOfPixel greyscale() {
+  public ImageOfPixel greyscale() throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image can't be null");
     }
     return new GreyscaleTransformation().transform(this.image);
+  }
+
+  @Override
+  public ImageOfPixel greyscale(ImageOfPixel maskedImage) throws IllegalArgumentException{
+    if (image == null) {
+      throw new IllegalArgumentException("Image can't be null");
+    }
+    if (maskedImage == null) {
+      throw new IllegalArgumentException("Image can't be null");
+    }
+    return new GreyscaleTransformation().transform(this.image, maskedImage);
   }
 
   /**

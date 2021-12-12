@@ -119,6 +119,51 @@ public class ImageProcessingSession {
 
   }
 
+  public void getComponent(String component, String modelName, String maskedName, String newName) {
+    if (this.images.containsKey(modelName) && this.images.containsKey(maskedName)) {
+      ImageOfPixel maskedImage = this.images.get(maskedName).returnMaskedImage();
+      switch (component) {
+        case "red":
+          images.put(newName,
+                  new ImageProcessingModel(this.images.get(modelName).redComponent(maskedImage)));
+          break;
+
+        case "green":
+          images.put(newName,
+                  new ImageProcessingModel(this.images.get(modelName).greenComponent(maskedImage)));
+          break;
+
+        case "blue":
+          images.put(newName,
+                  new ImageProcessingModel(this.images.get(modelName).blueComponent(maskedImage)));
+          break;
+
+        case "value":
+          images.put(newName,
+                  new ImageProcessingModel(this.images.get(modelName).valueImage(maskedImage)));
+          break;
+
+        case "luma":
+          images.put(newName,
+                  new ImageProcessingModel(this.images.get(modelName).luma(maskedImage)));
+          break;
+
+        case "intensity":
+          images.put(newName,
+                  new ImageProcessingModel(this.images.get(modelName).intensity(maskedImage)));
+          break;
+        default:
+          throw new IllegalArgumentException("invalid component");
+
+      }
+
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+
+    }
+
+  }
+
   /**
    * Given the name of the stored image and a name to save the manipulation this method makes a
    * horizontally flipped image.
@@ -277,6 +322,16 @@ public class ImageProcessingSession {
     }
   }
 
+  public void greyscale(String modelName, String maskedName, String newName) {
+    if (this.images.containsKey(modelName) && this.images.containsKey(maskedName)) {
+      ImageOfPixel maskedImage = this.images.get(maskedName).returnMaskedImage();
+      images.put(newName,
+              new ImageProcessingModel(this.images.get(modelName).greyscale(maskedImage)));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
+
   /**
    * Given the name of the stored image and a name to save the manipulation this method makes an
    * image with sepia applied.
@@ -291,5 +346,19 @@ public class ImageProcessingSession {
     } else {
       throw new IllegalArgumentException("invalid inputs");
     }
+  }
+
+  public void sepia(String modelName, String maskedName, String newName) {
+    if (this.images.containsKey(modelName) && this.images.containsKey(maskedName)) {
+      ImageOfPixel maskedImage = this.images.get(maskedName).returnMaskedImage();
+      images.put(newName,
+              new ImageProcessingModel(this.images.get(modelName).sepia(maskedImage)));
+    } else {
+      throw new IllegalArgumentException("invalid inputs");
+    }
+  }
+
+  public boolean locateImage(String modelName) {
+    return this.images.containsKey(modelName);
   }
 }

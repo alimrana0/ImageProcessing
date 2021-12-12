@@ -10,7 +10,7 @@ import model.imaging.pixel.IPixel;
 /**
  * Abstract class for any Color transformations.
  */
-public abstract class AbstractColorTransformation implements IColorTransform {
+public abstract class AbstractColorTransformation extends AbstractColorMaskTransform implements IColorTransform {
 
   /**
    * Applies a color transformation to a given image.

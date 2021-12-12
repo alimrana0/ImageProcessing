@@ -37,7 +37,4 @@ q
 
 load stars.ppm stars
 load starsbw.jpg mask
-sharpen stars mask new
-sharpen new mask new2
-sharpen new2 mask new3
-save mask.jpg mask
+blur stars new

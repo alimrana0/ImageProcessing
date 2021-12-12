@@ -18,7 +18,8 @@ import java.util.List;
  * Represents an abstracted version of a transformation processor in order to be extended by any
  * transformation.
  */
-public abstract class AbstractColorTransformationProcessor implements IFilter {
+public abstract class AbstractColorTransformationProcessor extends AbstractColorMaskTransformProcessor
+        implements IFilter {
 
   protected IKernel kernel;
   protected double[][] kernelValues;
@@ -30,7 +31,7 @@ public abstract class AbstractColorTransformationProcessor implements IFilter {
    * @throws IllegalArgumentException If the kernel is null or not 3x3.
    */
   protected AbstractColorTransformationProcessor(IKernel kernel) throws IllegalArgumentException {
-//    super(kernel);
+    super(kernel);
     if (kernel == null) {
       throw new IllegalArgumentException("Kernel can't be null");
     }

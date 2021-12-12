@@ -54,18 +54,27 @@ public abstract class AbstractColorMaskTransformProcessor {
     return new Image(applyTransform(imagePix, maskedPixelsPosns));
   }
 
-  protected List<Posn> storeBlack(List<List<IPixel>> maskedPixels) throws IllegalArgumentException {
-    IColor black = new Color(255, 255, 255);
-    IColor white = new Color(0, 0, 0);
-    List<Posn> blackPixels = null;
+  /**
+   * Stores the black pixels of the mask image in a list.
+   *
+   * @param maskedPixels the 2D list of pixels of the mask image
+   * @return a list of Posns for the black pixels in the mask
+   */
+  protected List<Posn> storeBlack(List<List<IPixel>> maskedPixels) {
+    List<Posn> blackPixels = new ArrayList();
     for (int i = 0; i < maskedPixels.size(); i++) {
       for (int j = 0; j < maskedPixels.get(0).size(); j++) {
-        if (maskedPixels.get(i).get(j).getColor() == black) {
+        if (maskedPixels.get(i).get(j).getColor().getRed() == 0
+                && maskedPixels.get(i).get(j).getColor().getBlue() == 0
+                && maskedPixels.get(i).get(j).getColor().getGreen() == 0) {
           blackPixels.add(maskedPixels.get(i).get(j).getPosn());
-        }
-        if (maskedPixels.get(i).get(j).getColor() == white) {
-          throw new IllegalArgumentException("Image is not black and white");
-        }
+        } // Decided not to error handle a non-black-and-white image so that the black pixels of
+        //any image can be transferred onto an image
+//        else if ((maskedPixels.get(i).get(j).getColor().getRed() != 255)
+//                || (maskedPixels.get(i).get(j).getColor().getGreen() != 255)
+//        || (maskedPixels.get(i).get(j).getColor().getBlue() != 255)){
+//          throw new IllegalArgumentException("Image is not black and white");
+//        }
       }
     }
     return blackPixels;
@@ -82,9 +91,7 @@ public abstract class AbstractColorMaskTransformProcessor {
     for (List<IPixel> c : imagePix) {
       ArrayList<IPixel> r = new ArrayList<>();
       for (IPixel p : c) {
-        if (maskedPixelPosns.contains(p.getPosn())) {
-          r.add(colorTransform(p));
-        }
+        r.add(colorTransform(p, maskedPixelPosns));
       }
       newPixels.add(r);
     }
@@ -116,6 +123,13 @@ public abstract class AbstractColorMaskTransformProcessor {
     return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
             changedGreen, changedBlue));
 
+  }
+
+  protected IPixel colorTransform(IPixel pixel, List<Posn> maskedPixelPosns) {
+    if (maskedPixelPosns.contains(pixel.getPosn())) {
+      return colorTransform(pixel);
+    }
+    return pixel;
   }
 
 }
