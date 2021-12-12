@@ -408,6 +408,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     previewFrame.pack();
 
+
     previewFrame.setVisible(true);
 
   }

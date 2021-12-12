@@ -19,6 +19,7 @@ public class ImagePreviewGUI extends JPanel {
 
   }
 
+
   public void setImageToShow(BufferedImage imageToShow) {
     this.imageToShow = imageToShow;
   }
