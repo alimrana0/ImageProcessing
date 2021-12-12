@@ -367,6 +367,22 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
   }
 
   @Override
+  public void handleDownscale(int newHeight, int newWidth) {
+    if (this.selected == null) {
+      handleRender("There is no current image selected.");
+    } else {
+      try {
+        this.model.replaceImage(selected, this.model.downscale(selected, newHeight, newWidth));
+        this.view.setImage(this.getTopVisibleImage());
+        this.updateHistogram();
+
+      } catch (IllegalArgumentException e) {
+        handleRender(e.getMessage());
+      }
+    }
+  }
+
+  @Override
   public void show() {
     if (this.selected == null) {
       handleRender("No image has been selected.");

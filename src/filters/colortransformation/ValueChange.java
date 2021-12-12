@@ -1,5 +1,7 @@
 package filters.colortransformation;
 
+import java.util.List;
+
 import model.imaging.Color;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
@@ -33,6 +35,12 @@ public class ValueChange extends AbstractColorTransformation {
     return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(largest,
             largest, largest));
 
+  }
+  protected IPixel colorTransform(IPixel pixel, List<Posn> maskedPixelPosns) {
+    if (maskedPixelPosns.contains(pixel.getPosn())) {
+      return colorTransform(pixel);
+    }
+    return pixel;
   }
 
   /**

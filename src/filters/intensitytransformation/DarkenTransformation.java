@@ -1,7 +1,10 @@
 package filters.intensitytransformation;
 
+import java.util.List;
+
 import model.imaging.Color;
 import filters.FilterClamp;
+import model.imaging.ImageOfPixel;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
@@ -16,6 +19,19 @@ public class DarkenTransformation extends AbstractIntensityTransformation {
    */
   public DarkenTransformation() {
     //Doesn't need any initializations.
+  }
+
+  @Override
+  protected IPixel intensityTransform(IPixel pixel, int val, List<Posn> maskedImagePosns) {
+    if (maskedImagePosns.contains(pixel.getPosn())) {
+      int changedRed = FilterClamp.clamp((int) (pixel.getColor().getRed() - val));
+      int changedGreen = FilterClamp.clamp((int) (pixel.getColor().getGreen() - val));
+      int changedBlue = FilterClamp.clamp((int) (pixel.getColor().getBlue() - val));
+
+      return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
+              changedGreen, changedBlue));
+    }
+    return pixel;
   }
 
   /**

@@ -18,6 +18,7 @@ import model.imaging.Image;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
+import view.IImageProcessingView;
 import view.ImageProcessingView;
 
 /**
@@ -32,6 +33,21 @@ public final class ImageProcessor {
    * @throws IOException if the client gives inputs invalid to the ImageProcessor.
    */
   public static void main(String[] args) throws IOException {
+//    Readable rd = new InputStreamReader(System.in);
+//
+//    ArrayList<IPixel> pixelArray = new ArrayList<>();
+//    pixelArray.add(new Pixel(new Posn(0, 0), new Color(0, 0, 0)));
+//    List<ArrayList<IPixel>> basicArray = new ArrayList<>();
+//    basicArray.add(pixelArray);
+//    Image emptyImage = new Image(basicArray);
+//
+//    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+//            System.out);
+//    ImageProcessingSession session = new ImageProcessingSession();
+//
+//    ImageController controller = new ImageControllerImpl(session, view, rd);
+//    controller.run();
+//  }
 
     if (args.length == 2) {
       if (args[0].equals("-script")) {
@@ -61,4 +77,5 @@ public final class ImageProcessor {
       System.out.println("Arguments are not valid.");
     }
   }
+
 }

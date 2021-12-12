@@ -34,3 +34,7 @@ load starsJPG.jpg stars
 load starsPNG.png stars
 load starsBMP.bmp stars
 q
+
+load stars.ppm stars
+load starsbw.jpg mask
+blur stars new

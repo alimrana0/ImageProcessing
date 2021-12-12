@@ -5,6 +5,7 @@ import model.imaging.Color;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
+import java.util.List;
 
 /**
  * Class to represent a pixel being greyscale in terms of its blue component.
@@ -13,7 +14,7 @@ public class BlueGreyscale extends AbstractColorTransformation {
   /**
    * Empty constructor for BlueGreyscale.
    */
-  public BlueGreyscale(){
+  public BlueGreyscale() {
     //Doesn't need any initializations.
   }
 
@@ -32,10 +33,15 @@ public class BlueGreyscale extends AbstractColorTransformation {
     int changedGreen = blue;
 
 
-
     return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
             changedGreen, blue));
 
   }
 
+  protected IPixel colorTransform(IPixel pixel, List<Posn> maskedPixelPosns) {
+    if (maskedPixelPosns.contains(pixel.getPosn())) {
+      return colorTransform(pixel);
+    }
+    return pixel;
+  }
 }

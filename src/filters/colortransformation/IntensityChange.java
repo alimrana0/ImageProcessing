@@ -1,5 +1,7 @@
 package filters.colortransformation;
 
+import java.util.List;
+
 import filters.FilterClamp;
 import model.imaging.Color;
 import model.imaging.Posn;
@@ -34,5 +36,12 @@ public class IntensityChange extends AbstractColorTransformation {
 
     return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(avg,
             avg, avg));
+  }
+
+  protected IPixel colorTransform(IPixel pixel, List<Posn> maskedPixelPosns) {
+    if (maskedPixelPosns.contains(pixel.getPosn())) {
+      return colorTransform(pixel);
+    }
+    return pixel;
   }
 }

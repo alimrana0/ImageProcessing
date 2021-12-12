@@ -3,6 +3,7 @@ package filters.colortransformation.greyscale;
 import java.util.ArrayList;
 import java.util.List;
 
+import filters.colortransformation.AbstractColorMaskTransform;
 import filters.colortransformation.IColorTransform;
 import filters.FilterClamp;
 import model.imaging.Color;
@@ -15,7 +16,7 @@ import model.imaging.pixel.Pixel;
 /**
  * Class representing a grey scale filter on a pixel.
  */
-public class LumaGreyscale implements IColorTransform {
+public class LumaGreyscale extends AbstractColorMaskTransform implements IColorTransform {
   public double[][] lumaVals;
 
   /**
@@ -76,5 +77,13 @@ public class LumaGreyscale implements IColorTransform {
     return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(changedRed,
             changedGreen, changedBlue));
 
+  }
+
+  @Override
+  protected IPixel colorTransform(IPixel pixel, List<Posn> maskedPixelPosns) {
+    if (maskedPixelPosns.contains(pixel.getPosn())) {
+      return colorTransform(pixel);
+    }
+    return pixel;
   }
 }

@@ -14,5 +14,7 @@ public interface IIntensityTransform {
    * @throws IllegalArgumentException If the image is null.
    */
   ImageOfPixel applyTransformation(ImageOfPixel image, int val) throws IllegalArgumentException;
+
+  ImageOfPixel applyTransformation(ImageOfPixel image, int val, ImageOfPixel maskedImage) throws IllegalArgumentException;
 }
 
