@@ -348,11 +348,11 @@ public class ControllerTest {
   @Test
   public void controllerSaveAndLoadAsAllTypes() throws IOException {
     String inputString = "load\nstars.ppm\nstars\n"
-        + "save\nstarsJPG.jpg\nstars\n"
+        + "save\nstars.jpg\nstars\n"
         + "save\nstarsPNG.png\nstars\n"
         + "save\nstarsBMP.bmp\nstars\n"
         + "save\nstarsPPM.ppm\nstars\n"
-        + "load\nstarsJPG.jpg\nstarsJPG\n"
+        + "load\nstars.jpg\nstarsJPG\n"
         + "load\nstarsPNG.png\nstarsPNG\n"
         + "load\nstarsBMP.bmp\nstarsBMP\nq";
     BufferedReader input = new BufferedReader(new StringReader(inputString));
@@ -470,6 +470,112 @@ public class ControllerTest {
         + "Image Loaded\n"
         + "Image Loaded\n"
         + "Image Loaded";
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+
+
+  @Test
+  public void scriptMaskTest() throws IOException {
+    String inputString = "-file scriptMask.txt";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
+
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
+
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "\n"
+        + "Image Loaded\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Brightened Image made\n"
+        + "Image saved\n"
+        + "Darkened Image made\n"
+        + "Image saved\n"
+        + "Vertical Image made\n"
+        + "Image saved\n"
+        + "Horizontal Image made\n"
+        + "Image saved\n"
+        + "Greyscaled Image Made\n"
+        + "Image saved\n"
+        + "Sepia Image Made\n"
+        + "Image saved\n"
+        + "Blurred Image Made\n"
+        + "Image saved\n"
+        + "Sharpened Image Made\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image saved\n"
+        + "Image Loaded\n"
+        + "Image Loaded\n"
+        + "Image Loaded\n"
+        + "Image Loaded\n"
+        + "Image Loaded\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Component Image made\n"
+        + "Image saved\n"
+        + "Brightened Image from mask made\n"
+        + "Image saved\n"
+        + "Darkened Image from mask made\n"
+        + "Image saved\n"
+        + "Greyscaled Mask Image Made\n"
+        + "Image saved\n"
+        + "Sepia Image Mask Made\n"
+        + "Image saved\n"
+        + "Blurred Image from mask made\n"
+        + "Image saved\n"
+        + "Sharpened Image from mask made\n"
+        + "Image saved";
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+  @Test
+  public void scriptDownscaleTest() throws IOException {
+    String inputString = "-file scriptDownscale.txt";
+    BufferedReader input = new BufferedReader(new StringReader(inputString));
+    StringBuffer outBuffer = new StringBuffer();
+
+    ImageProcessingSession session = new ImageProcessingSession();
+
+    IImageProcessingView view = new ImageProcessingView(new ImageProcessingModel(emptyImage),
+        outBuffer);
+
+    ImageController controller = new ImageControllerImpl(session, view, input);
+    controller.run();
+
+    String actualOutput = outBuffer.toString();
+    String expectedOutput = "\n"
+        + "Image Loaded\n"
+        + "Image made from downscale\n"
+        + "Image saved\n"
+        + "Image made from downscale\n"
+        + "Image saved";
     assertEquals(expectedOutput, actualOutput);
   }
 }

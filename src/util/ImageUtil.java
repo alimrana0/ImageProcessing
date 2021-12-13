@@ -158,7 +158,6 @@ public class ImageUtil {
       img = ImageIO.read(new File(pathname));
     } catch (IOException e) {
       //TODO THROW SOMN
-      System.out.println("ReadImage in Image util failed " + e.toString());
     }
     int height = img.getHeight();
     int width = img.getWidth();
