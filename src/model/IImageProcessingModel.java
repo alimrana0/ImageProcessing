@@ -19,6 +19,13 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel brighten(int val) throws IllegalArgumentException;
 
+  /**
+   * Brightens a given image based on the pixels of the given masked image.
+   * @param val value that the image will be brightened by.
+   * @param maskedImage the black and white version of the model's image
+   * @return the brightened image.
+   * @throws IllegalArgumentException if an image is null.
+   */
   ImageOfPixel brighten(int val, ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -29,6 +36,13 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel darken(int val) throws IllegalArgumentException;
 
+  /**
+   * Darkens a given image based on the pixels of the given masked image.
+   * @param val value that the image will be darkened by.
+   * @param maskedImage the black and white version of the model's image
+   * @return the darkened image.
+   * @throws IllegalArgumentException if an image is null.
+   */
   ImageOfPixel darken(int val, ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -38,6 +52,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel blueComponent() throws IllegalArgumentException;
 
+  /**
+   * Greyscale an image based on the blue component based on the given masked image's pixels.
+   * @param maskedImage the black and white version of the model's image
+   * @return the greyscale image
+   * @throws IllegalArgumentException if an image is null
+   */
   ImageOfPixel blueComponent(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
 
@@ -48,6 +68,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel redComponent() throws IllegalArgumentException;
 
+  /**
+   * Greyscale an image based on the red component based on the given masked image's pixels.
+   * @param maskedImage the black and white version of the model's image
+   * @return the greyscale image
+   * @throws IllegalArgumentException if an image is null
+   */
   ImageOfPixel redComponent(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -57,6 +83,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel greenComponent() throws IllegalArgumentException;
 
+  /**
+   * Greyscale an image based on the green component based on the given masked image's pixels.
+   * @param maskedImage the black and white version of the model's image
+   * @return the greyscale image
+   * @throws IllegalArgumentException if an image is null
+   */
   ImageOfPixel greenComponent(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -66,6 +98,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel intensity() throws IllegalArgumentException;
 
+  /**
+   * Alterns an image's intensity based on the given masked image's pixels.
+   * @param maskedImage the black and white version of the model's image
+   * @return the intensified image.
+   * @throws IllegalArgumentException if an image is null
+   */
   ImageOfPixel intensity(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -75,6 +113,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel valueImage() throws IllegalArgumentException;
 
+  /**
+   * Alterns an image's value based on the given masked image's pixels.
+   * @param maskedImage the black and white version of the model's image
+   * @return the value changed image.
+   * @throws IllegalArgumentException if an image is null
+   */
   ImageOfPixel valueImage(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -84,6 +128,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel luma() throws IllegalArgumentException;
 
+  /**
+   * Greyscale an image based on luma values; this is based on the given masked image's pixels.
+   * @param maskedImage the black and white version of the model's image
+   * @return the greyscale image
+   * @throws IllegalArgumentException if an image is null
+   */
   ImageOfPixel luma(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -106,6 +156,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel blur() throws IllegalArgumentException;
 
+  /**
+   * Filters the image by blurring the image based on the pixels of the given masked image.
+   * @param maskedImage the black and white version of the given model's image.
+   * @return the blurred image.
+   * @throws IllegalArgumentException if an image is null.
+   */
   ImageOfPixel blur(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -114,6 +170,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel sharpen() throws IllegalArgumentException;
 
+  /**
+   * Filters the image by sharpening the image based on the pixels of the given masked image.
+   * @param maskedImage the black and white version of the given model's image.
+   * @return the sharpened image.
+   * @throws IllegalArgumentException if an image is null.
+   */
   ImageOfPixel sharpen(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -122,6 +184,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel sepia() throws IllegalArgumentException;
 
+  /**
+   * Creates a sepia version of the image based on the masked image's pixels.
+   * @param maskedImage the black and white version of the model's image.
+   * @return the sepia version of the image.
+   * @throws IllegalArgumentException if an image is null.
+   */
   ImageOfPixel sepia(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -131,6 +199,12 @@ public interface IImageProcessingModel {
    */
   ImageOfPixel greyscale() throws IllegalArgumentException;
 
+  /**
+   * Greyscale an image based on the given masked image's pixels.
+   * @param maskedImage the black and white version of the model's image
+   * @return the greyscale image
+   * @throws IllegalArgumentException if an image is null
+   */
   ImageOfPixel greyscale(ImageOfPixel maskedImage) throws IllegalArgumentException;
 
   /**
@@ -140,10 +214,27 @@ public interface IImageProcessingModel {
    */
   void saveImageAsPPM(String filename) throws IOException;
 
+  /**
+   * Saves an image as a file other than PPM.
+   * @param outputName the name of the file being created.
+   * @throws IOException if the file creation processes fails.
+   */
   void saveImageAs(String outputName) throws IOException;
 
+  /**
+   * Replicated a model's image and returns it.
+   * @return a copy of the model's image.
+   * @throws IllegalArgumentException if the image is null.
+   */
   ImageOfPixel returnMaskedImage() throws IllegalArgumentException;
 
+  /**
+   * Downscales a given image to the given width and height.
+   * @param newWidth the width of the target image.
+   * @param newHeight the height of the target image.
+   * @return the image downscaled to the given dimensions
+   * @throws IllegalArgumentException if an image is null.
+   */
   ImageOfPixel downscale(int newWidth, int newHeight) throws IllegalArgumentException;
 
 }

@@ -369,7 +369,7 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
   @Override
   public void handleDownscale(int newHeight, int newWidth) {
     if (this.selected == null) {
-      handleRender("There is no current image selected.");
+      handleRender("No image has been selected.");
     } else {
       try {
         this.model.replaceImage(selected, this.model.downscale(selected, newHeight, newWidth));

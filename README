@@ -7,6 +7,9 @@
 The image stars was free to use and taken from https://filesamples.com/formats/ppm
 and converted into the correct ppm format using ImageMagick.
 
+The mountain image was free to use and taken from https://unsplash.com/images/nature/mountain.
+It was converted to a black and white image using https://pinetools.com/threshold-image.
+
 
 #Class Diagrams
 
@@ -157,3 +160,27 @@ The ImageProcessingGUIView class extends JFrame implements IImageProcessingGUIVi
 ##graph
 **-- GraphPanel**
 The GraphPanel class is a class that creates a JLayeredPanel that constructs a graph of given RGB and intensity values based on the image's pixel information.
+
+#Downscale Breakdown
+The way we implemented downscaled was largely detailed toward the assignment description's formulas that allow for an image to be scaled.
+This was done by creating an interface that would be able to manipulate the size of an image (potential image upscaling). A class was used to
+implement this interface that performed the task of breaking down an image's pixel locations, and comparing the ratio of the pixel's location
+to the original width and height, and applying it to the desired changed image dimensions' ratio. Since this is a transformation, it was added to
+ImageProcessingModel and ImageProcessingSession to perform on a given image. In order to allow for multiple layering of transforming, this downscale was also added
+to the ImageProcessingSessionImpl. The controller had an added switch statement to perform this action,
+and the ImageProcessingGUIView was changed in order to allow for these operations to be completed and visualized in the GUI.
+
+#Mask Transformation Breakdown
+Since this feature requires our program to interact with multiple images at the same time (image being transformed and the mask version of the image),
+we had to make abstractions for our previously made filters. This is so that the transformation could be applied to any type of image transformation,
+as well as for added extensibility for any potential changes in manipulating an image's pixels that doesn't have to pertain to its black pixels. The hope with this
+was to allow for future masking that would be able to transform based on selected for pixels, other than just black. For example: Changing only the pixels in
+the mask image (which doesn't have to be black and white so that the user can transform whatever image they want that isn't strictly black and white) that have an RGB
+green value of 20. This will allow thresholds to be added later on. These abstracted classes (AbstractColorMaskTransform, AbstractIntensityMaskTransform, and AbstractImageProcessingMaskTransform).
+had a method for the previous filters to implement, and the original abstract classes extended these mask abstracted classes. ColorMaskTransformProcessor was
+not abstract because the filters that implement it only construct from a kernel, and don't need to call the method independently. The ImageProcessingModel and
+ImageProcessingSession required additions for each feature that supports masking that takes in a masked image. This will allow, again, for future mask
+transformations that don't have to pertain to just black pixels. The controller was changed in order to allow for these operations to occur, and since
+this operations didn't need to be implemented in the GUI, there was no change to the View. As for the actual transforming, each mask class stored the black
+pixels of the mask image and transformed the image only if the list contained the position of the given pixel. A replicator class was made in filter
+in order to allow for cross-model interaction (for a model to access elements of a previous model, as this was previously not possible).

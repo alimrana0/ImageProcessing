@@ -18,13 +18,8 @@ import filters.intensitytransformation.BrightenTransformation;
 import filters.intensitytransformation.DarkenTransformation;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import model.imaging.Image;
 import model.imaging.ImageOfPixel;
-import model.imaging.pixel.IPixel;
-import util.ImageUtil;
 
 /**
  * Class representing a model for an ImageProcessor.
@@ -32,7 +27,6 @@ import util.ImageUtil;
 public class ImageProcessingModel implements IImageProcessingModel {
 
   private ImageOfPixel image;
-  private ImageOfPixel maskedImage;
 
   /**
    * Constructor for an image processing model that uses a given image to set its image field.
@@ -47,14 +41,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     this.image = image;
   }
 
-  public ImageProcessingModel(ImageOfPixel image, ImageOfPixel maskedImage) throws IllegalArgumentException {
-    if (image == null) {
-      throw new IllegalArgumentException("Image cannot be null");
-    }
-    this.image = image;
-    this.maskedImage = maskedImage;
-  }
-
+  @Override
   public ImageOfPixel returnMaskedImage() throws IllegalArgumentException {
 
     if (this.image == null) {
@@ -101,10 +88,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
-    if (maskedImage == null) {
-      return new DarkenTransformation().applyTransformation(this.image, val);
-    }
-    return new DarkenTransformation().applyTransformation(this.image, val, maskedImage);
+    return new DarkenTransformation().applyTransformation(this.image, val);
   }
 
   @Override
@@ -315,7 +299,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
 
   }
 
-
+  @Override
   public ImageOfPixel blur(ImageOfPixel maskedImage) throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
@@ -323,7 +307,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     if (maskedImage == null) {
       throw new IllegalArgumentException("no Masked image");
     }
-    return new BlurFilter().maskTransform(this.image, maskedImage);
+    return new BlurFilter().transform(this.image, maskedImage);
   }
 
   /**
@@ -336,7 +320,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     if (image == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
-    return new SharpenFilter().maskTransform(this.image, this.maskedImage);
+    return new SharpenFilter().transform(this.image);
   }
 
   @Override
@@ -347,7 +331,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     if (maskedImage == null) {
       throw new IllegalArgumentException("no Masked image");
     }
-    return new SharpenFilter().maskTransform(this.image, maskedImage);
+    return new SharpenFilter().transform(this.image, maskedImage);
   }
 
 
@@ -366,7 +350,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
     if (image == null) {
       throw new IllegalArgumentException("Image can't be null");
     }
-    if(maskedImage == null) {
+    if (maskedImage == null) {
       throw new IllegalArgumentException("Mask cannot be null");
     }
     return new SepiaTransformation().transform(this.image, maskedImage);
@@ -386,7 +370,7 @@ public class ImageProcessingModel implements IImageProcessingModel {
   }
 
   @Override
-  public ImageOfPixel greyscale(ImageOfPixel maskedImage) throws IllegalArgumentException{
+  public ImageOfPixel greyscale(ImageOfPixel maskedImage) throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image can't be null");
     }
@@ -420,9 +404,9 @@ public class ImageProcessingModel implements IImageProcessingModel {
   @Override
   public ImageOfPixel downscale(int newWidth, int newHeight) throws IllegalArgumentException {
     if (image == null) {
-      throw new IllegalArgumentException("Image cannot be null");
+      throw new IllegalArgumentException("Image can't be null");
     }
-    return new DownscaleTransform().apply(this.image, newWidth, newHeight);
+    return new DownscaleTransform().scale(this.image, newWidth, newHeight);
   }
 
 

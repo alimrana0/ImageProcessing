@@ -1,0 +1,6 @@
+load stars.jpg stars
+downscale 320 213 stars down2to1
+save down2to1.jpg down2to1
+downscale 300 300 stars down1to1
+save down1to1.jpg down1to1
+q

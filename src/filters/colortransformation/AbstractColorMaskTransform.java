@@ -3,22 +3,23 @@ package filters.colortransformation;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.imaging.Color;
-import model.imaging.IColor;
 import model.imaging.Image;
 import model.imaging.ImageOfPixel;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 
 public abstract class AbstractColorMaskTransform {
+
   /**
    * Applies a color transformation to a given image.
    * @param image Image being transformed
-   * @return the image transformed
-   * @throws IllegalArgumentException if the image is null
+   * @param maskedImage the mask of the image
+   * @return the image transformed based on the mask's pixels
+   * @throws IllegalArgumentException if an image is null
    */
-  public ImageOfPixel applyColorTransformation(ImageOfPixel image, ImageOfPixel maskedImage) throws IllegalArgumentException {
-    if (image == null) {
+  public ImageOfPixel applyColorTransformation(ImageOfPixel image, ImageOfPixel maskedImage)
+          throws IllegalArgumentException {
+    if (image == null || maskedImage == null) {
       throw new IllegalArgumentException("Image can't be null.");
     }
     List<List<IPixel>> imagePixels = image.getPixels();
@@ -52,14 +53,16 @@ public abstract class AbstractColorMaskTransform {
     return blackPixels;
   }
 
-
   /**
-   * Applies the given transformation to each pixel in the given image.
+   * Applies the given transformation to each pixel in the given image under the condition of the
+   * masked pixels corresponding to the image's pixel positions being contained in a list.
    *
    * @param imagePixels the image's pixels.
-   * @return a list of list of transformed pixels
+   * @param maskedPixelPosns the list of positions of the masked image's black pixels
+   * @return the transformed image pixels
    */
-  protected List<ArrayList<IPixel>> transform(List<List<IPixel>> imagePixels, List<Posn> maskedPixelPosns) {
+  protected List<ArrayList<IPixel>> transform(List<List<IPixel>> imagePixels,
+                                              List<Posn> maskedPixelPosns) {
     List<ArrayList<IPixel>> updatedPixels = new ArrayList<>();
     for (List<IPixel> l : imagePixels) {
       ArrayList<IPixel> row = new ArrayList<>();
@@ -71,6 +74,13 @@ public abstract class AbstractColorMaskTransform {
     return updatedPixels;
   }
 
+  /**
+   * Abstract method to transform a pixel's color based on the positions contained in the list of
+   * masked pixel positions.
+   * @param p the pixel being transformed
+   * @param maskedPixelPosns the list of pixel positions of the black pixels of the mask image
+   * @return the transformed pixel.
+   */
   protected abstract IPixel colorTransform(IPixel p, List<Posn> maskedPixelPosns);
 
 

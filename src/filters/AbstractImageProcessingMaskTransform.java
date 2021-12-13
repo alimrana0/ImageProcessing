@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.imaging.Color;
-import model.imaging.IColor;
 import model.imaging.Image;
 import model.imaging.ImageOfPixel;
 import model.imaging.Posn;
@@ -16,6 +15,12 @@ public class AbstractImageProcessingMaskTransform {
 
   protected final IKernel kernel;
 
+  /**
+   * Constructs an AbstractImageProcessingMaskTransform using a given kernel.
+   *
+   * @param kernel kernel being applied to the image.
+   * @throws IllegalArgumentException If the kernel is null or not 3x3.
+   */
   protected AbstractImageProcessingMaskTransform(IKernel kernel) throws IllegalArgumentException {
     if (kernel == null) {
       throw new IllegalArgumentException("Argument can't be null.");
@@ -26,7 +31,16 @@ public class AbstractImageProcessingMaskTransform {
     this.kernel = kernel;
   }
 
-  public ImageOfPixel maskTransform(ImageOfPixel image, ImageOfPixel maskedImage) throws IllegalArgumentException {
+  /**
+   * Applies some transformation on the color of the given image based on the pixels in a masked
+   * image.
+   *
+   * @param image Image being transformed.
+   * @param maskedImage black and white version of the iop
+   * @return The transformed image.
+   * @throws IllegalArgumentException If an image is null.
+   */
+  public ImageOfPixel transform(ImageOfPixel image, ImageOfPixel maskedImage) throws IllegalArgumentException {
     if (image == null) {
       throw new IllegalArgumentException("Image can't be null.");
     }
@@ -74,12 +88,7 @@ public class AbstractImageProcessingMaskTransform {
     for (int i = 0; i < pixels.size(); i++) {
       ArrayList<IPixel> r = new ArrayList<>();
       for (int j = 0; j < pixels.get(0).size(); j++) {
-        if(maskedPixelsPosns.contains(pixels.get(i).get(j).getPosn())) {
-          r.add(filter(pixels.get(i).get(j), image));
-        }
-        else {
-          r.add(pixels.get(i).get(j));
-        }
+          r.add(filter(pixels.get(i).get(j), image, maskedPixelsPosns));
       }
       newPixels.add(r);
     }
@@ -89,60 +98,63 @@ public class AbstractImageProcessingMaskTransform {
   }
 
   /**
-   * Applies a transformation to a given pixel by use of the given kernel. Values are clamped to 0
-   * or 255.
-   *
-   * @param pixel pixel being filtered.
-   * @param image image being filtered.
-   * @return The filtered pixel
+   * Method to transform a pixel based on a kernel, only if the positions contained in the list of
+   * masked pixel positions has a position corresponding to the given pixel
+   * @param pixel the pixel being transformed
+   * @param image the image of the pixel being transformed
+   * @param maskedPixelPosns the list of pixel positions of the black pixels of the mask image
+   * @return the transformed pixel.
    */
-  protected IPixel filter(IPixel pixel, ImageOfPixel image) {
+  protected IPixel filter(IPixel pixel, ImageOfPixel image, List<Posn> maskedPixelPosns) {
+    if (maskedPixelPosns.contains(pixel.getPosn())) {
+      List<List<IPixel>> imagePixels = image.getPixels();
 
-    List<List<IPixel>> imagePixels = image.getPixels();
+      int peripherals = kernel.getHeight() / 2;
 
-    int peripherals = kernel.getHeight() / 2;
+      int r = 0;
+      int g = 0;
+      int b = 0;
 
-    int r = 0;
-    int g = 0;
-    int b = 0;
+      for (int i = peripherals * -1; i <= peripherals; i++) {
+        for (int j = peripherals * -1; j <= peripherals; j++) {
+          try {
+            double kVal = (double) Array
+                    .get(Array.get(kernel.getValues(), i + peripherals), j + peripherals);
 
-    for (int i = peripherals * -1; i <= peripherals; i++) {
-      for (int j = peripherals * -1; j <= peripherals; j++) {
-        try {
-          double kVal = (double) Array
-                  .get(Array.get(kernel.getValues(), i + peripherals), j + peripherals);
+            int red = imagePixels.get(pixel.getPosn().getY() + i)
+                    .get(pixel.getPosn().getX() + j).getColor().getRed();
+            int green = imagePixels.get(pixel.getPosn().getY() + i)
+                    .get(pixel.getPosn().getX() + j).getColor().getGreen();
+            int blue = imagePixels.get(pixel.getPosn().getY() + i)
+                    .get(pixel.getPosn().getX() + j).getColor().getBlue();
 
-          int red = imagePixels.get(pixel.getPosn().getY() + i)
-                  .get(pixel.getPosn().getX() + j).getColor().getRed();
-          int green = imagePixels.get(pixel.getPosn().getY() + i)
-                  .get(pixel.getPosn().getX() + j).getColor().getGreen();
-          int blue = imagePixels.get(pixel.getPosn().getY() + i)
-                  .get(pixel.getPosn().getX() + j).getColor().getBlue();
+            red *= kVal;
+            green *= kVal;
+            blue *= kVal;
 
-          red *= kVal;
-          green *= kVal;
-          blue *= kVal;
+            r += red;
+            g += green;
+            b += blue;
 
-          r += red;
-          g += green;
-          b += blue;
-
-        } catch (IndexOutOfBoundsException ignore) {
-          r += 0;
-          g += 0;
-          b += 0;
+          } catch (IndexOutOfBoundsException ignore) {
+            r += 0;
+            g += 0;
+            b += 0;
+          }
         }
       }
+
+      r = FilterClamp.clamp(r);
+      g = FilterClamp.clamp(g);
+      b = FilterClamp.clamp(b);
+
+      return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(r, g, b));
+
+
     }
-
-    r = FilterClamp.clamp(r);
-    g = FilterClamp.clamp(g);
-    b = FilterClamp.clamp(b);
-
-    return new Pixel(new Posn(pixel.getPosn().getX(), pixel.getPosn().getY()), new Color(r, g, b));
-
-
+    return pixel;
   }
+
 
 
 }
