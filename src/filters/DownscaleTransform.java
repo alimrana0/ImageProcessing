@@ -17,16 +17,17 @@ public class DownscaleTransform implements IScale {
 
   @Override
   public ImageOfPixel scale(ImageOfPixel image, int adjustedWidth, int adjustedHeight) {
-    if (adjustedWidth > image.getPixels().size()
-            || adjustedHeight > image.getPixels().get(0).size()) {
-      throw new IllegalArgumentException("Cannot downscale to a dimensions larger than original.");
-    }
     if (adjustedWidth < 0 || adjustedHeight < 0) {
       throw new IllegalArgumentException("The image can't have negative dimensions.");
     }
     if (image == null || image.getPixels().size() == 0 || image.getPixels().get(0).size() == 0) {
       throw new IllegalArgumentException("Invalid image.");
     }
+    if (adjustedWidth > image.getPixels().size()
+            || adjustedHeight > image.getPixels().get(0).size()) {
+      throw new IllegalArgumentException("Cannot downscale to a dimensions larger than original.");
+    }
+
 
     List<ArrayList<IPixel>> downscaledImage = new ArrayList<>();
 

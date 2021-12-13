@@ -1,18 +1,13 @@
 import controller.ImageController;
 import controller.ImageControllerImpl;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.ImageProcessingController;
-import controller.ImageProcessingControllerGUI;
-import model.IImageProcessingSession;
 import model.ImageProcessingModel;
 import model.ImageProcessingSession;
-import model.ImageProcessingSessionImpl;
 import model.imaging.Color;
 import model.imaging.Image;
 import model.imaging.Posn;
