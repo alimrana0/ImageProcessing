@@ -17,5 +17,6 @@ public class ImagePreviewGUI extends JLabel {
   public void setImageToShow(BufferedImage imageToShow) {
     this.setIcon(new ImageIcon(imageToShow));
     this.imageToShow = imageToShow;
+
   }
 }
