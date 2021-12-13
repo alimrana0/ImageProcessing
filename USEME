@@ -16,6 +16,7 @@
 	- IntensityComponent
 	- Brighten
 	- Darken
+	- Downscale
 	- Vertical Flip
 	- Horizontal Flip
 -These commands can also be accessed through the edit drop down menu
@@ -63,6 +64,10 @@ in the assignment with a slight variation on the get component command.
   - blur stars stars-blur
 - sharpen (image name) (name of new saved image)
   - sharpen stars stars-sharpen
+- downscale (desired height) (desired width) (image name) (name of new saved image)
+  - downscale 300 200 stars stars-down
+-Add (mask name) after (image name) in any of these operations except horizontal and vertical flip
+  - blur 50 stars mask new
 
 - You can also run a script from a text file using the -file command
 - -file (script text file)
