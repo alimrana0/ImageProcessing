@@ -11,6 +11,8 @@ import java.awt.Cursor;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -20,6 +22,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JMenuBar;
 import javax.swing.JLayeredPane;
@@ -48,7 +51,7 @@ import view.graph.GraphPanel;
  * accordingly with
  */
 public class ImageProcessingGUIView extends JFrame implements IImageProcessingGUIView,
-        ActionListener {
+        ActionListener, AdjustmentListener {
 
   private final IViewListener vl;
   private final JLayeredPane layerNames;
@@ -70,6 +73,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
   private int newHeight;
   private int newWidth;
+  private JScrollPane previewScroll;
 
   /**
    * Constructor for the foundation GUI that will be manipulated in the future by the user.
@@ -392,9 +396,13 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     //preview JPanel made
     previewGUI = new ImagePreviewGUI(this.topImg);
-    JScrollPane previewScroll = new JScrollPane(previewGUI);
+    previewScroll = new JScrollPane(previewGUI);
 
     previewScroll.setPreferredSize(new Dimension(200,200));
+
+    previewScroll.getVerticalScrollBar().addAdjustmentListener(this);
+    previewScroll.getHorizontalScrollBar().addAdjustmentListener(this);
+
     //create and set frame parameters
     JFrame previewFrame = new JFrame("Operation Preview");
     previewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -840,4 +848,9 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   }
 
 
+  @Override
+  public void adjustmentValueChanged(AdjustmentEvent e) {
+    System.out.println(previewScroll.getVerticalScrollBar().getValue());
+    System.out.println(previewScroll.getHorizontalScrollBar().getValue());
+  }
 }
