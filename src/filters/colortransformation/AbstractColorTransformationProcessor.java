@@ -3,7 +3,6 @@ package filters.colortransformation;
 import filters.FilterClamp;
 import filters.IFilter;
 import filters.IKernel;
-import filters.AbstractImageProcessingMaskTransform;
 import model.imaging.Color;
 import model.imaging.Image;
 import model.imaging.ImageOfPixel;
@@ -18,7 +17,7 @@ import java.util.List;
  * Represents an abstracted version of a transformation processor in order to be extended by any
  * transformation.
  */
-public abstract class AbstractColorTransformationProcessor extends AbstractColorMaskTransformProcessor
+public abstract class AbstractColorTransformationProcessor extends ColorMaskTransformProcessor
         implements IFilter {
 
   protected IKernel kernel;

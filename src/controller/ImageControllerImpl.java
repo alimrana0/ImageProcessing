@@ -204,7 +204,7 @@ public class ImageControllerImpl implements ImageController {
         case "horizontal-flip":
           this.readModelNameAndNewName();
           try {
-            this.model.horizontalFlip(this.firstImgName, this.thirdImgName);
+            this.model.horizontalFlip(this.firstImgName, this.secondImgName);
             this.view.renderMessage("\nHorizontal Image made");
           } catch (IllegalArgumentException e) {
             this.view.renderMessage("\n" + e.getMessage());
@@ -216,7 +216,7 @@ public class ImageControllerImpl implements ImageController {
         case "vertical-flip":
           this.readModelNameAndNewName();
           try {
-            this.model.verticalFlip(this.firstImgName, this.thirdImgName);
+            this.model.verticalFlip(this.firstImgName, this.secondImgName);
             this.view.renderMessage("\nVertical Image made");
           } catch (IllegalArgumentException e) {
             this.view.renderMessage("\n" + e.getMessage());

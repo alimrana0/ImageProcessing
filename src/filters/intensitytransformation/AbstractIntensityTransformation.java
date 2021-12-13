@@ -10,7 +10,8 @@ import model.imaging.pixel.IPixel;
 /**
  * Abstract class for an intensity transformation on an image.
  */
-public abstract class AbstractIntensityTransformation extends AbstractIntensityMaskTransform implements IIntensityTransform {
+public abstract class AbstractIntensityTransformation extends AbstractIntensityMaskTransform
+        implements IIntensityTransform {
 
   /**
    * Empty constructor for an abstract intensity transformation.

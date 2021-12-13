@@ -170,7 +170,7 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
     if (id == null) {
       throw new IllegalArgumentException("Image cannot be null");
     }
-    return new DownscaleTransform().apply(this.getImage(id), newWidth, newHeight);
+    return new DownscaleTransform().scale(this.getImage(id), newWidth, newHeight);
   }
   @Override
   public void addMultipleImages(Map<String, ImageOfPixel> images, List<String> invisible)

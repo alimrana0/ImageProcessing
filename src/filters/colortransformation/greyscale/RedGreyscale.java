@@ -40,6 +40,15 @@ public class RedGreyscale extends AbstractColorTransformation {
 
   }
 
+  /**
+   * Applies the color transformation to the given pixel by updating its rgb values selected by
+   * the mask image. Any out of range rgb value is clamped to the minimum value of 0 or the maximum
+   * value of 255.
+   *
+   * @param pixel Pixel being transformed.
+   * @param maskedPixelPosns the list of positions of the black pixels in the mask
+   * @return the pixel, transformed only if it is in the position of the mask's black pixel
+   */
   protected IPixel colorTransform(IPixel pixel, List<Posn> maskedPixelPosns) {
     if (maskedPixelPosns.contains(pixel.getPosn())) {
       return colorTransform(pixel);
