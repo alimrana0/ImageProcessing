@@ -25,7 +25,7 @@ public class ImageControllerImpl implements ImageController {
   /**
    * Creates a new ImageControllerImpl given a session, view and readable object. Given a variety of
    * commands such as load, save, get-component (component), horizontal-flip, vertical-flip,
-   * brighten, darken, and q to quite the controller creates and manipulates images.
+   * brighten, darken, and q to quit the controller creates and manipulates images.
    *
    * @param input The input of the application that is used to read in commands.
    * @throws IllegalArgumentException input is null.
@@ -307,8 +307,6 @@ public class ImageControllerImpl implements ImageController {
           File file = new File(fileName);
           this.in = new Scanner(file);
           break;
-
-
 
         case "Q":
         case "q":

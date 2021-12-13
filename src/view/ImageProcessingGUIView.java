@@ -2,7 +2,6 @@ package view;
 
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.awt.ScrollPane;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
@@ -22,7 +21,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JMenuBar;
 import javax.swing.JLayeredPane;
@@ -408,6 +406,8 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     previewScroll.getVerticalScrollBar().addAdjustmentListener(this);
     previewScroll.getHorizontalScrollBar().addAdjustmentListener(this);
+    //previewScroll.getVerticalScrollBar().setPreferredSize(new Dimension(10, 0));
+    //previewScroll.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 10));
 
     //create and set frame parameters
     JFrame previewFrame = new JFrame("Operation Preview");
