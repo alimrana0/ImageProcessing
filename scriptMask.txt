@@ -33,5 +33,30 @@ save starsBMP.bmp stars
 load starsJPG.jpg stars
 load starsPNG.png stars
 load starsBMP.bmp stars
+load mount.jpg mount
+load mountmask.jpg mask
+get-component red mount mask red-mount-mask
+save redmountmask.jpg red-mount-mask
+get-component green mount mask green-mount-mask
+save greenmountmask.jpg green-mount-mask
+get-component blue mount mask blue-mount-mask
+save bluemountmask.jpg blue-mount-mask
+get-component luma mount mask lumamountmask
+save lumamountmask.jpg lumamountmask
+get-component value mount mask valuemountmask
+save valuemountmask.jpg valuemountmask
+get-component intensity mount mask intensitymountmask
+save intensitymountmask.jpg intensitymountmask
+brighten 10 mount mask brightmountmask
+save brightmountmask.jpg brightmountmask
+darken 10 mount mask darkmountmask
+save darkmountmask.jpg darkmountmask
+greyscale mount mask mountGreyscalemask
+save mountGreyscalemask.jpg mountGreyscalemask
+sepia mount mask mountSepiamask
+save mountSepiamask.jpg mountSepiamask
+blur mount mask mountBlurmask
+save mountBlurmask.jpg mountBlurmask
+sharpen mount mask mountSharpenmask
+save mountSharpenmask.jpg mountSharpenmask
 q
-

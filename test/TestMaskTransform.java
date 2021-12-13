@@ -29,7 +29,8 @@ import static org.junit.Assert.assertEquals;
  * Test class for the mask transformations on an image.
  */
 public class TestMaskTransform {
-  IColor black = new Color(0,0,0); 
+  IColor black = new Color(0,0,0);
+  IColor white = new Color(255, 255, 255);
   IColor dark = new Color(100, 50, 50); 
   IPixel pixel1 = new Pixel(new Posn(0,0), dark);
   IPixel pixel2 = new Pixel(new Posn(0,1), dark);
@@ -41,12 +42,20 @@ public class TestMaskTransform {
   IPixel maskPixel3 = new Pixel(new Posn(1,0), black);
   IPixel maskPixel4 = new Pixel(new Posn(1,1), black);
 
+  IPixel maskPixel5 = new Pixel(new Posn(0,0), black);
+  IPixel maskPixel6 = new Pixel(new Posn(0,1), white);
+  IPixel maskPixel7 = new Pixel(new Posn(1,0), white);
+  IPixel maskPixel8 = new Pixel(new Posn(1,1), black);
+
   ArrayList<ArrayList<IPixel>> list2D = new ArrayList<ArrayList<IPixel>>();
   ArrayList<ArrayList<IPixel>> list2DMask = new ArrayList<ArrayList<IPixel>>();
+  ArrayList<ArrayList<IPixel>> list2DMask2 = new ArrayList<ArrayList<IPixel>>();
   ArrayList<IPixel> temp1 = new ArrayList<IPixel>();
   ArrayList<IPixel> temp2 = new ArrayList<IPixel>();
   ArrayList<IPixel> temp3 = new ArrayList<IPixel>();
   ArrayList<IPixel> temp4 = new ArrayList<IPixel>();
+  ArrayList<IPixel> temp5 = new ArrayList<IPixel>();
+  ArrayList<IPixel> temp6 = new ArrayList<IPixel>();
 
 
 
@@ -68,6 +77,14 @@ public class TestMaskTransform {
     temp4.add(maskPixel3);
     temp4.add(maskPixel4);
     list2DMask.add(temp4);
+
+    temp5.add(maskPixel5);
+    temp5.add(maskPixel6);
+    list2DMask2.add(temp5);
+
+    temp6.add(maskPixel7);
+    temp6.add(maskPixel8);
+    list2DMask2.add(temp6);
   }
 
   @Test
@@ -93,6 +110,27 @@ public class TestMaskTransform {
     assertEquals(brightenedImageMask.getPixels().get(1).get(1).getColor().getRed(), 102);
     assertEquals(brightenedImageMask.getPixels().get(1).get(1).getColor().getGreen(), 52);
     assertEquals(brightenedImageMask.getPixels().get(1).get(1).getColor().getBlue(), 52);
+
+
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel brightenedImageMask2 = new BrightenTransformation().applyTransformation(image, 2, maskImage2);
+
+    assertEquals(brightenedImageMask2.getPixels().get(0).get(0).getColor().getRed(), 102);
+    assertEquals(brightenedImageMask2.getPixels().get(0).get(0).getColor().getGreen(), 52);
+    assertEquals(brightenedImageMask2.getPixels().get(0).get(0).getColor().getBlue(), 52);
+
+    assertEquals(brightenedImageMask2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(brightenedImageMask2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(brightenedImageMask2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(brightenedImageMask2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(brightenedImageMask2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(brightenedImageMask2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(brightenedImageMask2.getPixels().get(1).get(1).getColor().getRed(), 102);
+    assertEquals(brightenedImageMask2.getPixels().get(1).get(1).getColor().getGreen(), 52);
+    assertEquals(brightenedImageMask2.getPixels().get(1).get(1).getColor().getBlue(), 52);
 
   }
 
@@ -121,6 +159,26 @@ public class TestMaskTransform {
     assertEquals(darkenedImageMask.getPixels().get(1).get(1).getColor().getGreen(), 48);
     assertEquals(darkenedImageMask.getPixels().get(1).get(1).getColor().getBlue(), 48);
 
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel darkenedImageMask2 = new DarkenTransformation().applyTransformation(image, 2, maskImage2);
+
+    assertEquals(darkenedImageMask2.getPixels().get(0).get(0).getColor().getRed(), 98);
+    assertEquals(darkenedImageMask2.getPixels().get(0).get(0).getColor().getGreen(), 48);
+    assertEquals(darkenedImageMask2.getPixels().get(0).get(0).getColor().getBlue(), 48);
+
+    assertEquals(darkenedImageMask2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(darkenedImageMask2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(darkenedImageMask2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(darkenedImageMask2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(darkenedImageMask2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(darkenedImageMask2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(darkenedImageMask2.getPixels().get(1).get(1).getColor().getRed(), 98);
+    assertEquals(darkenedImageMask2.getPixels().get(1).get(1).getColor().getGreen(), 48);
+    assertEquals(darkenedImageMask2.getPixels().get(1).get(1).getColor().getBlue(), 48);
+
   }
 
   @Test
@@ -146,6 +204,25 @@ public class TestMaskTransform {
     assertEquals(blurred.getPixels().get(1).get(1).getColor().getRed(), 55);
     assertEquals(blurred.getPixels().get(1).get(1).getColor().getGreen(), 27);
     assertEquals(blurred.getPixels().get(1).get(1).getColor().getBlue(), 27);
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel blurred2 = new BlurFilter().transform(image, maskImage2);
+
+    assertEquals(blurred2.getPixels().get(0).get(0).getColor().getRed(), 55);
+    assertEquals(blurred2.getPixels().get(0).get(0).getColor().getGreen(), 27);
+    assertEquals(blurred2.getPixels().get(0).get(0).getColor().getBlue(), 27);
+
+    assertEquals(blurred2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(blurred2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(blurred2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(blurred2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(blurred2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(blurred2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(blurred2.getPixels().get(1).get(1).getColor().getRed(), 55);
+    assertEquals(blurred2.getPixels().get(1).get(1).getColor().getGreen(), 27);
+    assertEquals(blurred2.getPixels().get(1).get(1).getColor().getBlue(), 27);
 
   }
 
@@ -173,6 +250,24 @@ public class TestMaskTransform {
     assertEquals(sharpened.getPixels().get(1).get(1).getColor().getGreen(), 86);
     assertEquals(sharpened.getPixels().get(1).get(1).getColor().getBlue(), 86);
 
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel sharpened2 = new SharpenFilter().transform(image, maskImage2);
+
+    assertEquals(sharpened2.getPixels().get(0).get(0).getColor().getRed(), 175);
+    assertEquals(sharpened2.getPixels().get(0).get(0).getColor().getGreen(), 86);
+    assertEquals(sharpened2.getPixels().get(0).get(0).getColor().getBlue(), 86);
+
+    assertEquals(sharpened2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(sharpened2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(sharpened2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(sharpened2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(sharpened2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(sharpened2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(sharpened2.getPixels().get(1).get(1).getColor().getRed(), 175);
+    assertEquals(sharpened2.getPixels().get(1).get(1).getColor().getGreen(), 86);
+    assertEquals(sharpened2.getPixels().get(1).get(1).getColor().getBlue(), 86);
   }
 
   @Test
@@ -199,6 +294,24 @@ public class TestMaskTransform {
     assertEquals(red.getPixels().get(1).get(1).getColor().getGreen(), 100);
     assertEquals(red.getPixels().get(1).get(1).getColor().getBlue(), 100);
 
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel red2 = new RedGreyscale().applyColorTransformation(image, maskImage2);
+
+    assertEquals(red2.getPixels().get(0).get(0).getColor().getRed(), 100);
+    assertEquals(red2.getPixels().get(0).get(0).getColor().getGreen(), 100);
+    assertEquals(red2.getPixels().get(0).get(0).getColor().getBlue(), 100);
+
+    assertEquals(red2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(red2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(red2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(red2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(red2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(red2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(red2.getPixels().get(1).get(1).getColor().getRed(), 100);
+    assertEquals(red2.getPixels().get(1).get(1).getColor().getGreen(), 100);
+    assertEquals(red2.getPixels().get(1).get(1).getColor().getBlue(), 100);
   }
 
   @Test
@@ -225,6 +338,24 @@ public class TestMaskTransform {
     assertEquals(green.getPixels().get(1).get(1).getColor().getGreen(), 50);
     assertEquals(green.getPixels().get(1).get(1).getColor().getBlue(), 50);
 
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel green2 = new GreenGreyscale().applyColorTransformation(image, maskImage2);
+
+    assertEquals(green2.getPixels().get(0).get(0).getColor().getRed(), 50);
+    assertEquals(green2.getPixels().get(0).get(0).getColor().getGreen(), 50);
+    assertEquals(green2.getPixels().get(0).get(0).getColor().getBlue(), 50);
+
+    assertEquals(green2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(green2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(green2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(green2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(green2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(green2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(green2.getPixels().get(1).get(1).getColor().getRed(), 50);
+    assertEquals(green2.getPixels().get(1).get(1).getColor().getGreen(), 50);
+    assertEquals(green2.getPixels().get(1).get(1).getColor().getBlue(), 50);
   }
 
   @Test
@@ -251,6 +382,25 @@ public class TestMaskTransform {
     assertEquals(blue.getPixels().get(1).get(1).getColor().getGreen(), 50);
     assertEquals(blue.getPixels().get(1).get(1).getColor().getBlue(), 50);
 
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel blue2 = new BlueGreyscale().applyColorTransformation(image, maskImage2);
+
+    assertEquals(blue2.getPixels().get(0).get(0).getColor().getRed(), 50);
+    assertEquals(blue2.getPixels().get(0).get(0).getColor().getGreen(), 50);
+    assertEquals(blue2.getPixels().get(0).get(0).getColor().getBlue(), 50);
+
+    assertEquals(blue2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(blue2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(blue2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(blue2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(blue2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(blue2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(blue2.getPixels().get(1).get(1).getColor().getRed(), 50);
+    assertEquals(blue2.getPixels().get(1).get(1).getColor().getGreen(), 50);
+    assertEquals(blue2.getPixels().get(1).get(1).getColor().getBlue(), 50);
   }
 
   @Test
@@ -277,6 +427,25 @@ public class TestMaskTransform {
     assertEquals(luma.getPixels().get(1).get(1).getColor().getGreen(), 60);
     assertEquals(luma.getPixels().get(1).get(1).getColor().getBlue(), 60);
 
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel luma2 = new LumaGreyscale().applyColorTransformation(image, maskImage2);
+
+    assertEquals(luma2.getPixels().get(0).get(0).getColor().getRed(), 60);
+    assertEquals(luma2.getPixels().get(0).get(0).getColor().getGreen(), 60);
+    assertEquals(luma2.getPixels().get(0).get(0).getColor().getBlue(), 60);
+
+    assertEquals(luma2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(luma2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(luma2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(luma2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(luma2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(luma2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(luma2.getPixels().get(1).get(1).getColor().getRed(), 60);
+    assertEquals(luma2.getPixels().get(1).get(1).getColor().getGreen(), 60);
+    assertEquals(luma2.getPixels().get(1).get(1).getColor().getBlue(), 60);
   }
 
   @Test
@@ -303,6 +472,25 @@ public class TestMaskTransform {
     assertEquals(greyscale.getPixels().get(1).get(1).getColor().getGreen(), 60);
     assertEquals(greyscale.getPixels().get(1).get(1).getColor().getBlue(), 60);
 
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel greyscale2 = new GreyscaleTransformation().transform(image, maskImage2);
+
+    assertEquals(greyscale2.getPixels().get(0).get(0).getColor().getRed(), 60);
+    assertEquals(greyscale2.getPixels().get(0).get(0).getColor().getGreen(), 60);
+    assertEquals(greyscale2.getPixels().get(0).get(0).getColor().getBlue(), 60);
+
+    assertEquals(greyscale2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(greyscale2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(greyscale2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(greyscale2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(greyscale2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(greyscale2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(greyscale2.getPixels().get(1).get(1).getColor().getRed(), 60);
+    assertEquals(greyscale2.getPixels().get(1).get(1).getColor().getGreen(), 60);
+    assertEquals(greyscale2.getPixels().get(1).get(1).getColor().getBlue(), 60);
   }
 
   @Test
@@ -329,6 +517,25 @@ public class TestMaskTransform {
     assertEquals(intensity.getPixels().get(1).get(1).getColor().getGreen(), 66);
     assertEquals(intensity.getPixels().get(1).get(1).getColor().getBlue(), 66);
 
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel intensity2 = new IntensityChange().applyColorTransformation(image, maskImage2);
+
+    assertEquals(intensity2.getPixels().get(0).get(0).getColor().getRed(), 66);
+    assertEquals(intensity2.getPixels().get(0).get(0).getColor().getGreen(), 66);
+    assertEquals(intensity2.getPixels().get(0).get(0).getColor().getBlue(), 66);
+
+    assertEquals(intensity2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(intensity2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(intensity2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(intensity2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(intensity2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(intensity2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(intensity2.getPixels().get(1).get(1).getColor().getRed(), 66);
+    assertEquals(intensity2.getPixels().get(1).get(1).getColor().getGreen(), 66);
+    assertEquals(intensity2.getPixels().get(1).get(1).getColor().getBlue(), 66);
   }
 
   @Test
@@ -355,6 +562,25 @@ public class TestMaskTransform {
     assertEquals(value.getPixels().get(1).get(1).getColor().getGreen(), 100);
     assertEquals(value.getPixels().get(1).get(1).getColor().getBlue(), 100);
 
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel value2 = new ValueChange().applyColorTransformation(image, maskImage2);
+
+    assertEquals(value2.getPixels().get(0).get(0).getColor().getRed(), 100);
+    assertEquals(value2.getPixels().get(0).get(0).getColor().getGreen(), 100);
+    assertEquals(value2.getPixels().get(0).get(0).getColor().getBlue(), 100);
+
+    assertEquals(value2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(value2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(value2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(value2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(value2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(value2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(value2.getPixels().get(1).get(1).getColor().getRed(), 100);
+    assertEquals(value2.getPixels().get(1).get(1).getColor().getGreen(), 100);
+    assertEquals(value2.getPixels().get(1).get(1).getColor().getBlue(), 100);
   }
 
   @Test
@@ -380,6 +606,25 @@ public class TestMaskTransform {
     assertEquals(sepia.getPixels().get(1).get(1).getColor().getRed(), 87);
     assertEquals(sepia.getPixels().get(1).get(1).getColor().getGreen(), 77);
     assertEquals(sepia.getPixels().get(1).get(1).getColor().getBlue(), 60);
+
+    ImageOfPixel maskImage2 = new Image(list2DMask2);
+    ImageOfPixel sepia2 = new SepiaTransformation().transform(image, maskImage2);
+
+    assertEquals(sepia2.getPixels().get(0).get(0).getColor().getRed(), 87);
+    assertEquals(sepia2.getPixels().get(0).get(0).getColor().getGreen(), 77);
+    assertEquals(sepia2.getPixels().get(0).get(0).getColor().getBlue(), 60);
+
+    assertEquals(sepia2.getPixels().get(0).get(1).getColor().getRed(), 100);
+    assertEquals(sepia2.getPixels().get(0).get(1).getColor().getGreen(), 50);
+    assertEquals(sepia2.getPixels().get(0).get(1).getColor().getBlue(), 50);
+
+    assertEquals(sepia2.getPixels().get(1).get(0).getColor().getRed(), 100);
+    assertEquals(sepia2.getPixels().get(1).get(0).getColor().getGreen(), 50);
+    assertEquals(sepia2.getPixels().get(1).get(0).getColor().getBlue(), 50);
+
+    assertEquals(sepia2.getPixels().get(1).get(1).getColor().getRed(), 87);
+    assertEquals(sepia2.getPixels().get(1).get(1).getColor().getGreen(), 77);
+    assertEquals(sepia2.getPixels().get(1).get(1).getColor().getBlue(), 60);
 
   }
 
