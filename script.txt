@@ -1,4 +1,4 @@
-add stars.ppm stars
+load stars.ppm stars
 get-component red stars
 red-stars save redstars.ppm red-stars
 get-component green stars green-stars

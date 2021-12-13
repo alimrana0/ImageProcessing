@@ -308,8 +308,6 @@ public class ImageControllerImpl implements ImageController {
           this.in = new Scanner(file);
           break;
 
-
-
         case "Q":
         case "q":
           quit = true;
