@@ -36,6 +36,8 @@ public class ValueChange extends AbstractColorTransformation {
             largest, largest));
 
   }
+
+  @Override
   protected IPixel colorTransform(IPixel pixel, List<Posn> maskedPixelPosns) {
     if (maskedPixelPosns.contains(pixel.getPosn())) {
       return colorTransform(pixel);

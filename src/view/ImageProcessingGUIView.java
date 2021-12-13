@@ -71,9 +71,15 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   private final GraphPanel graph;
   private final ImagePreviewGUI previewGUI;
 
+
+  private int adjustedHeight;
+  private int adjustedWidth;
+
+
   private int newHeight;
   private int newWidth;
   private JScrollPane previewScroll;
+
 
   /**
    * Constructor for the foundation GUI that will be manipulated in the future by the user.
@@ -520,7 +526,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
         sendDarkenInstruction(increment);
         break;
       case "Downscale":
-        emitDownscaleEvent(600, 500);
+        emitDownscaleEvent(640, 426);
         break;
       case "Load Multi":
         sendLoadAllInstructions();
@@ -660,8 +666,8 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     vl.darkenHandler(val);
   }
 
-  private void emitDownscaleEvent(int newHeight, int newWidth) {
-    vl.handleDownscale(newHeight, newWidth);
+  private void emitDownscaleEvent(int adjustedHeight, int adjustedWidth) {
+    vl.handleDownscale(adjustedHeight, adjustedWidth);
   }
   /**
    * Sends a load Instruction, which instructs the listener to load a selected image
@@ -837,13 +843,13 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   }
 
   private void getNewImageDimensions() {
-    String newDimensions = JOptionPane.showInputDialog("Enter the new dimensions of the image " +
-            "as HeightxWidth with no spaces Ex: 600x500");
+    String newDimensions = JOptionPane.showInputDialog("Please enter the desired downscale dimensions" +
+            "in the following format: \"HeightxWidth.\" For Example: 640x426");
 
     String[] dim = newDimensions.split("x", 3);
-    newHeight = Integer.parseInt(dim[0]);
-    newWidth = Integer.parseInt(dim[1]);
-    emitDownscaleEvent(newHeight, newWidth);
+    adjustedHeight = Integer.parseInt(dim[0]);
+    adjustedWidth = Integer.parseInt(dim[1]);
+    emitDownscaleEvent(adjustedHeight, adjustedWidth);
 
   }
 

@@ -43,10 +43,6 @@ public class ImageProcessingSession {
     }
   }
 
-  public ImageOfPixel getPixels(String modelName) {
-    return this.images.get(modelName).darken(0);
-  }
-
   /**
    * Saves an image from the image processing session to a specified file output.
    *

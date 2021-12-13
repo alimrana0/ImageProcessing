@@ -1,6 +1,9 @@
 package filters.intensitytransformation;
 
+import java.util.List;
+
 import model.imaging.ImageOfPixel;
+import model.imaging.Posn;
 
 /**
  * An interface to represent an intensity transformation on an image.
@@ -14,7 +17,5 @@ public interface IIntensityTransform {
    * @throws IllegalArgumentException If the image is null.
    */
   ImageOfPixel applyTransformation(ImageOfPixel image, int val) throws IllegalArgumentException;
-
-  ImageOfPixel applyTransformation(ImageOfPixel image, int val, ImageOfPixel maskedImage) throws IllegalArgumentException;
 }
 

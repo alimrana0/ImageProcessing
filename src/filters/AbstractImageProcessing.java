@@ -15,7 +15,8 @@ import model.imaging.pixel.Pixel;
  * An abstract class to allow for a filter to be used on an image using a given kernel (must be
  * of odd dimensions).
  */
-public abstract class AbstractImageProcessing extends AbstractImageProcessingMaskTransform implements IFilter {
+public abstract class AbstractImageProcessing extends AbstractImageProcessingMaskTransform
+        implements IFilter {
 
   protected final IKernel kernel;
 
