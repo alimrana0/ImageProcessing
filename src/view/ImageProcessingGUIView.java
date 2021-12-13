@@ -406,6 +406,8 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     previewScroll.getVerticalScrollBar().addAdjustmentListener(this);
     previewScroll.getHorizontalScrollBar().addAdjustmentListener(this);
+    //previewScroll.getVerticalScrollBar().setPreferredSize(new Dimension(10, 0));
+    //previewScroll.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 10));
 
     //create and set frame parameters
     JFrame previewFrame = new JFrame("Operation Preview");

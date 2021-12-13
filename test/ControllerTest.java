@@ -79,15 +79,7 @@ public class ControllerTest {
 
     String actualOutput = outBuffer.toString();
 
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit";
+    String expectedOutput = "";
 
     assertEquals(expectedOutput, actualOutput);
   }
@@ -113,15 +105,7 @@ public class ControllerTest {
         + "load stars.ppm with name stars\n"
         + "save image as stars-saved.ppm from stars";
 
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "Image saved";
     assertEquals(expectedOutput, actualOutput);
@@ -152,15 +136,7 @@ public class ControllerTest {
             + "vertically flipping stars, store as stars-vertical\n"
             + "horizontally flipping stars-vertical, store as stars-horizontal";
 
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "Vertical Image made\n"
         + "Horizontal Image made";
@@ -202,15 +178,7 @@ public class ControllerTest {
             + "get component intensity from stars-luma, store as stars-intensity\n"
             + "horizontally flipping stars-intensity, store as stars-flipped";
 
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "Component Image made\n"
         + "Component Image made\n"
@@ -250,15 +218,7 @@ public class ControllerTest {
             + "brightening stars-dark by 4, store as stars-bright\n"
             + "horizontally flipping stars-bright, store as stars";
 
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "Darkened Image made\n"
         + "Brightened Image made\n"
@@ -285,15 +245,7 @@ public class ControllerTest {
 
     String actualOutput = outBuffer.toString();
 
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Unknown Command Entered\n"
         + "Unknown Command Entered\n"
         + "Unknown Command Entered";
@@ -316,15 +268,7 @@ public class ControllerTest {
     controller.run();
 
     String actualOutput = outBuffer.toString();
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "Invalid model name";
     assertEquals(expectedOutput, actualOutput);
@@ -345,15 +289,7 @@ public class ControllerTest {
     controller.run();
 
     String actualOutput = outBuffer.toString();
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "File not Found";
     assertEquals(expectedOutput, actualOutput);
   }
@@ -362,10 +298,10 @@ public class ControllerTest {
   @Test
   public void controllerInvalidCommandInputs() throws IOException {
     String inputString = "load\nstars.ppm\nstars\n"
-        + "get-component\nINVALID\nstars\nstars\n"
-        + "get-component\nred\nNOIMAGE\nstars\n"
+        + "get-component\nINVALID\nstars\nstarsx\n"
+        + "get-component\nred\nNOIMAGE\nnewImage\n"
         + "brighten\nnotint\n"
-        + "brighten\n0\nNOIMAGE\nstars\n"
+        + "brighten\n0\nNOIMAGE\nnewName\n"
         + "darken\nnotint\n"
         + "darken\n0\nNOIMAGE\nnewName\n"
         + "vertical-flip\nNOIMAGE\nnewName\n"
@@ -382,15 +318,7 @@ public class ControllerTest {
     controller.run();
 
     String actualOutput = outBuffer.toString();
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "invalid component\n"
         + "invalid inputs\n"
@@ -439,15 +367,7 @@ public class ControllerTest {
     controller.run();
 
     String actualOutput = outBuffer.toString();
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "Image saved\n"
         + "Image saved\n"
@@ -486,15 +406,7 @@ public class ControllerTest {
     controller.run();
 
     String actualOutput = outBuffer.toString();
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "Greyscaled Image Made\n"
         + "Image saved\n"
@@ -522,15 +434,7 @@ public class ControllerTest {
     controller.run();
 
     String actualOutput = outBuffer.toString();
-    String expectedOutput = "Commands:\n"
-        + "load filepath name\n"
-        + "save saveLocation name\n"
-        + "get-component component \n"
-        + "horizontal-flip\n"
-        + "vertical-flip\n"
-        + "brighten\n"
-        + "darken\n"
-        + "Q or q to quit\n"
+    String expectedOutput = "\n"
         + "Image Loaded\n"
         + "Component Image made\n"
         + "Image saved\n"
