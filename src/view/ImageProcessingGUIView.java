@@ -51,7 +51,7 @@ import view.graph.GraphPanel;
  * accordingly with
  */
 public class ImageProcessingGUIView extends JFrame implements IImageProcessingGUIView,
-        ActionListener, AdjustmentListener {
+    ActionListener, AdjustmentListener {
 
   private final IViewListener vl;
   private final JLayeredPane layerNames;
@@ -109,7 +109,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     //Set up main menus
     JMenu file = new JMenu("File");
     file.getAccessibleContext().setAccessibleDescription(
-            "Menu for file operations");
+        "Menu for file operations");
 
     save = new JMenu("Save");
 
@@ -135,7 +135,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     transformations = new JMenu("Transform");
     transformations.getAccessibleContext()
-            .setAccessibleDescription("Menu for color transformations");
+        .setAccessibleDescription("Menu for color transformations");
     transformations.setEnabled(false);
 
     filters = new JMenu("Filter");
@@ -151,7 +151,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     JMenuItem greenComponent = new JMenuItem("Green Grayscale");
     greenComponent.getAccessibleContext().
-            setAccessibleDescription("Green Grayscale transformation");
+        setAccessibleDescription("Green Grayscale transformation");
     greenComponent.setActionCommand("Green Grayscale\"");
     greenComponent.addActionListener(this);
     transformations.add(greenComponent);
@@ -170,14 +170,14 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     JMenuItem valueComponent = new JMenuItem("Value Component");
     valueComponent.getAccessibleContext().
-            setAccessibleDescription("Value Component transformation");
+        setAccessibleDescription("Value Component transformation");
     valueComponent.setActionCommand("Value Component\"");
     valueComponent.addActionListener(this);
     transformations.add(valueComponent);
 
     JMenuItem intensityComponent = new JMenuItem("Intensity Component");
     intensityComponent.getAccessibleContext().
-            setAccessibleDescription("Intensity Component transformation");
+        setAccessibleDescription("Intensity Component transformation");
     intensityComponent.setActionCommand("Intensity Component");
     intensityComponent.addActionListener(this);
     transformations.add(intensityComponent);
@@ -190,7 +190,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
     JMenuItem flipHorizontal = new JMenuItem("Horizontal Flip");
     flipHorizontal.getAccessibleContext().
-            setAccessibleDescription("Horizontal Flip transformation");
+        setAccessibleDescription("Horizontal Flip transformation");
     flipHorizontal.setActionCommand("Horizontal Flip");
     flipHorizontal.addActionListener(this);
     transformations.add(flipHorizontal);
@@ -316,7 +316,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     JScrollPane histogramScroll = new JScrollPane(histogram);
     mainPanel.add(histogramScroll, BorderLayout.EAST);
 
-    //BUTTONS CREATED 
+    //BUTTONS CREATED
 
 
     //buttons for actions
@@ -676,10 +676,10 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   private void sendLoadImageInstruction() {
     String[] types = {"PPM", "PNG", "JPEG"};
     int typeVal = JOptionPane
-            .showOptionDialog(this,
-                    "Select the file type you would like to import", "File Types",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, types,
-                    null);
+        .showOptionDialog(this,
+            "Select the file type you would like to import", "File Types",
+            JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, types,
+            null);
 
     if (typeVal != -1) {
       String name = JOptionPane.showInputDialog("Please enter the designated name for this layer");
@@ -692,8 +692,8 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
         if (result == JFileChooser.APPROVE_OPTION) {
           File f = fc.getSelectedFile();
           vl
-                  .loadLayerHandler(f.getAbsolutePath(), types[typeVal],
-                          name);
+              .loadLayerHandler(f.getAbsolutePath(), types[typeVal],
+                  name);
         }
       }
     }
@@ -707,7 +707,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   private void sendLoadAllInstructions() {
     final JFileChooser fc = new JFileChooser(".");
     FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "TXT", "txt");
+        "TXT", "txt");
     fc.setFileFilter(filter);
     int result = fc.showOpenDialog(this);
     if (result == JFileChooser.APPROVE_OPTION) {
@@ -749,11 +749,11 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     if (!this.images.isEmpty()) {
       String[] types = {"PPM", "PNG", "JPEG"};
       int typeVal = JOptionPane
-              .showOptionDialog(this,
-                      "Select the file type you would like to save as", "File Types",
-                      JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                      types,
-                      null);
+          .showOptionDialog(this,
+              "Select the file type you would like to save as", "File Types",
+              JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+              types,
+              null);
       final JFileChooser fc = new JFileChooser(".");
       if (typeVal != -1) {
         setChooser(typeVal, fc);
@@ -766,7 +766,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
       }
     } else {
       JOptionPane.showMessageDialog(null,
-              "Please add an image before trying to save");
+          "Please add an image before trying to save");
     }
   }
 
@@ -777,14 +777,14 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   private void sendSaveAllInstructions() {
     String[] types = {"PPM", "PNG", "JPEG"};
     int filetypeValue = JOptionPane
-            .showOptionDialog(this,
-                    "Select the file type you would like to save as", "File Types",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                    types,
-                    null);
+        .showOptionDialog(this,
+            "Select the file type you would like to save as", "File Types",
+            JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+            types,
+            null);
     final JFileChooser fc = new JFileChooser(".");
     FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "TXT", "txt");
+        "TXT", "txt");
     fc.setFileFilter(filter);
     int result = fc.showSaveDialog(this);
     if (result == JFileChooser.APPROVE_OPTION) {
@@ -802,15 +802,15 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   private void setChooser(int typeVal, JFileChooser fc) {
     if (typeVal == 0) {
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
-              "PPM", "ppm");
+          "PPM", "ppm");
       fc.setFileFilter(filter);
     } else if (typeVal == 1) {
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
-              "PNG", "png");
+          "PNG", "png");
       fc.setFileFilter(filter);
     } else if (typeVal == 2) {
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
-              "JPEG", "jpeg");
+          "JPEG", "jpeg");
       fc.setFileFilter(filter);
     }
   }
@@ -844,7 +844,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
   private void getNewImageDimensions() {
     String newDimensions = JOptionPane.showInputDialog("Please enter the desired downscale dimensions" +
-            "in the following format: \"HeightxWidth.\" For Example: 640x426");
+        "in the following format: \"HeightxWidth.\" For Example: 640x426");
 
     String[] dim = newDimensions.split("x", 3);
     adjustedHeight = Integer.parseInt(dim[0]);
