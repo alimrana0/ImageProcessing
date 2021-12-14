@@ -38,4 +38,11 @@ public interface IImageProcessingGUIView extends IImageProcessingView {
    */
   void updateGraph(List<Line> lines);
 
+
+  /**
+   * Sets the image in the preview pane.
+   *
+   * @param image The image to be displayed in the preview plane.
+   */
+  public void setPreviewImage (BufferedImage image);
 }

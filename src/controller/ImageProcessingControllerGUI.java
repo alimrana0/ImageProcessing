@@ -3,6 +3,8 @@ package controller;
 import java.awt.image.BufferedImage;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +16,16 @@ import controller.filewriting.JPEGWriteFile;
 import controller.filewriting.WriteMultiLayered;
 import controller.filewriting.PNGWriteFile;
 import controller.filewriting.PPMWriteFile;
+import java.util.Queue;
 import model.IImageProcessingSession;
+import model.ImageProcessingModel;
+import model.imaging.Color;
+import model.imaging.Image;
 import model.imaging.ImageOfPixel;
+import model.imaging.Posn;
+import model.imaging.pixel.IPixel;
+import model.imaging.pixel.Pixel;
+import util.ImageUtil;
 import view.IViewListener;
 import view.IImageProcessingGUIView;
 import view.ImageProcessingGUIView;
@@ -30,6 +40,7 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
   private final IImageProcessingSession model;
   private final IImageProcessingGUIView view;
   private String selected;
+  private int counter;
 
   /**
    * Constructs an instance of a GUI controller.
@@ -38,13 +49,14 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
    * @throws IllegalArgumentException if given a null argument.
    */
   public ImageProcessingControllerGUI(IImageProcessingSession model)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     if (model == null) {
       throw new IllegalArgumentException("Null parameter.");
     }
     this.model = model;
     this.view = new ImageProcessingGUIView(this);
     this.selected = null;
+    counter = 0;
   }
 
   @Override
@@ -73,7 +85,7 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
       case "ppm":
         try {
           new PPMWriteFile()
-                  .writeFile(filename + ".ppm", this.model.getImage(getTopVisibleID()));
+              .writeFile(filename + ".ppm", this.model.getImage(getTopVisibleID()));
         } catch (IllegalArgumentException e) {
           handleRender(e.getMessage());
         } catch (IOException e) {
@@ -83,7 +95,7 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
       case "png":
         try {
           new PNGWriteFile().writeFile(filename + ".png",
-                  this.model.getImage(getTopVisibleID()));
+              this.model.getImage(getTopVisibleID()));
         } catch (IllegalArgumentException e) {
           handleRender(e.getMessage());
         } catch (IOException e) {
@@ -93,7 +105,7 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
       case "jpeg":
         try {
           new JPEGWriteFile()
-                  .writeFile(filename + ".jpeg", this.model.getImage(getTopVisibleID()));
+              .writeFile(filename + ".jpeg", this.model.getImage(getTopVisibleID()));
         } catch (IllegalArgumentException e) {
           handleRender(e.getMessage());
         } catch (IOException e) {
@@ -130,11 +142,11 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
 
   @Override
   public void saveAllHandler(String fileName, String fileType)
-          throws IllegalStateException {
+      throws IllegalStateException {
     try {
       new WriteMultiLayered()
-              .writeFile(fileName, fileType, this.model.getImages(),
-                      this.model.getInvisible());
+          .writeFile(fileName, fileType, this.model.getImages(),
+              this.model.getInvisible());
     } catch (IllegalArgumentException e) {
       handleRender(e.getMessage());
     } catch (IOException io) {
@@ -440,7 +452,7 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
   public void useScript(String filename) {
     try {
       new ImageProcessingController(this.model, new FileReader(filename), System.out)
-              .run();
+          .run();
       this.view.setImage(this.getTopVisibleImage());
       for (String layer : this.model.getImages().keySet()) {
         this.view.addImage(layer);
@@ -449,6 +461,7 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
       handleRender("The script has failed to run.");
     }
   }
+
 
   /**
    * Retrieves the top visible layer of the model and returns a buffered image representation of it.
@@ -527,5 +540,13 @@ public class ImageProcessingControllerGUI implements ImageController, IViewListe
    */
   private void updateHistogram() {
     this.view.updateGraph(this.model.getImage(selected).getLines());
+  }
+
+
+  @Override
+  public void updatePreview(int horizontal, int vertical, String operation, BufferedImage image) {
+    List<ArrayList<IPixel>> updated = this.model.updatePreview(horizontal, vertical, operation,
+        image);
+    this.view.setPreviewImage(this.getBuffImage(new Image(updated)));
   }
 }

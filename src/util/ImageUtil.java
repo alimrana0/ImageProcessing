@@ -158,8 +158,36 @@ public class ImageUtil {
       img = ImageIO.read(new File(pathname));
     } catch (IOException e) {
       //TODO THROW SOMN
-      System.out.println("ReadImage in Image util failed " + e.toString());
     }
+    int height = img.getHeight();
+    int width = img.getWidth();
+
+    List pixels = new ArrayList();
+
+    int rgb;
+    int r;
+    int g;
+    int b;
+    for (int i = 0; i < height; i++) {
+      List temp = new ArrayList();
+      for (int j = 0; j < width; j++) {
+
+        rgb = img.getRGB(j, i);
+        r = (rgb >> 16) & 0xFF;
+        g = (rgb >> 8) & 0xFF;
+        b = rgb & 0xFF;
+        //   System.out.println(b);
+        Color color = new Color(r, g, b);
+        temp.add(new Pixel(new Posn(j, i), color));
+      }
+      pixels.add(temp);
+    }
+
+    return pixels;
+  }
+
+  public static List readBuffered(BufferedImage img) {
+
     int height = img.getHeight();
     int width = img.getWidth();
 

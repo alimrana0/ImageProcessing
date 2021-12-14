@@ -2,6 +2,8 @@ package view;
 
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
@@ -15,10 +17,12 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageProducer;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,6 +34,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -78,6 +83,8 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   private int newWidth;
   private JScrollPane previewScroll;
 
+  private JFrame previewFrame;
+  private String currentOperation;
 
   /**
    * Constructor for the foundation GUI that will be manipulated in the future by the user.
@@ -378,6 +385,10 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     hideButton.setActionCommand("Hide Image");
     hideButton.addActionListener(this);
 
+    JButton previewButton = new JButton("preview");
+    previewButton.setActionCommand("preview");
+    previewButton.addActionListener(this);
+
     streamPanel.add(redGrayscaleButton);
     streamPanel.add(greenGrayscaleButton);
     streamPanel.add(blueGrayscaleButton);
@@ -396,6 +407,7 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     streamPanel.add(showButton);
     streamPanel.add(hideButton);
 
+    streamPanel.add(previewButton);
 
 
     //preview JPanel made
@@ -410,14 +422,13 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
     //previewScroll.getHorizontalScrollBar().setPreferredSize(new Dimension(0, 10));
 
     //create and set frame parameters
-    JFrame previewFrame = new JFrame("Operation Preview");
+    previewFrame = new JFrame("Operation Preview");
     previewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     previewFrame.setPreferredSize(new Dimension(200, 200));
     previewFrame.setResizable(false);
 
     previewFrame.setContentPane(previewScroll);
     previewFrame.pack();
-    previewFrame.setVisible(true);
 
   }
 
@@ -485,72 +496,93 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
   public void actionPerformed(ActionEvent a) {
     //used for brightness changes
     int increment = 25;
-    switch (a.getActionCommand()) {
-      case "Red Grayscale":
-        sendRedGrayscaleInstruction();
-        break;
-      case "Green Grayscale":
-        sendGreenGrayscaleInstruction();
-        break;
-      case "Blue Grayscale":
-        sendBlueGrayscaleInstruction();
-        break;
-      case "Grayscale":
-        sendGrayscaleLayerInstruction();
-        break;
-      case "Value Component":
-        sendValueInstruction();
-        break;
-      case "Intensity Component":
-        sendIntensityInstruction();
-        break;
-      case "Vertical Flip":
-        sendFlipVertical();
-        break;
-      case "Horizontal Flip":
-        sendFlipHorizontal();
-        break;
-      case "Blur":
-        sendBlurInstruction();
-        break;
-      case "Sharpen":
-        sendSharpenInstruction();
-        break;
-      case "Sepia":
-        sendSepiaInstruction();
-        break;
-      case "Brighten":
-        sendBrightenInstruction(increment);
-        break;
-      case "Darken":
-        sendDarkenInstruction(increment);
-        break;
-      case "Downscale":
-        emitDownscaleEvent(640, 426);
-        break;
-      case "Load Multi":
-        sendLoadAllInstructions();
-        break;
-      case "Add Image":
-        sendLoadImageInstruction();
-        break;
-      case "Delete Image":
-        sendDeleteInstruction();
-        break;
-      case "Save":
-        sendSaveInstruction();
-        break;
-      case "Save All":
-        sendSaveAllInstructions();
-        break;
-      case "Show Image":
-        sendShowInstruction();
-        break;
-      case "Hide Image":
-        sendHideInstruction();
-        break;
-      default:
-        break;
+    if (this.previewFrame.isVisible()) {
+      if(a.getActionCommand() == "preview") {
+        togglePreview();
+      }
+      else {
+        this.currentOperation = a.getActionCommand();
+      }
+    }
+    else {
+      switch (a.getActionCommand()) {
+        case "Red Grayscale":
+          sendRedGrayscaleInstruction();
+          break;
+        case "Green Grayscale":
+          sendGreenGrayscaleInstruction();
+          break;
+        case "Blue Grayscale":
+          sendBlueGrayscaleInstruction();
+          break;
+        case "Grayscale":
+          sendGrayscaleLayerInstruction();
+          break;
+        case "Value Component":
+          sendValueInstruction();
+          break;
+        case "Intensity Component":
+          sendIntensityInstruction();
+          break;
+        case "Vertical Flip":
+          sendFlipVertical();
+          break;
+        case "Horizontal Flip":
+          sendFlipHorizontal();
+          break;
+        case "Blur":
+          sendBlurInstruction();
+          break;
+        case "Sharpen":
+          sendSharpenInstruction();
+          break;
+        case "Sepia":
+          sendSepiaInstruction();
+          break;
+        case "Brighten":
+          sendBrightenInstruction(increment);
+          break;
+        case "Darken":
+          sendDarkenInstruction(increment);
+          break;
+        case "Downscale":
+          emitDownscaleEvent(640, 426);
+          break;
+        case "Load Multi":
+          sendLoadAllInstructions();
+          break;
+        case "Add Image":
+          sendLoadImageInstruction();
+          break;
+        case "Delete Image":
+          sendDeleteInstruction();
+          break;
+        case "Save":
+          sendSaveInstruction();
+          break;
+        case "Save All":
+          sendSaveAllInstructions();
+          break;
+        case "Show Image":
+          sendShowInstruction();
+          break;
+        case "Hide Image":
+          sendHideInstruction();
+          break;
+        case "preview":
+          togglePreview();
+        default:
+          break;
+      }
+    }
+  }
+
+  private void togglePreview() {
+    if(this.previewFrame.isVisible()) {
+      this.previewFrame.setVisible(false);
+    }
+    else {
+      this.previewFrame.setVisible(true);
     }
   }
 
@@ -856,7 +888,24 @@ public class ImageProcessingGUIView extends JFrame implements IImageProcessingGU
 
   @Override
   public void adjustmentValueChanged(AdjustmentEvent e) {
-    System.out.println(previewScroll.getVerticalScrollBar().getValue());
-    System.out.println(previewScroll.getHorizontalScrollBar().getValue());
+    if (currentOperation != null) {
+      vl.updatePreview(previewScroll.getHorizontalScrollBar().getValue(),
+          previewScroll.getVerticalScrollBar().getValue(),
+          this.currentOperation,
+          this.topImg);
+    }
   }
+
+  /**
+   * Sets the image in the preview pane.
+   *
+   * @param image The image to be displayed in the preview plane.
+   */
+  public void setPreviewImage (BufferedImage image) {
+    previewGUI.setImageToShow(image);
+    previewGUI.repaint();
+    previewGUI.revalidate();
+  }
+
+
 }

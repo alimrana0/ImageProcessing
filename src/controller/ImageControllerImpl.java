@@ -54,8 +54,6 @@ public class ImageControllerImpl implements ImageController {
   public void run() throws IOException {
     boolean quit = false;
 
-
-
     while (!quit) {
 
       //accept user input
@@ -92,19 +90,20 @@ public class ImageControllerImpl implements ImageController {
         case "get-component":
           String component = in.next();
           this.readModelNameAndNewName();
-          if(!model.locateImage(secondImgName)) {
-              try {
-                this.model.getComponent(component, this.firstImgName, this.secondImgName);
-                this.view.renderMessage("\nComponent Image made");
-              } catch (IllegalArgumentException e) {
-                this.view.renderMessage("\n" + e.getMessage());
+          if (!model.locateImage(secondImgName)) {
+            try {
+              this.model.getComponent(component, this.firstImgName, this.secondImgName);
+              this.view.renderMessage("\nComponent Image made");
+            } catch (IllegalArgumentException e) {
+              this.view.renderMessage("\n" + e.getMessage());
 
             }
-              break;
+            break;
           }
           this.thirdImgName = in.next();
           try {
-            this.model.getComponent(component, this.firstImgName, this.secondImgName, this.thirdImgName);
+            this.model.getComponent(component, this.firstImgName, this.secondImgName,
+                this.thirdImgName);
             this.view.renderMessage("\nComponent Image made");
           } catch (IllegalArgumentException e) {
             this.view.renderMessage("\n" + e.getMessage());
@@ -115,14 +114,14 @@ public class ImageControllerImpl implements ImageController {
         // then stores it in the hashmap.
         case "blur":
           this.readModelNameAndNewName();
-          if(!model.locateImage(secondImgName)) {
-              try {
-                this.model.blur(this.firstImgName, this.secondImgName);
-                this.view.renderMessage("\nBlurred Image Made");
-              } catch (IllegalArgumentException e) {
-                this.view.renderMessage("\n" + e.getMessage());
-              }
-              break;
+          if (!model.locateImage(secondImgName)) {
+            try {
+              this.model.blur(this.firstImgName, this.secondImgName);
+              this.view.renderMessage("\nBlurred Image Made");
+            } catch (IllegalArgumentException e) {
+              this.view.renderMessage("\n" + e.getMessage());
+            }
+            break;
           }
           this.thirdImgName = in.next();
           try {
@@ -137,14 +136,14 @@ public class ImageControllerImpl implements ImageController {
         // then stores it in the hashmap.
         case "sharpen":
           this.readModelNameAndNewName();
-          if(!model.locateImage(secondImgName)) {
-              try {
-                this.model.sharpen(this.firstImgName, this.secondImgName);
-                this.view.renderMessage("\nSharpened Image Made");
-              } catch (IllegalArgumentException e) {
-                this.view.renderMessage("\n" + e.getMessage());
-              }
-              break;
+          if (!model.locateImage(secondImgName)) {
+            try {
+              this.model.sharpen(this.firstImgName, this.secondImgName);
+              this.view.renderMessage("\nSharpened Image Made");
+            } catch (IllegalArgumentException e) {
+              this.view.renderMessage("\n" + e.getMessage());
+            }
+            break;
           }
           this.thirdImgName = in.next();
           try {
@@ -159,15 +158,15 @@ public class ImageControllerImpl implements ImageController {
         // then stores it in the hashmap.
         case "greyscale":
           this.readModelNameAndNewName();
-          if(!model.locateImage(secondImgName)) {
-              try {
-                this.model.greyscale(this.firstImgName, this.secondImgName);
-                this.view.renderMessage("\nGreyscaled Image Made");
-              } catch (IllegalArgumentException e) {
-                this.view.renderMessage("\n" + e.getMessage());
-              }
-              break;
+          if (!model.locateImage(secondImgName)) {
+            try {
+              this.model.greyscale(this.firstImgName, this.secondImgName);
+              this.view.renderMessage("\nGreyscaled Image Made");
+            } catch (IllegalArgumentException e) {
+              this.view.renderMessage("\n" + e.getMessage());
             }
+            break;
+          }
           this.thirdImgName = in.next();
           try {
             this.model.greyscale(this.firstImgName, this.secondImgName, this.thirdImgName);
@@ -181,22 +180,22 @@ public class ImageControllerImpl implements ImageController {
         // then stores it in the hashmap.
         case "sepia":
           this.readModelNameAndNewName();
-          if(!model.locateImage(secondImgName)) {
-              try {
-                this.model.sepia(this.firstImgName, this.secondImgName);
-                this.view.renderMessage("\nSepia Image Made");
-              } catch (IllegalArgumentException e) {
-                this.view.renderMessage("\n" + e.getMessage());
-              }
-              break;
-          }
-            this.thirdImgName = in.next();
+          if (!model.locateImage(secondImgName)) {
             try {
-              this.model.sepia(this.firstImgName, this.secondImgName, this.thirdImgName);
-              this.view.renderMessage("\nSepia Image Mask Made");
+              this.model.sepia(this.firstImgName, this.secondImgName);
+              this.view.renderMessage("\nSepia Image Made");
             } catch (IllegalArgumentException e) {
               this.view.renderMessage("\n" + e.getMessage());
             }
+            break;
+          }
+          this.thirdImgName = in.next();
+          try {
+            this.model.sepia(this.firstImgName, this.secondImgName, this.thirdImgName);
+            this.view.renderMessage("\nSepia Image Mask Made");
+          } catch (IllegalArgumentException e) {
+            this.view.renderMessage("\n" + e.getMessage());
+          }
           break;
 
         //Creates a new image after horizontally flipping the image of the given name and
@@ -234,18 +233,19 @@ public class ImageControllerImpl implements ImageController {
             break;
           }
           this.readModelNameAndNewName();
-          if(!model.locateImage(secondImgName)) {
-              try {
-                this.model.brighten(brightenValue, this.firstImgName, this.secondImgName);
-                this.view.renderMessage("\nBrightened Image made");
-              } catch (IllegalArgumentException e) {
-                this.view.renderMessage("\n" + e.getMessage());
-              }
-              break;
+          if (!model.locateImage(secondImgName)) {
+            try {
+              this.model.brighten(brightenValue, this.firstImgName, this.secondImgName);
+              this.view.renderMessage("\nBrightened Image made");
+            } catch (IllegalArgumentException e) {
+              this.view.renderMessage("\n" + e.getMessage());
+            }
+            break;
           }
           this.thirdImgName = in.next();
           try {
-            this.model.brighten(brightenValue, this.firstImgName, this.secondImgName, this.thirdImgName);
+            this.model.brighten(brightenValue, this.firstImgName, this.secondImgName,
+                this.thirdImgName);
             this.view.renderMessage("\nBrightened Image from mask made");
           } catch (IllegalArgumentException e) {
             this.view.renderMessage("\n" + e.getMessage());
@@ -264,18 +264,19 @@ public class ImageControllerImpl implements ImageController {
             break;
           }
           this.readModelNameAndNewName();
-          if(!model.locateImage(secondImgName)) {
-              try {
-                this.model.darken(darkenValue, this.firstImgName, this.secondImgName);
-                this.view.renderMessage("\nDarkened Image made");
-              } catch (IllegalArgumentException e) {
-                this.view.renderMessage("\n" + e.getMessage());
-              }
-              break;
+          if (!model.locateImage(secondImgName)) {
+            try {
+              this.model.darken(darkenValue, this.firstImgName, this.secondImgName);
+              this.view.renderMessage("\nDarkened Image made");
+            } catch (IllegalArgumentException e) {
+              this.view.renderMessage("\n" + e.getMessage());
+            }
+            break;
           }
           this.thirdImgName = in.next();
           try {
-            this.model.darken(darkenValue, this.firstImgName, this.secondImgName, this.thirdImgName);
+            this.model.darken(darkenValue, this.firstImgName, this.secondImgName,
+                this.thirdImgName);
             this.view.renderMessage("\nDarkened Image from mask made");
           } catch (IllegalArgumentException e) {
             this.view.renderMessage("\n" + e.getMessage());
@@ -287,8 +288,7 @@ public class ImageControllerImpl implements ImageController {
           try {
             newWidth = Integer.parseInt(in.next());
             newHeight = Integer.parseInt(in.next());
-          }
-          catch (NumberFormatException e) {
+          } catch (NumberFormatException e) {
             this.view.renderMessage("\nMust enter an integer");
             break;
           }
