@@ -33,8 +33,7 @@ public final class ImageProcessor {
    */
   public static void main(String[] args) throws IOException {
 
-    if (args.length == 1) {
-      if (args[0].equals("-script")) {
+    if (args.length == 1 && args[0].equals("-script")) {
         Readable rd = new InputStreamReader(System.in);
 
         ArrayList<IPixel> pixelArray = new ArrayList<>();
@@ -49,7 +48,6 @@ public final class ImageProcessor {
 
         ImageController controller = new ImageControllerImpl(session, view, rd);
         controller.run();
-      }
     }
     else if (args.length == 1 && args[0].equals("-text")) {
       Readable rd = new InputStreamReader(System.in);
