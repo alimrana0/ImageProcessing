@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="EC123">
+    <output-path>$PROJECT_DIR$/out/artifacts/EC123</output-path>
+    <root id="archive" name="ImageProcessing2.jar">
+      <element id="module-output" name="ImageProcessing2" />
+    </root>
+  </artifact>
+</component>
