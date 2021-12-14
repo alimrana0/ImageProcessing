@@ -18,7 +18,6 @@ import model.imaging.Image;
 import model.imaging.Posn;
 import model.imaging.pixel.IPixel;
 import model.imaging.pixel.Pixel;
-import view.IImageProcessingView;
 import view.ImageProcessingView;
 
 /**

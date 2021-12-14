@@ -184,3 +184,21 @@ transformations that don't have to pertain to just black pixels. The controller 
 this operations didn't need to be implemented in the GUI, there was no change to the View. As for the actual transforming, each mask class stored the black
 pixels of the mask image and transformed the image only if the list contained the position of the given pixel. A replicator class was made in filter
 in order to allow for cross-model interaction (for a model to access elements of a previous model, as this was previously not possible).
+
+#Preview Breakdown
+This feature was implemented through a number of steps. The first was adding a new button for preview, where on click
+a preview window appears and all operations are ignored for the main image. This was done by making a small change to
+the ImageProcessingGUIView which was adding an if statement, where if the preview was visible the
+view would not send updates to the controller for button processes. The button for preview is still active
+in order to toggle the preview. A listener was added for the scroll bars
+that sends the command to update to the controller, as well as sending the values of the scroll bar locations,
+the current image, and the most recently pressed operation(an operation can be pressed without afecting the image due to the if statement added).
+The controller then would pass this information to a method in the model. This method in the model
+created a smaller image of the current 200x200 section being viewed, manipulated it, and then placed it back into
+a copy of the current image being viewed. This is then given back to the controller, which passes it to the
+view and updates the preview frame on screen. This functionality required no major changes. Only a handful of methods
+were added, the necessary objects in the view were added, and the required modification in the view
+in order to stop operations while preview is open. This modification was required, as there is no
+other way to ignore the calls efficiently. An if statement could have been added in the controller
+but that would require modifications to multiple methods. So by adding the if statement in the ImageProcessingGUIView
+it minimized the modification to a negligible amount.

@@ -62,6 +62,11 @@ public class Image implements ImageOfPixel {
     return new ArrayList<>(pixels);
   }
 
+  @Override
+  public List<ArrayList<IPixel>> getPixelsArraylist() {
+    return this.replicate(pixels);
+  }
+
   /**
    * Saves an image as a PPM file given the name of the file to save it as.
    *

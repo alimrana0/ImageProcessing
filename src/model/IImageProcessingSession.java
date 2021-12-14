@@ -1,9 +1,12 @@
 package model;
 
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import model.imaging.ImageOfPixel;
 
 import java.util.List;
 import java.util.Map;
+import model.imaging.pixel.IPixel;
 
 /**
  * Interface representing the model session for an image processor that is dealing with multiple
@@ -11,6 +14,7 @@ import java.util.Map;
  * well as image visibility.
  */
 public interface IImageProcessingSession {
+
   /**
    * Performs a blur transformation on the image associated with the given ID.
    *
@@ -157,7 +161,7 @@ public interface IImageProcessingSession {
    *                                  or IDs aren't unique.
    */
   void addMultipleImages(Map<String, ImageOfPixel> images, List<String> invisible)
-          throws IllegalArgumentException;
+      throws IllegalArgumentException;
 
   /**
    * Gets the list of invisible images marked by their IDs.
@@ -208,4 +212,7 @@ public interface IImageProcessingSession {
    * @throws IllegalArgumentException If ID is invalid or no such image can be found.
    */
   ImageOfPixel getImage(String id) throws IllegalArgumentException;
+
+  public List<ArrayList<IPixel>> updatePreview(int horizontal, int vertical, String operation,
+      BufferedImage image);
 }

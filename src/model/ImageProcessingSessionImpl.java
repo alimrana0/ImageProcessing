@@ -14,12 +14,18 @@ import filters.flippingtransformation.FlipHorizontal;
 import filters.flippingtransformation.FlipVertical;
 import filters.intensitytransformation.BrightenTransformation;
 import filters.intensitytransformation.DarkenTransformation;
+import java.awt.image.BufferedImage;
+import java.util.LinkedList;
+import java.util.Queue;
+import model.imaging.Image;
 import model.imaging.ImageOfPixel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.imaging.pixel.IPixel;
+import util.ImageUtil;
 
 /**
  * Class to represent and image processor session model that is able to load several images at the
@@ -293,4 +299,93 @@ public class ImageProcessingSessionImpl implements IImageProcessingSession {
   public List<String> getInvisible() {
     return new ArrayList<>(this.invisible);
   }
+
+  @Override
+  public List<ArrayList<IPixel>> updatePreview (int horizontal, int vertical, String operation, BufferedImage image) {
+    int imgH = image.getHeight();
+    int imgW = image.getWidth();
+    int h = horizontal;
+    int v = vertical;
+
+    Image toBeModified = new Image(ImageUtil.readBuffered(image));
+    List<ArrayList<IPixel>> pixels = new ArrayList<>();
+
+    List<ArrayList<IPixel>> copy = toBeModified.getPixelsArraylist();
+
+    for (int i = 0; i < imgH; i++) {
+      ArrayList<IPixel> temp = new ArrayList<>();
+      for (int j = 0; j < imgW; j++) {
+        IPixel pixel;
+        if ((i < 0 + v + 200 && i > 0 + v) && (j < 0 + h + 200 && j > 0 + h)) {
+          pixel = copy.get(i).get(j);
+          temp.add(pixel);
+        }
+      }
+      if ((i < 0 + v + 200 && i > 0 + v)) {
+        pixels.add(temp);
+      }
+    }
+
+    //modify 200x200
+    ImageProcessingModel square = new ImageProcessingModel(new Image(pixels));
+    ImageOfPixel modified;
+    switch (operation) {
+      case "Red Grayscale":
+        modified = square.redComponent();
+        break;
+      case "Green Grayscale":
+        modified = square.greenComponent();
+        break;
+      case "Blue Grayscale":
+        modified = square.blueComponent();
+        break;
+      case "Grayscale":
+        modified = square.greyscale();
+        break;
+      case "Value Component":
+        modified = square.valueImage();
+        break;
+      case "Intensity Component":
+        modified = square.intensity();
+        break;
+      case "Blur":
+        modified = square.blur();
+        break;
+      case "Sharpen":
+        modified = square.sharpen();
+        break;
+      case "Sepia":
+        modified = square.sepia();
+        break;
+      case "Brighten":
+        modified = square.brighten(25);
+        break;
+      case "Darken":
+        modified = square.darken(25);
+        break;
+      default:
+        modified = null;
+        break;
+    }
+
+    Queue<IPixel> q = new LinkedList<IPixel>();
+    for (ArrayList<IPixel> list : modified.getPixelsArraylist()) {
+      for (IPixel temp : list) {
+        q.add(temp);
+      }
+    }
+
+    for (int i = 0; i < imgH; i++) {
+      for (int j = 0; j < imgW; j++) {
+        if ((i < 0 + v + 200 && i > 0 + v) && (j < 0 + h + 200 && j > 0 + h)) {
+          //IPixel pixel = modified.get(i - v).get(j - h);
+          if (!q.isEmpty()) {
+            copy.get(i).set(j, q.remove());
+          }
+        }
+      }
+    }
+    return copy;
+  }
+
 }

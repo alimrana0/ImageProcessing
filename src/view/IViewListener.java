@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Interface representing a listener for a GUI image processing view. It reacts by performing
  * functions on the view based on instructions.
@@ -146,4 +148,14 @@ public interface IViewListener {
    * @param name script file's file path.
    */
   void useScript(String name);
-}
+
+  /**
+   * Updates the preview based on the location of the window and the current operation.
+   *
+   * @param horizontal The value of the horizontal scrollbar.
+   * @param vertical The value of the vertical scrollbar.
+   * @param operation The current operation being previewed.
+   * @param image The current image that is to be manipulated.
+   */
+  public void updatePreview(int horizontal, int vertical, String operation, BufferedImage image);
+  }

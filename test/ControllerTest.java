@@ -354,7 +354,11 @@ public class ControllerTest {
         + "save\nstarsPPM.ppm\nstars\n"
         + "load\nstars.jpg\nstarsJPG\n"
         + "load\nstarsPNG.png\nstarsPNG\n"
-        + "load\nstarsBMP.bmp\nstarsBMP\nq";
+        + "load\nstarsBMP.bmp\nstarsBMP\n"
+        + "load square.jpg mask\n"
+        + "get-component red stars mask red-stars-mask\n"
+        + "save\nstarsMask.jpg\nred-stars-mask\n"
+        + "q";
     BufferedReader input = new BufferedReader(new StringReader(inputString));
     StringBuffer outBuffer = new StringBuffer();
 
